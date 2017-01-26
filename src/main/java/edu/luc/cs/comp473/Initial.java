@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.luc.comp473;
+package main.java.edu.luc.cs.comp473;
 
 import static org.junit.Assert.*;
 
