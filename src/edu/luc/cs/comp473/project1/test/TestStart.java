@@ -1,7 +1,4 @@
-/**
- * 
- */
-package test.java.edu.luc.cs.comp473;
+package edu.luc.cs.comp473.project1.test;
 
 import static org.junit.Assert.*;
 
@@ -9,11 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * @author tkrawczyk
- *
- */
-public class Initial {
+public class TestStart {
 
 	/**
 	 * @throws java.lang.Exception
