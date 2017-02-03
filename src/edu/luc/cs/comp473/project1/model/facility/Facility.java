@@ -43,4 +43,26 @@ public class Facility {
 		int availCapacity = 0 ;
 		return availCapacity ; 
 	}
+	
+	public void createBuilding(String name, String description){
+		this.buildings.add(new Building(name,description));
+	}
+	
+	public void removeBuildingByName(String name){
+		for(int i = 0 ; i < buildings.size(); i++){
+			if(buildings.get(i).getName()==name){
+				buildings.remove(i);
+				break ; 
+			}
+		}
+	}
+	
+	public boolean containsBuilding(String name){
+		for (Building b : buildings){
+			if (b.getName() == name){
+				return true ;
+			}
+		}
+		return false ;
+	}
 }
