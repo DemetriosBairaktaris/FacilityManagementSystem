@@ -1,7 +1,7 @@
 package edu.luc.cs.comp473.project1.model.facility;
 
 public class Room {
-
+//
 	private int roomNumber ; 
 	private int capacity ; 
 	private boolean available ;

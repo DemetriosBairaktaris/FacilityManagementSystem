@@ -9,10 +9,13 @@ public class Facility {
 	private String name ;
 	private String description; 
 	private List<Building> buildings ; 
+	private int usage ;  //
 	
 	public Facility(String name, String description){
 		this.name = name ; 
 		this.description = description ; 
+		this.buildings = new ArrayList<>();
+		this.usage = 0 ;  // Is 
 	}
 	
 	public String getName(){
@@ -37,7 +40,7 @@ public class Facility {
 	}
 	
 	public int requestAvailableCapacity(){
-		int capacity = 0 ;
-		return 0 ; 
+		int availCapacity = 0 ;
+		return availCapacity ; 
 	}
 }
