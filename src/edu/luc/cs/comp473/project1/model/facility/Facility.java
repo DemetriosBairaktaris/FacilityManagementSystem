@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.luc.cs.comp473.project1.model.facility;
 
 import java.util.*;
@@ -13,8 +10,10 @@ import java.util.*;
  */
 public class Facility {
 
+    //TODO create method in here to generate an ID based on the name and to return it when called.
     private String name;
     private String description;
+    private int id;
     private List<Building> buildings;
     private int usage; //
 
