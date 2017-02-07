@@ -42,42 +42,77 @@ public class FacilityService {
      * @param facility
      */
     public void removeFacility(Facility facility) {
-        //TODO add removal method here
+        facilityStorage.removeFacility(facility);
     }
     
-    public Facility getFacilityInformation() {
+    /**
+     * TODO determine what this method is meant to return
+     * @return
+     */
+    public Facility getFacilityInformation(Facility facility) {
         return null;
     }
     
-    public void addFacilityDetail() {
+    /**
+     * TODO determine what this method is meant to do
+     */
+    public void addFacilityDetail(Facility facility) {
         
     }
     
-    public int requestAvailableCapacity() {
-        return 0;
+    /**
+     * This method returns the available capacity of the entire facility
+     * @return total available capacity
+     */
+    public int requestAvailableCapacity(Facility facility) {
+        return facility.requestAvailableCapacity();
     }
     
-    public boolean isInUseDuringInterval() {
+    /**
+     * This method checks if the facility is in use during a specific interval
+     * @return boolean value for yes or no
+     */
+    public boolean isInUseDuringInterval(Facility facility) {
         return false;
     }
     
-    public void assignFacilityToUse() {
+    /**
+     * This method assigns a facility for a specific interval.
+     */
+    public void assignFacilityToUse(Facility facility) {
         
     }
     
-    public void vacateFacility() {
+    /**
+     * This facility empties all occupants and makes all rooms available.
+     */
+    public void vacateFacility(Facility facility) {
         
     }
     
-    public List<?> listInspections() {
+    /**
+     * Lists all the inspections of a facility
+     * TODO may require a new object to keep track of this.
+     * @param facility
+     * @return
+     */
+    public List<?> listInspections(Facility facility) {
         return null;
     }
     
-    public int listActualUsage() {
+    /**
+     * Calculates actual usage of a facility for a year
+     * @return
+     */
+    public int listActualUsage(Facility facility) {
         return 0;
     }
     
-    public int calcUsageRate() {
+    /**
+     * Calculates a usage rate for the year
+     * @return
+     */
+    public int calcUsageRate(Facility facility) {
         return 0;
     }
 }
