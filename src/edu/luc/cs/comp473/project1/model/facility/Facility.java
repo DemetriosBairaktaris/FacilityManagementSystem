@@ -13,7 +13,6 @@ import edu.luc.cs.comp473.project1.model.maintenance.MaintenanceRequest;
  */
 public class Facility {
 
-    //TODO create method in here to generate an ID based on the name and to return it when called.
     private String name;
     private String description;
     private int id;
@@ -26,6 +25,8 @@ public class Facility {
         this.description = description;
         usage = 0;
         id = name.hashCode();
+        buildings = new ArrayList<Building>();
+        maintenance = new ArrayList<MaintenanceRequest>();
     }
 
     /**
@@ -37,6 +38,10 @@ public class Facility {
         return this.name;
     }
     
+    /**
+     * Retrieves the ID that is bashed on a hash of the facility name.
+     * @return
+     */
     public int getID() {
         return id;
     }
@@ -52,6 +57,10 @@ public class Facility {
 
     public void addMaintenance(MaintenanceRequest request) {
         maintenance.add(request);
+    }
+    
+    public MaintenanceRequest getMaintenance() {
+        return maintenance.get(0);
     }
     
     /**

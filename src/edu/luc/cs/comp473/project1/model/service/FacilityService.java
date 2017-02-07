@@ -13,6 +13,7 @@ import edu.luc.cs.comp473.project1.model.facility.Facility;
 public class FacilityService {
 
     private FacilityDAO facilityStorage;
+    private List<Facility> facilityList;
     
     public FacilityService() {
         facilityStorage = new FacilityDAO();
@@ -23,8 +24,8 @@ public class FacilityService {
      * @return
      */
     public List<Facility> listFacilities() {
-        //TODO have this call to the storage and return a list of the facilities.
-        return null;
+        //TODO figure out how to get the facilities
+        return facilityList;
     }
     
     /**

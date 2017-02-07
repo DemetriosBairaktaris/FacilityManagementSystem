@@ -17,6 +17,14 @@ public class Room {
         this.available = true;
     }
 
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+    
+    public int getCapacity() {
+        return capacity;
+    }
+    
     /**
      * Sets if the room is available.
      * @param v true for available, false for unavailable
