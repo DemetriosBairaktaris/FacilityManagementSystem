@@ -20,7 +20,8 @@ public class MaintenanceService {
     }
     
     public void makeFacilityMaintenanceRequest(Facility facility, String problem) {
-        
+        MaintenanceRequest request = new MaintenanceRequest(problem);
+        facility.addMaintenance(request);
     }
     
     public void scheduleMaintenance() {
