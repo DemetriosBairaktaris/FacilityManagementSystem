@@ -2,6 +2,9 @@ package edu.luc.cs.comp473.project1.model.facility;
 
 import java.util.*;
 
+import edu.luc.cs.comp473.project1.model.facility.Building;
+import edu.luc.cs.comp473.project1.model.maintenance.MaintenanceRequest;
+
 /**
  * This class creates Facility objects and controls buildings and rooms.
  * 
@@ -10,18 +13,20 @@ import java.util.*;
  */
 public class Facility {
 
-    //TODO create method in here to generate an ID based on the name and to return it when called.
     private String name;
     private String description;
     private int id;
     private List<Building> buildings;
+    private List<MaintenanceRequest> maintenance;
     private int usage; //
 
     public Facility(String name, String description) {
         this.name = name;
         this.description = description;
-        this.buildings = new ArrayList<>();
-        this.usage = 0; // Is
+        usage = 0;
+        id = name.hashCode();
+        buildings = new ArrayList<Building>();
+        maintenance = new ArrayList<MaintenanceRequest>();
     }
 
     /**
@@ -31,6 +36,14 @@ public class Facility {
      */
     public String getName() {
         return this.name;
+    }
+    
+    /**
+     * Retrieves the ID that is bashed on a hash of the facility name.
+     * @return
+     */
+    public int getID() {
+        return id;
     }
 
     /**
@@ -42,6 +55,14 @@ public class Facility {
         return description;
     }
 
+    public void addMaintenance(MaintenanceRequest request) {
+        maintenance.add(request);
+    }
+    
+    public MaintenanceRequest getMaintenance() {
+        return maintenance.get(0);
+    }
+    
     /**
      * Retrieves all the buildings associated with this facility
      * 
@@ -83,7 +104,7 @@ public class Facility {
      * @param description
      */
     public void createBuilding(String name, String description) {
-        this.buildings.add(new Building(name, description));
+        buildings.add(new Building(name, description));
     }
 
     /**

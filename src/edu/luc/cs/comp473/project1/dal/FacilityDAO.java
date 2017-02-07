@@ -11,7 +11,6 @@ import edu.luc.cs.comp473.project1.model.facility.Facility;
  */
 public class FacilityDAO {
     
-    private int id;
     private HashMap<Integer, Facility> facilityHashMap;
     
     public FacilityDAO() {
@@ -19,12 +18,13 @@ public class FacilityDAO {
     }
     
     /**
-     * This method retrieves the Facility from the map.
-     * @param id Unique key for the Facility object
+     * This method retrieves the Facility from the memory using the hash code for its name
+     * as the ID.
+     * @param  name name of facility
      * @return requested Facility object
      */
-    public Facility getFacility(int id) {
-        return facilityHashMap.get(id);
+    public Facility getFacility(String name) {
+        return facilityHashMap.get(name.hashCode());
     }
     
     /**
@@ -32,13 +32,14 @@ public class FacilityDAO {
      * @param facility object to be placed into storage
      */
     public void insertFacility(Facility facility) {
-        facilityHashMap.put(id, facility);
+        facilityHashMap.put(facility.getID(), facility);
     }
     
+    /**
+     * This method removes a facility based on the facilities ID.
+     * @param facility
+     */
     public void removeFacility(Facility facility) {
-        facilityHashMap.remove(null);
-        //TODO add method here to retrieve ID from facility.
+        facilityHashMap.remove(facility.getID());
     }
-    
-    //TODO add method to generate unique keys for the Facility objects based on name
 }

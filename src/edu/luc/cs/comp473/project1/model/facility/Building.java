@@ -8,7 +8,8 @@ import java.util.*;
  *
  */
 public class Building {
-    //
+    
+    //TODO change lists to dictionaries to allow for key based searching
     private String name;
     private String description;
     private List<Room> rooms;
@@ -33,6 +34,19 @@ public class Building {
      */
     public String getDescription() {
         return this.description;
+    }
+    
+    public void addRoom(int roomNumber, int capacity) {
+        Room room = new Room(roomNumber, capacity);
+        rooms.add(room);
+    }
+    
+    public Room getRoom() {
+        //rooms.get();
+        return null;
+    }
+    
+    public void removeRoom() {
     }
 
     /**
