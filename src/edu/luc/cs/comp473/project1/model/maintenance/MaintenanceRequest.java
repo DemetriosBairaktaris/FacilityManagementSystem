@@ -6,15 +6,15 @@ package edu.luc.cs.comp473.project1.model.maintenance;
  *
  */
 public class MaintenanceRequest {
-
     private int status;
     private int id;
     private String problem;
+    private static int seed_id = 0 ; 
     
     public MaintenanceRequest(String problem) {
         status = 0;
-        id = 0;
-        problem = this.problem;
+        id = seed_id++;
+        this.problem = problem ; 
     }
     
     /**
@@ -30,7 +30,7 @@ public class MaintenanceRequest {
      * @param status
      */
     public void setStatus(int status) {
-        status = this.status;
+        this.status = status ; 
     }
     
     /**
@@ -45,8 +45,11 @@ public class MaintenanceRequest {
      * This method returns the problem description.
      * @return problem
      */
-    public String getProblem() {
-        return problem;
-    }
-    
+   public String getProblem(){
+       return this.problem ; 
+   }
+
 }
+
+
+
