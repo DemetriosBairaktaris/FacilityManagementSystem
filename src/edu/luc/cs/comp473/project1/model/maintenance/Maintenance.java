@@ -1,8 +1,7 @@
-package edu.luc.cs.comp473.project1.model.service;
+package edu.luc.cs.comp473.project1.model.maintenance;
 
 import java.util.List;
 
-import edu.luc.cs.comp473.project1.dal.MaintenanceDAO;
 import edu.luc.cs.comp473.project1.model.facility.Facility;
 import edu.luc.cs.comp473.project1.model.maintenance.MaintenanceRequest;
 
@@ -11,12 +10,9 @@ import edu.luc.cs.comp473.project1.model.maintenance.MaintenanceRequest;
  * @author TeamDK
  *
  */
-public class MaintenanceService {
+public class Maintenance {
 
-    private MaintenanceDAO maintenanceStorage;
-    
-    public MaintenanceService() {
-        maintenanceStorage = new MaintenanceDAO();
+    public Maintenance() {
     }
     
     public void makeFacilityMaintenanceRequest(Facility facility, String problem) {
