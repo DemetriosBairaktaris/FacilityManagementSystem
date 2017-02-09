@@ -2,10 +2,8 @@ package edu.luc.cs.comp473.project1.model.maintenance;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import edu.luc.cs.comp473.project1.model.facility.Facility;
-import edu.luc.cs.comp473.project1.model.maintenance.MaintenanceRequest;
 
 /**
  * This class is the interface between the client and the domain model for the maintenance objects
@@ -36,8 +34,8 @@ public class Maintenance {
         createOrder(problem);
     }
     
-    public void scheduleMaintenance() {
-        
+    public boolean scheduleMaintenance(Date date1, Date date2) {
+        return schedule.scheduleMaintenance(date1, date2);
     }
     
     public BigDecimal calcMaintenanceCostForFacility() {

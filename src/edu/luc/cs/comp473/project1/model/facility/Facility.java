@@ -18,12 +18,10 @@ public class Facility {
     private int id;
     private List<Building> buildings;
     private List<MaintenanceRequest> maintenance;
-    private int usage; //
 
     public Facility(String name, String description) {
         this.name = name;
         this.description = description;
-        usage = 0;
         id = name.hashCode();
         buildings = new ArrayList<Building>();
         maintenance = new ArrayList<MaintenanceRequest>();
