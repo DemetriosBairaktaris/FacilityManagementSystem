@@ -15,7 +15,7 @@ public class MaintenanceRequest {
     }
     
     /**
-     * This method returns the status
+     * 
      * @return status
      */
     public boolean getStatus() {
@@ -23,7 +23,7 @@ public class MaintenanceRequest {
     }
     
     /**
-     * This method sets the status
+     * 
      * @param status
      */
     public void setStatus(boolean status) {

@@ -47,6 +47,9 @@ public class TestMaintenance {
     public void testCloseOrder() {
         maintenance.closeOrder(0);
         assertTrue(maintenance.listMaintenance().get(0).getStatus());
+        maintenance.closeOrder(1);
+        maintenance.closeOrder(2);
+        assertEquals(maintenance.listMaintenance().size(), 3);
     }
 
     @After
