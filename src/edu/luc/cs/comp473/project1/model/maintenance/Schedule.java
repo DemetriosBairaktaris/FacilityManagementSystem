@@ -3,6 +3,7 @@ package edu.luc.cs.comp473.project1.model.maintenance;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Schedule {
 
@@ -32,6 +33,28 @@ public class Schedule {
         else {
             return false;
         }
+    }
+    
+    public long calcDownTimeForFacility() {
+        
+        if (startDate == null) {
+            return 0;
+        }
+        else {
+            
+            Date firstDate = startDate.get(0);
+            Date lastDate = new Date();
+            long downTime = 0;
+            for (int i = 0; i < endDate.size(); i++) {
+                if (endDate.get(i).after(lastDate)) {
+                    lastDate.setTime(endDate.get(i).getTime());
+                }
+            }
+            downTime = lastDate.getTime() - firstDate.getTime();
+            downTime = TimeUnit.MILLISECONDS.toDays(downTime);
+            return downTime;
+        }
+
     }
     
     private boolean checkAvailability(Date date1, Date date2) {

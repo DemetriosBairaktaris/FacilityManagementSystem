@@ -23,10 +23,10 @@ public class TestMaintenance {
         maintenance = new Maintenance();
         laborCost = new BigDecimal("343.87");
         partsCost = new BigDecimal("210.45");
-        date1 = new Date(1491022800000L);
-        date2 = new Date(1491368400000L);
-        date3 = new Date(1491109200000L);
-        date4 = new Date(1491282000000L);
+        date1 = new Date(1491022800000L); //April 1, 2017
+        date2 = new Date(1491368400000L); //April 5, 2017
+        date3 = new Date(1491109200000L); //April 2, 2017
+        date4 = new Date(1491282000000L); //April 4, 2017
         maintenance.makeFacilityMaintenanceRequest("Sink is leaking");
         maintenance.makeFacilityMaintenanceRequest("Light bulb is burnt out.");
         maintenance.makeFacilityMaintenanceRequest("Ceiling is cracking.");
@@ -62,6 +62,18 @@ public class TestMaintenance {
     public void testScheduleMaintenancec() {
         assertTrue(maintenance.scheduleMaintenance(date1, date2));
         assertFalse(maintenance.scheduleMaintenance(date3, date4));
+    }
+    
+    @Test
+    public void testCalcProblemRateForFacility() {
+        int num = 3 / 365;
+        assertEquals(num, maintenance.calcProblemRateForFacility());
+    }
+    
+    @Test
+    public void testCalcDownTimeForFacility() {
+        assertTrue(maintenance.scheduleMaintenance(date1, date2));
+        assertEquals(4L, maintenance.calcDownTimeForFacility());
     }
 
     @After

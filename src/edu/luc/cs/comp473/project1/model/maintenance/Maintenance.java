@@ -18,6 +18,7 @@ public class Maintenance {
     private Schedule schedule;
     private BigDecimal cost;
     private int orderNum;
+    private int numRequests;
     
     public Maintenance() {
         log = new Log();
@@ -68,11 +69,12 @@ public class Maintenance {
     }
     
     public int calcProblemRateForFacility() {
-        return 0;
+        numRequests = requests.size();
+        return numRequests / 365;
     }
     
-    public int calcDownTimeForFacility() {
-        return 0;
+    public long calcDownTimeForFacility() {
+        return schedule.calcDownTimeForFacility();
     }
     
     public List<MaintenanceRequest> listMaintenanceRequests() {
