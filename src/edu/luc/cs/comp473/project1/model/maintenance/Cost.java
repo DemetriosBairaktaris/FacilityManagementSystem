@@ -8,8 +8,8 @@ public class Cost {
     private BigDecimal laborCost;
     
     public Cost() {
-        partsCost = new BigDecimal(0);
-        laborCost = new BigDecimal(0);
+        partsCost = new BigDecimal("0");
+        laborCost = new BigDecimal("0");
     }
     
     public void setLaborCost(BigDecimal cost) {
