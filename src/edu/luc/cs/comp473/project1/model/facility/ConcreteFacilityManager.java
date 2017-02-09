@@ -1,25 +1,28 @@
 package edu.luc.cs.comp473.project1.model.facility;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class ConcreteFacilityManager implements FacilityManager {
-
+    
+    private List<Facility> facilities ;
+    
+    public ConcreteFacilityManager(){
+        facilities = new LinkedList<>();
+    }
     @Override
     public List<Facility> listFacilities() {
-        // TODO Auto-generated method stub
-        return null;
+        return facilities ; 
     }
 
     @Override
-    public void addNewFacility(String name, String desc) {
-        // TODO Auto-generated method stub
-        
+    public void addNewFacility(Facility facility) {
+        facilities.add(facility);
     }
 
     @Override
     public boolean removeFacility(Facility facility) {
-        // TODO Auto-generated method stub
-        return false;
+        return facilities.remove(facility);
     }
 
 }
