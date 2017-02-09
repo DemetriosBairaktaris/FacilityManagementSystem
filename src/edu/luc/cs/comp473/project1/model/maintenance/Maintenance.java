@@ -53,6 +53,12 @@ public class Maintenance {
         orderNum++;
     }
     
+    public void closeOrder(int orderNum) {
+        Order order = orders.get(orderNum);
+        order.setStatus(true);
+        log.addOrder(order);
+    }
+    
     public void setPartsCost(BigDecimal cost, int orderNum) {
         Order order = orders.get(orderNum);
         order.setLaborCost(cost);

@@ -42,6 +42,12 @@ public class TestMaintenance {
         assertEquals(maintenance.listMaintenanceRequests().get(1).getProblem(), "Light bulb is burnt out.");
         assertEquals(maintenance.listMaintenanceRequests().get(2).getProblem(), "Ceiling is cracking.");
     }
+    
+    @Test
+    public void testCloseOrder() {
+        maintenance.closeOrder(0);
+        assertTrue(maintenance.listMaintenance().get(0).getStatus());
+    }
 
     @After
     public void tearDown() throws Exception {
