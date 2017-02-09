@@ -72,11 +72,11 @@ public class Maintenance {
     }
     
     public List<MaintenanceRequest> listMaintenanceRequests() {
-        return null;
+        return requests;
     }
     
-    public List<MaintenanceRequest> listMaintenance() {
-        return null;
+    public List<Order> listMaintenance() {
+        return log.getMaintenanceList();
     }
     
     public List<MaintenanceRequest> listFacilityProblems() {
