@@ -75,6 +75,17 @@ public class TestMaintenance {
         assertTrue(maintenance.scheduleMaintenance(date1, date2));
         assertEquals(4L, maintenance.calcDownTimeForFacility());
     }
+    
+    @Test
+    public void testListFacilityProblems() {
+        
+        String test = "Facility Problems:\n"
+            + "Sink is leaking\n"
+            + "Light bulb is burnt out.\n"
+            + "Ceiling is cracking.\n";
+        
+        assertEquals(test, maintenance.listFacilityProblems());
+    }
 
     @After
     public void tearDown() throws Exception {

@@ -85,7 +85,18 @@ public class Maintenance {
         return log.getMaintenanceList();
     }
     
-    public List<MaintenanceRequest> listFacilityProblems() {
-        return null;
+    public String listFacilityProblems() {
+        
+        String problems = "Facility Problems:\n";
+        
+        if (requests == null) {
+            return "No facility problems.";
+        }
+        
+        for (int i = 0; i < requests.size(); i++) {
+            problems = problems.concat(requests.get(i).getProblem() + "\n");
+        }
+        
+        return problems;
     }
 }
