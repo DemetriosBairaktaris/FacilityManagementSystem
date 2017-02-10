@@ -48,6 +48,8 @@ public class TestFacility {
     @Test
     public void testRequestAvailableCapacity(){
         assertEquals(65,facility.requestAvailableCapacity());
+        facility.addFacilityDetail(new Room(5,5));
+        assertEquals(70,facility.requestAvailableCapacity());
     }
     
     @Test
@@ -58,8 +60,16 @@ public class TestFacility {
     }
     
     @Test 
-    public void testIsInUseDuringInterval(){ //hold off for now
-        fail("Not implemented");
+    public void testIsInUseDuringInterval(){ 
+        Date currentDate = new Date();
+        Date one,two,three ; 
+        one = new Date(currentDate.getTime()+30000);
+        two = new Date(currentDate.getTime()+40000);
+        three = new Date(currentDate.getTime()+31000);
+        assertFalse(facility.isInUseDuringInterval(one,two));
+        facility.assignFacilityToUse(one, two);
+        assertTrue(facility.isInUseDuringInterval(one,two));
+        assertTrue(facility.isInUseDuringInterval(one, three));
     }
     
     @Test
@@ -73,14 +83,42 @@ public class TestFacility {
     }
     
     @Test
-    public void testListActualUsage(){ //hold off for now
-      //TODO after assign facility to use 
-        fail();
+    public void testListActualUsage(){ 
+       
+       Date currentDate = new Date();
+       Date one = new Date(currentDate.getTime()+30000);
+       Date two = new Date(currentDate.getTime()+40000);
+       Date three = new Date (currentDate.getTime()+50000);
+       Date four = new Date (currentDate.getTime()+60000);
+       facility.assignFacilityToUse(one, two);
+       facility.assignFacilityToUse(three,four);
+       
+       assertEquals(
+               "Usage Dates:\n"+
+               one.toString()+" - "+ two.toString()+ "\n"+
+               three.toString()+ " - "+ four.toString()+ "\n"        
+               ,facility.listActualUsage());
     }
     
+    @SuppressWarnings("deprecation")
     @Test
-    public void testCalcUsageRate(){//hold off
-        fail("not implemented");
+    public void testCalcUsageRate(){
+        //Simple Case: 1 Day : should be 1/365
+        Date one,two,three ;
+        one = new Date(2018,0,1);
+        two = new Date(2018,0,2);
+        facility.assignFacilityToUse(one, two);
+        assertEquals((1.0/365),facility.calcUsageRate(),0.50);
+        
+        
+       //Complex Case: OverLapping Intervals
+        one = new Date(2018,2,30);
+        two = new Date(2018,3,10);
+        three = new Date(2018,1,20);
+        facility.assignFacilityToUse(one, two);
+        facility.assignFacilityToUse(three, one);
+        facility.assignFacilityToUse(three, two); // total should be 2-20-2018 -- 4-10-2018
+        assertEquals((70560.0/525600.0),facility.calcUsageRate(),0.50);
     }
     
     @Test

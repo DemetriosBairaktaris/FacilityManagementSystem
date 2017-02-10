@@ -120,14 +120,14 @@ public abstract class Facility {
            room.vacate();
         }
     }
-    public boolean isInUseDuringInterval(){
-        //TODO: figure out param
-        return false ; 
+    public boolean isInUseDuringInterval(Date one, Date two){
+        return use.isInUseDuringInterval(one,two); 
     }
+    
     public boolean assignFacilityToUse(Date one, Date two){
-        
         return use.assignFacilityToUse(one, two);
     }
+    
     public List<Inspection> listInspections(){
         //TODO
         return null ; 
@@ -135,8 +135,8 @@ public abstract class Facility {
     public String listActualUsage(){
         return use.listActualUsage();
     }
-    public float calcUsageRate(){
+    public double calcUsageRate(){
         //TODO
-        return 0;
+        return use.calcUsageRate();
     }
 }
