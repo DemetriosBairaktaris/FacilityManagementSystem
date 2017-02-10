@@ -10,11 +10,13 @@ public class Schedule {
     private Date currentDate;
     private List<Date> startDate;
     private List<Date> endDate;
+    private long downTime;
     
     public Schedule() {
         currentDate = new Date();
         startDate = new ArrayList<Date>();
         endDate = new ArrayList<Date>();
+        downTime = 0;
     }
     
     public boolean scheduleMaintenance(Date date1, Date date2) {
@@ -41,17 +43,12 @@ public class Schedule {
             return 0;
         }
         else {
-            
-            Date firstDate = startDate.get(0);
-            Date lastDate = new Date();
-            long downTime = 0;
             for (int i = 0; i < endDate.size(); i++) {
-                if (endDate.get(i).after(lastDate)) {
-                    lastDate.setTime(endDate.get(i).getTime());
-                }
+                downTime += endDate.get(i).getTime() - startDate.get(i).getTime();
             }
-            downTime = lastDate.getTime() - firstDate.getTime();
+            
             downTime = TimeUnit.MILLISECONDS.toDays(downTime);
+            
             return downTime;
         }
 
