@@ -15,6 +15,7 @@ public abstract class Facility {
     private String description;
     private String address;
     private List<Room> rooms ; 
+    private List<Inspection> inspections ; 
     //private Maintenance maintenance ; 
     private Use use ; 
 
@@ -24,6 +25,7 @@ public abstract class Facility {
         this.description = desc ; 
         this.address = address ; 
         this.use = new Use();
+        this.inspections = new ArrayList<>();
     }
     /**
      * Retrieves a facility name.
@@ -33,7 +35,6 @@ public abstract class Facility {
     public String getName() {
         return this.name;
     }
-   
     /**
      * Retrieves the facility description
      * 
@@ -42,7 +43,6 @@ public abstract class Facility {
     public String getDescription() {
         return description;
     }
-    
     /**
      * 
      * @return address
@@ -50,7 +50,6 @@ public abstract class Facility {
     public String getAddress(){
         return address ; 
     }
-    
     /**
      * String representation of a facility 
      * @return String 
@@ -60,16 +59,13 @@ public abstract class Facility {
         return this.name+ ":  "+ this.description+"\n"
         + "Address:  "+ this.address;
     }
-
     public void addMaintenance(MaintenanceRequest request) {
         //maintenance.add(request);
     }
-    
     public MaintenanceRequest getMaintenance() {
         //return maintenance.get(0);
         return null ; 
     }
-    
     /**
      * Retrieves all the rooms associated with this facility
      * 
@@ -78,10 +74,7 @@ public abstract class Facility {
     public List<Room> getRooms() {
         return rooms ; 
     }
-    
   
-
-
     /**
      * @return String 
      */
@@ -128,15 +121,33 @@ public abstract class Facility {
         return use.assignFacilityToUse(one, two);
     }
     
-    public List<Inspection> listInspections(){
-        //TODO
-        return null ; 
+    public String listInspections(){
+        String inspectionResults = "Inspections:\n";
+        if(inspections.size()==0){inspectionResults+="No Inspections done, yet";}
+        else{
+        
+            for (Inspection i : inspections){
+               inspectionResults = inspectionResults.concat(i.getDate()+":  ");
+               if(i.getPassed()){
+                   inspectionResults = inspectionResults.concat("passed\n");
+               }
+               else{
+                   inspectionResults = inspectionResults.concat("failed\n");
+               }
+            }
+        }
+        return inspectionResults ;
     }
+    
     public String listActualUsage(){
         return use.listActualUsage();
     }
     public double calcUsageRate(){
-        //TODO
         return use.calcUsageRate();
+    }
+    public Inspection inspect(){
+        Inspection i = new Inspection(new Date());
+        inspections.add(i);
+        return i ;
     }
 }

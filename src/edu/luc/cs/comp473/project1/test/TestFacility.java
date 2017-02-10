@@ -23,6 +23,8 @@ public class TestFacility {
         facility.addFacilityDetail(new Room(1,20));
         facility.addFacilityDetail(new Room(2,25));
         facility.addFacilityDetail(new Room(11,20));
+        
+        
     }
     
     @Test
@@ -132,6 +134,20 @@ public class TestFacility {
         facility.vacateFacility();
         currentCapacity = facility.requestAvailableCapacity();
         assertEquals(currentCapacity,initialCapacity);
+    }
+    
+    @Test 
+    public void testListInspections(){
+        Inspection one = facility.inspect();
+        Inspection two = facility.inspect();
+        one.setPassed(false);
+        two.setPassed(true);
+        
+        assertEquals("Inspections:\n"+
+                one.getDate() + ":  failed\n"+
+                two.getDate() + ":  passed\n",
+                facility.listInspections()
+                );
     }
     
     @After
