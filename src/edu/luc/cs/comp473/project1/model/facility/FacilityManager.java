@@ -5,10 +5,8 @@ import java.util.List;
 
 
 public interface FacilityManager {
-    
     //Facility//
     public List<Facility> listFacilities ();
     public void addNewFacility(Facility facility);
     public boolean removeFacility(Facility facility);
-
 }

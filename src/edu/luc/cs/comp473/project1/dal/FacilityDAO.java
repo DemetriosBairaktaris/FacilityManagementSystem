@@ -11,10 +11,10 @@ import edu.luc.cs.comp473.project1.model.facility.Facility;
  */
 public class FacilityDAO {
     
-    private HashMap<Integer, Facility> facilityHashMap;
+    private HashMap<Facility, Facility> facilityHashMap;
     
     public FacilityDAO() {
-        facilityHashMap = new HashMap<Integer, Facility>();
+        facilityHashMap = new HashMap<>();
     }
     
     /**
@@ -32,7 +32,7 @@ public class FacilityDAO {
      * @param facility object to be placed into storage
      */
     public void insertFacility(Facility facility) {
-        facilityHashMap.put(facility.getID(), facility);
+        facilityHashMap.put(facility, facility);
     }
     
     /**
@@ -40,6 +40,6 @@ public class FacilityDAO {
      * @param facility
      */
     public void removeFacility(Facility facility) {
-        facilityHashMap.remove(facility.getID());
+        facilityHashMap.remove(facility);
     }
 }

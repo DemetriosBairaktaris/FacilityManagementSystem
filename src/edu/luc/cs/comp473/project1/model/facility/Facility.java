@@ -14,10 +14,8 @@ public abstract class Facility {
     private String name;
     private String description;
     private String address;
-    protected int numberOfRooms ;
-    protected int roomCapacity ;
     private List<Room> rooms ; 
-    private List<MaintenanceRequest> maintenance;
+    //private Maintenance maintenance ; 
     //private int usage; //
 
     public Facility(String name, String desc, String address){
@@ -63,11 +61,12 @@ public abstract class Facility {
     }
 
     public void addMaintenance(MaintenanceRequest request) {
-        maintenance.add(request);
+        //maintenance.add(request);
     }
     
     public MaintenanceRequest getMaintenance() {
-        return maintenance.get(0);
+        //return maintenance.get(0);
+        return null ; 
     }
     
     /**
@@ -79,15 +78,8 @@ public abstract class Facility {
         return rooms ; 
     }
     
-    /**
-     * creates all the rooms based on the child class's # of rooms and room capacities
-     */
-    protected void createRooms(){
-        
-        for (int i = 0 ; i < numberOfRooms ; i++){
-            rooms.add(new Room(i,roomCapacity));
-        }
-    }
+  
+
 
     /**
      * @return String 
@@ -103,8 +95,8 @@ public abstract class Facility {
      * adds a details the facility
      * @param unknown
      */
-    public void addFacilityDetail() {
-        // TODO : Figure out parameter, figure out what "detail" means
+    public void addFacilityDetail(Room room) {
+       this.rooms.add(room);
     }
 
     /**

@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ConcreteFacilityManager implements FacilityManager {
-    
+    //
     private List<Facility> facilities ;
     
     public ConcreteFacilityManager(){

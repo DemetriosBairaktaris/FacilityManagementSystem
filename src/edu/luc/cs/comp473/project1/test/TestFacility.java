@@ -11,13 +11,16 @@ import org.junit.Test;
 public class TestFacility {
 
     private Facility facility;
-    private String name = "Water Tower Campus Apartment";
+    private String name = "Water Tower Campus";
     private String desc = "LUC Campus located at Water Tower Place.";
     private String address = "911 Clark Street";
 
     @Before
     public void setUp() throws Exception {
-        facility = new Apartment(name, desc, address);
+        facility = new Building(name, desc, address);
+        facility.addFacilityDetail(new Room(1,20));
+        facility.addFacilityDetail(new Room(2,25));
+        facility.addFacilityDetail(new Room(11,20));
     }
     
     @Test
@@ -42,14 +45,14 @@ public class TestFacility {
     
     @Test
     public void testRequestAvailableCapacity(){
-        fail("not implemented");
-        
-        assertEquals(45,facility.requestAvailableCapacity());
+        assertEquals(65,facility.requestAvailableCapacity());
     }
     
     @Test
     public void testAddFacilityDetail(){ //hold off for now
-        fail("not implemented");
+        assertEquals(3,facility.getRooms().size());
+        facility.addFacilityDetail(new Room(5,13));
+        assertEquals(4,facility.getRooms().size());
     }
     
     @Test 
@@ -77,7 +80,6 @@ public class TestFacility {
         int initialCapacity = facility.requestAvailableCapacity();
         facility.vacateFacility();
         assertEquals(initialCapacity,facility.requestAvailableCapacity()); 
-        
         facility.getRooms().get(0).addInhabitant("Steve");
         int currentCapacity =facility.requestAvailableCapacity();
         assertTrue(initialCapacity > currentCapacity); 
