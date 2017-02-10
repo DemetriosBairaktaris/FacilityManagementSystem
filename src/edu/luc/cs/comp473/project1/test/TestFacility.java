@@ -108,7 +108,7 @@ public class TestFacility {
         one = new Date(2018,0,1);
         two = new Date(2018,0,2);
         facility.assignFacilityToUse(one, two);
-        assertEquals((1.0/365),facility.calcUsageRate(),0.50);
+        assertEquals((1.0/365),facility.calcUsageRate(),0.005);
         
         
        //Complex Case: OverLapping Intervals
@@ -118,7 +118,7 @@ public class TestFacility {
         facility.assignFacilityToUse(one, two);
         facility.assignFacilityToUse(three, one);
         facility.assignFacilityToUse(three, two); // total should be 2-20-2018 -- 4-10-2018
-        assertEquals((70560.0/525600.0),facility.calcUsageRate(),0.50);
+        assertEquals((70560.0/525600.0),facility.calcUsageRate(),0.005);
     }
     
     @Test

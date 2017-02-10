@@ -71,11 +71,14 @@ public class Use {
         }
         System.out.println(list);
         for(Interval i : list){
-            totalMinutes+= i.getEndDate().getTime() - i.getStartDate().getTime() ;
-            totalMinutes = totalMinutes/1000; 
-            totalMinutes = totalMinutes/60 ; 
+            double val = i.getEndDate().getTime() - i.getStartDate().getTime() ;
+            System.out.println(val);
+            val = val/1000; 
+            val = val/60 ; 
+            totalMinutes+= val ; 
+            System.out.println(val);
         }
-        System.out.println(totalMinutes);
+     
         return totalMinutes/minutesPerYear;
         
     }
@@ -92,7 +95,7 @@ public class Use {
                     list.get(0).setEndDate(intervals.get(i).getEndDate());
                 }
             }
-            else if(intervals.get(i).getStartDate().getTime()<list.get(0).getStartDate().getTime()){
+            else if(intervals.get(i).getEndDate().getTime()>list.get(0).getEndDate().getTime()){
                 list.add(0, intervals.get(i));
             }
         }
