@@ -16,13 +16,14 @@ public abstract class Facility {
     private String address;
     private List<Room> rooms ; 
     //private Maintenance maintenance ; 
-    //private int usage; //
+    private Use use ; 
 
     public Facility(String name, String desc, String address){
         this.rooms = new ArrayList<>();
         this.name = name ;
         this.description = desc ; 
         this.address = address ; 
+        this.use = new Use();
     }
     /**
      * Retrieves a facility name.
@@ -123,17 +124,16 @@ public abstract class Facility {
         //TODO: figure out param
         return false ; 
     }
-    public boolean assignFacilityToUse(Use use){
-        //TODO
+    public boolean assignFacilityToUse(Date one, Date two){
+        
         return false;
     }
     public List<Inspection> listInspections(){
         //TODO
         return null ; 
     }
-    public float listActualUsage(){
-        //TODO
-        return 0;
+    public String listActualUsage(){
+        return use.listActualUsage();
     }
     public float calcUsageRate(){
         //TODO
