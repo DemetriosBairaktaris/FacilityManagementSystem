@@ -126,7 +126,7 @@ public abstract class Facility {
     }
     public boolean assignFacilityToUse(Date one, Date two){
         
-        return false;
+        return use.assignFacilityToUse(one, two);
     }
     public List<Inspection> listInspections(){
         //TODO

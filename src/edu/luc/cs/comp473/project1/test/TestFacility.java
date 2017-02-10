@@ -4,6 +4,8 @@ import edu.luc.cs.comp473.project1.model.facility.*;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -62,13 +64,18 @@ public class TestFacility {
     
     @Test
     public void testAssignFacilityToUse(){
-        fail("not implemented");
+        Date currentDate = new Date();
+        Date one = new Date (currentDate.getTime()+200000);
+        Date two = new Date(currentDate.getTime()+300000);
+        assertTrue(facility.assignFacilityToUse(one, two));
+        assertFalse(facility.assignFacilityToUse(new Date(currentDate.getTime()-20000), two));
+        assertFalse(facility.assignFacilityToUse(one, one)) ; 
     }
     
     @Test
     public void testListActualUsage(){ //hold off for now
-      //TODO 
-        
+      //TODO after assign facility to use 
+        fail();
     }
     
     @Test
