@@ -29,16 +29,30 @@ public class Maintenance {
         orderNum = 0;
     }
     
+    /**
+     * Makes a maintenance request and creates an order
+     * @param problem
+     */
     public void makeFacilityMaintenanceRequest(String problem) {
         MaintenanceRequest request = new MaintenanceRequest(problem);
         requests.add(request);
         createOrder(problem);
     }
     
+    /**
+     * Schedules the maintenance to be performed in the schedule
+     * @param date1
+     * @param date2
+     * @return true for successful, false for failure
+     */
     public boolean scheduleMaintenance(Date date1, Date date2) {
         return schedule.scheduleMaintenance(date1, date2);
     }
     
+    /**
+     * 
+     * @return total cost for facility
+     */
     public BigDecimal calcMaintenanceCostForFacility() {
         for (int i = 0; i < orders.size(); i++) {
             cost = cost.add(orders.get(i).getCost());
@@ -46,45 +60,83 @@ public class Maintenance {
         return cost;
     }
     
+    /**
+     * creates an order for maintenance
+     * @param desc
+     */
     private void createOrder(String desc) {
         Order order = new Order(desc, orderNum);
         orders.add(order);
         orderNum++;
     }
     
+    /**
+     * closes an order when finished
+     * @param orderNum
+     */
     public void closeOrder(int orderNum) {
         Order order = orders.get(orderNum);
         order.setStatus(true);
         log.addOrder(order);
     }
     
+    /**
+     * sets the cost of parts on an order
+     * @param cost
+     * @param orderNum
+     */
     public void setPartsCost(BigDecimal cost, int orderNum) {
         Order order = orders.get(orderNum);
         order.setLaborCost(cost);
     }
     
+    /**
+     * sets the cost of labor on an order
+     * @param cost
+     * @param orderNum
+     */
     public void setLaborCost(BigDecimal cost, int orderNum) {
         Order order = orders.get(orderNum);
         order.setPartsCost(cost);
     }
     
+    /**
+     * determines the problem rate for the facility
+     * @return problems / year in days
+     */
     public int calcProblemRateForFacility() {
         numRequests = requests.size();
         return numRequests / 365;
     }
     
+    /**
+     * 
+     * @return total down time for the scheduled maintenance
+     */
     public long calcDownTimeForFacility() {
         return schedule.calcDownTimeForFacility();
     }
     
+    /**
+     * 
+     * @return all maintenance requests
+     */
     public List<MaintenanceRequest> listMaintenanceRequests() {
         return requests;
     }
     
+    /**
+     * 
+     * @return all maintenance added to the log
+     */
     public List<Order> listMaintenance() {
         return log.getMaintenanceList();
     }
     
+    /**
+     * 
+     * @return all problems from maintenance requests
+     */
     public String listFacilityProblems() {
         
         String problems = "Facility Problems:\n";

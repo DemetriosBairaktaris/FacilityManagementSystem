@@ -5,6 +5,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class handles all the scheduling of orders and maintenance.
+ * @author TeamDK
+ *
+ */
 public class Schedule {
 
     private Date currentDate;
@@ -19,6 +24,12 @@ public class Schedule {
         downTime = 0;
     }
     
+    /**
+     * schedules the requests maintenance
+     * @param date1
+     * @param date2
+     * @return true if successful, false if failure
+     */
     public boolean scheduleMaintenance(Date date1, Date date2) {
         
         if (currentDate.getTime() > date1.getTime() ) {
@@ -37,6 +48,10 @@ public class Schedule {
         }
     }
     
+    /**
+     * 
+     * @return total down time for facility from total maintenance
+     */
     public long calcDownTimeForFacility() {
         
         if (startDate.size() == 0) {
@@ -54,6 +69,12 @@ public class Schedule {
 
     }
     
+    /**
+     * 
+     * @param date1
+     * @param date2
+     * @return true if available, false if unavailable
+     */
     private boolean checkAvailability(Date date1, Date date2) {
         
         if (startDate.size() == 0) {
