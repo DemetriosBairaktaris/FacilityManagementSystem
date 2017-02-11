@@ -19,6 +19,7 @@ public class Maintenance {
     private BigDecimal cost;
     private int orderNum;
     private int numRequests;
+    private List<Technician> technicians;
     
     public Maintenance() {
         log = new Log();
@@ -27,6 +28,7 @@ public class Maintenance {
         schedule = new Schedule();
         cost = new BigDecimal("0");
         orderNum = 0;
+        technicians = new ArrayList<Technician>();
     }
     
     /**
@@ -150,5 +152,18 @@ public class Maintenance {
         }
         
         return problems;
+    }
+    
+    public void createTechnician(String name, int id) {
+        Technician tech = new Technician(name, id);
+        technicians.add(tech);
+    }
+    
+    public void removeTechnician(String name) {
+        for (int i = 0; i < technicians.size(); i++) {
+            if (technicians.get(i).getName().equals(name)) {
+                technicians.remove(i);
+            }
+        }
     }
 }
