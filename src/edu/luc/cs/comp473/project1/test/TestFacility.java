@@ -158,5 +158,6 @@ public class TestFacility {
     @After
     public void tearDown() throws Exception {
         facility = null;
+        
     }
 }
