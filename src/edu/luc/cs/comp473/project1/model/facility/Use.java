@@ -93,14 +93,14 @@ public class Use {
             sortAndCombine();
             newIntervalAdded = false ;
         }
-        System.out.println(list);
+       
         for(Interval i : list){
             double val = i.getEndDate().getTime() - i.getStartDate().getTime() ;
-            System.out.println(val);
+            
             val = val/1000; 
             val = val/60 ; 
             totalMinutes+= val ; 
-            System.out.println(val);
+           
         }
      
         return totalMinutes/minutesPerYear;

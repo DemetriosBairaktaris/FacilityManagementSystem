@@ -16,7 +16,7 @@ public abstract class Facility {
     private String address;
     private List<Room> rooms ; 
     private List<Inspection> inspections ; 
-    private Maintenance maintenance ; 
+    //private Maintenance maintenance ; 
     private Use use ; 
     
     /**
@@ -33,7 +33,7 @@ public abstract class Facility {
         this.rooms = new ArrayList<>();
         this.inspections = new ArrayList<>();
         this.inspections = new ArrayList<>();
-        this.maintenance = new Maintenance();
+       // this.maintenance = new Maintenance();
         this.use = new Use();
     }
     
@@ -75,12 +75,13 @@ public abstract class Facility {
   
     /**
      * 
-     * @return MaintenanceRequest
-     */
-    public MaintenanceRequest getMaintenance() {
-        return maintenance;
-        
-    }
+     * @return Maintenance
+//     */
+//    public Maintenance getMaintenance() {
+//        //return maintenance;
+//        return null
+//        
+//    }
     
     /**
      * Retrieves all the rooms associated with this facility
