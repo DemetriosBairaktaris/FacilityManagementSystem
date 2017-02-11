@@ -7,12 +7,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.luc.cs.comp473.project1.dal.FacilityDAO;
+import edu.luc.cs.comp473.project1.model.facility.Apartment;
 import edu.luc.cs.comp473.project1.model.facility.Facility;
 
 public class TestFacilityDAO {
 
     private FacilityDAO storage;
-    private Facility facility = new Facility("test", "test");
+    private Facility facility = new Apartment("test", "test","test");
     
     @Before
     public void setUp() throws Exception {

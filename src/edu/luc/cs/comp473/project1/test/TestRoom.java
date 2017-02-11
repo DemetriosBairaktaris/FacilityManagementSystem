@@ -17,9 +17,8 @@ public class TestRoom {
     @Before
     public void setUp() throws Exception {
         room = new Room(roomNum, capacity);
-        
     }
-
+    
     @Test
     public void testGetRoomNumber() {
         assertEquals(room.getRoomNumber(), roomNum);
@@ -31,16 +30,14 @@ public class TestRoom {
     }
     
     @Test
-    public void testAvailability() {
-        room.setAvailability(true);
-        assertTrue(room.isAvailable());
-        room.setAvailability(false);
-        assertFalse(room.isAvailable());
+    public void testGetAvailableCapacity() throws Exception {
+       int initCapacity = room.getCapacity();
+       room.addInhabitant("Steve");
+       assertTrue(initCapacity == (room.getAvailableCapacity()+1));
     }
 
     @After
     public void tearDown() throws Exception {
         room = null;
     }
-    
 }
