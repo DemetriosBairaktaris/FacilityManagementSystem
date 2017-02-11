@@ -47,6 +47,11 @@ public class TestFacility {
                 );
     }
     
+    @Test(expected = KeyNotFoundException.class)
+    public void testGetNonExistentRoom(){
+        
+    }
+    
     @Test
     public void testRequestAvailableCapacity(){
         assertEquals(65,facility.requestAvailableCapacity());
@@ -149,7 +154,7 @@ public class TestFacility {
                 facility.listInspections()
                 );
     }
-    
+     
     @After
     public void tearDown() throws Exception {
         facility = null;
