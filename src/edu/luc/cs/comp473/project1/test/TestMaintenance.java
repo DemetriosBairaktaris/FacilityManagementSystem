@@ -27,9 +27,13 @@ public class TestMaintenance {
         date2 = new Date(1491368400000L); //April 5, 2017
         date3 = new Date(1491109200000L); //April 2, 2017
         date4 = new Date(1491282000000L); //April 4, 2017
+        maintenance.createTechnician("Bob", 1);
         maintenance.makeFacilityMaintenanceRequest("Sink is leaking");
         maintenance.makeFacilityMaintenanceRequest("Light bulb is burnt out.");
         maintenance.makeFacilityMaintenanceRequest("Ceiling is cracking.");
+        maintenance.createOrder(maintenance.listMaintenanceRequests().get(0).getProblem(), maintenance.getTechnician(1));
+        maintenance.createOrder(maintenance.listMaintenanceRequests().get(1).getProblem(), maintenance.getTechnician(1));
+        maintenance.createOrder(maintenance.listMaintenanceRequests().get(2).getProblem(), maintenance.getTechnician(1));
         maintenance.setLaborCost(laborCost, 0);
         maintenance.setPartsCost(partsCost, 0);
     }

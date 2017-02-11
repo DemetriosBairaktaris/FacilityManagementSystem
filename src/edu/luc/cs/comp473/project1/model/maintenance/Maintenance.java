@@ -38,7 +38,6 @@ public class Maintenance {
     public void makeFacilityMaintenanceRequest(String problem) {
         MaintenanceRequest request = new MaintenanceRequest(problem);
         requests.add(request);
-        createOrder(problem);
     }
     
     /**
@@ -66,8 +65,8 @@ public class Maintenance {
      * creates an order for maintenance
      * @param desc
      */
-    private void createOrder(String desc) {
-        Order order = new Order(desc, orderNum);
+    public void createOrder(String desc, Technician tech) {
+        Order order = new Order(desc, orderNum, tech);
         orders.add(order);
         orderNum++;
     }
@@ -157,6 +156,18 @@ public class Maintenance {
     public void createTechnician(String name, int id) {
         Technician tech = new Technician(name, id);
         technicians.add(tech);
+    }
+    
+    public Technician getTechnician(int id) {
+        for (int i = 0; i < technicians.size(); i++) {
+            if (technicians.get(i).getID() == id) {
+                return technicians.get(i);
+                }
+            else {
+                return null;
+            }
+        }
+        return null;
     }
     
     public void removeTechnician(String name) {
