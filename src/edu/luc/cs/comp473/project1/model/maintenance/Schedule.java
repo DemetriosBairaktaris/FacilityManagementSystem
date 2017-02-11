@@ -39,7 +39,7 @@ public class Schedule {
     
     public long calcDownTimeForFacility() {
         
-        if (startDate == null) {
+        if (startDate.size() == 0) {
             return 0;
         }
         else {
@@ -56,7 +56,7 @@ public class Schedule {
     
     private boolean checkAvailability(Date date1, Date date2) {
         
-        if (startDate == null) {
+        if (startDate.size() == 0) {
             return true;
         }
         
