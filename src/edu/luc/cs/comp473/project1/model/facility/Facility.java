@@ -13,6 +13,7 @@ public abstract class Facility {
 
     private String name;
     private String description;
+
     private String address;
     private List<Room> rooms ; 
     private List<Inspection> inspections ; 
