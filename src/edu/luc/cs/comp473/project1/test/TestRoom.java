@@ -13,7 +13,11 @@ public class TestRoom {
     private Room room;
     private int roomNum = 101;
     private int capacity = 40;
-    
+    /**
+     * 
+     * @author TeamDK
+     *
+     */
     @Before
     public void setUp() throws Exception {
         room = new Room(roomNum, capacity);
