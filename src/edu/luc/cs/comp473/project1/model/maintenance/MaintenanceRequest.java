@@ -22,7 +22,7 @@ public class MaintenanceRequest {
      * @return status
      */
     public int getStatus() {
-        return status;
+        return this.status;
     }
     
     /**
