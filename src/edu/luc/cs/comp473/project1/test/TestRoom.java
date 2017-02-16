@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.luc.cs.comp473.project1.model.facility.BasicRoom;
 import edu.luc.cs.comp473.project1.model.facility.Room;
 
 public class TestRoom {
@@ -13,10 +14,14 @@ public class TestRoom {
     private Room room;
     private int roomNum = 101;
     private int capacity = 40;
-    
+    /**
+     * 
+     * @author TeamDK
+     *
+     */
     @Before
     public void setUp() throws Exception {
-        room = new Room(roomNum, capacity);
+        room = new BasicRoom(roomNum, capacity);
     }
     
     @Test
