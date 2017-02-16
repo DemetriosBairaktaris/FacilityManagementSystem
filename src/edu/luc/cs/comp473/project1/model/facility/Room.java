@@ -3,6 +3,9 @@ package edu.luc.cs.comp473.project1.model.facility;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.luc.cs.comp473.project1.model.System.ConcreteSystemLog;
+import edu.luc.cs.comp473.project1.model.System.SystemLog;
+
 /**
  * This class creates objects that are associated with a specific building
  * @author TeamDK
@@ -13,6 +16,7 @@ public abstract class Room {
     private int roomNumber;
     private int capacity;
     private List<String> inhabitants ; 
+    private SystemLog s;
 
     /**
      * @param roomNumber
@@ -22,6 +26,8 @@ public abstract class Room {
         this.roomNumber = roomNumber;
         this.capacity = capacity;
         inhabitants = new ArrayList<>(capacity);
+        s = new ConcreteSystemLog();
+        s.logCreate(this);
         
     }
 
@@ -78,5 +84,10 @@ public abstract class Room {
      */
     public void vacate(){
         inhabitants.clear();
+        s.logVacate(this);
+    }
+    
+    public String toString(){
+        return "Room Number:  "+this.getRoomNumber()+"\nCapacity:  "+this.getCapacity();
     }
 }

@@ -3,6 +3,9 @@ package edu.luc.cs.comp473.project1.model.facility;
 
 import java.util.Date;
 
+import edu.luc.cs.comp473.project1.model.System.ConcreteSystemLog;
+import edu.luc.cs.comp473.project1.model.System.SystemLog;
+
 /**
  * 
  * @author TeamDK
@@ -11,6 +14,7 @@ import java.util.Date;
 public class Interval implements Comparable<Interval>{
     private Date startDate ;
     private Date endDate ; 
+    private SystemLog s ; 
     
     /**
      * 
@@ -20,6 +24,9 @@ public class Interval implements Comparable<Interval>{
     public Interval(Date one, Date two){
         startDate = one ;
         endDate = two ;
+        s = new ConcreteSystemLog();
+        s.logCreate(this);
+        
     }
     
     /**

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import edu.luc.cs.comp473.project1.model.System.ConcreteSystemLog;
+import edu.luc.cs.comp473.project1.model.System.SystemLog;
+
 /**
  * 
  * @author TeamDK
@@ -18,7 +21,8 @@ public abstract class Facility {
     private List<Room> rooms ; 
     private List<Inspection> inspections ; 
     //private Maintenance maintenance ; 
-    private Use use ; 
+    private Use use ;
+    private SystemLog s ;
     
     /**
      * 
@@ -36,6 +40,8 @@ public abstract class Facility {
         this.inspections = new ArrayList<>();
        // this.maintenance = new Maintenance();
         this.use = new Use();
+        s = new ConcreteSystemLog();
+        s.logCreate(this);
     }
     
     /**
@@ -108,6 +114,7 @@ public abstract class Facility {
      * @param room
      */
     public void addFacilityDetail(Room room) {
+        s.logAdd(room,this);
        this.rooms.add(room);
     }
 
@@ -130,9 +137,11 @@ public abstract class Facility {
      * @return void
      */
     public void vacateFacility(){
+        s.logVacate(this);
         for (Room room: this.getRooms()){
            room.vacate();
         }
+        
     }
     /**
      * 
@@ -197,6 +206,7 @@ public abstract class Facility {
      * @return Inspection
      */
     public Inspection inspect(){
+        s.logInspect(this);
         Inspection i = new Inspection(new Date());
         inspections.add(i);
         return i ;
