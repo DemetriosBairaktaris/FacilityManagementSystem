@@ -8,7 +8,7 @@ import java.util.List;
  * @author TeamDK
  *
  */
-public class Room {
+public abstract class Room {
 
     private int roomNumber;
     private int capacity;
@@ -22,6 +22,7 @@ public class Room {
         this.roomNumber = roomNumber;
         this.capacity = capacity;
         inhabitants = new ArrayList<>(capacity);
+        
     }
 
     /**

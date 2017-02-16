@@ -20,9 +20,9 @@ public class TestFacility {
     @Before
     public void setUp() throws Exception {
         facility = new Building(name, desc, address);
-        facility.addFacilityDetail(new Room(1,20));
-        facility.addFacilityDetail(new Room(2,25));
-        facility.addFacilityDetail(new Room(11,20));
+        facility.addFacilityDetail(new BasicRoom(1,20));
+        facility.addFacilityDetail(new BasicRoom(2,25));
+        facility.addFacilityDetail(new BasicRoom(11,20));
         
         
     }
@@ -47,22 +47,17 @@ public class TestFacility {
                 );
     }
     
-    @Test(expected = KeyNotFoundException.class)
-    public void testGetNonExistentRoom(){
-        
-    }
-    
     @Test
     public void testRequestAvailableCapacity(){
         assertEquals(65,facility.requestAvailableCapacity());
-        facility.addFacilityDetail(new Room(5,5));
+        facility.addFacilityDetail(new BasicRoom(5,5));
         assertEquals(70,facility.requestAvailableCapacity());
     }
     
     @Test
     public void testAddFacilityDetail(){ //hold off for now
         assertEquals(3,facility.getRooms().size());
-        facility.addFacilityDetail(new Room(5,13));
+        facility.addFacilityDetail(new BasicRoom(5,13));
         assertEquals(4,facility.getRooms().size());
     }
     
