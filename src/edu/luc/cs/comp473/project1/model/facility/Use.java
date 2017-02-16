@@ -7,6 +7,11 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 
+ * @author TeamDK
+ *
+ */
 public class Use {
  
     private List<Interval> intervals ;
@@ -21,6 +26,10 @@ public class Use {
         newIntervalAdded = false ;
     }
     
+    /**
+     * 
+     * @return String
+     */
     public String listActualUsage(){
         if (intervals.size() == 0){
             return "No Usage" ; 
@@ -32,6 +41,11 @@ public class Use {
         return usageDates ; 
     }
     
+    /*
+     * @param one
+     * @param two
+     * @return boolean
+     */
     public boolean assignFacilityToUse(Date one, Date two){
         currentDate = new Date();
         if(one.getTime()<currentDate.getTime()){
@@ -47,6 +61,12 @@ public class Use {
         }
     }
     
+    /**
+     * 
+     * @param one
+     * @param two
+     * @return boolean
+     */
     public boolean isInUseDuringInterval(Date one, Date two){
        if (intervals.size() == 0){return false;}
        if(newIntervalAdded){
@@ -62,6 +82,10 @@ public class Use {
        return false ;
     }
     
+    /**
+     * 
+     * @return double
+     */
     @SuppressWarnings("deprecation")
     public double calcUsageRate(){
         double totalMinutes = 0 ;
@@ -69,22 +93,25 @@ public class Use {
             sortAndCombine();
             newIntervalAdded = false ;
         }
-        System.out.println(list);
+       
         for(Interval i : list){
             double val = i.getEndDate().getTime() - i.getStartDate().getTime() ;
-            System.out.println(val);
+            
             val = val/1000; 
             val = val/60 ; 
             totalMinutes+= val ; 
-            System.out.println(val);
+           
         }
      
         return totalMinutes/minutesPerYear;
         
     }
     
-    
-    
+    /**
+     * A helper method which sorts all intervals and combines overlapping intervals
+     * Only called if there has been new additions to the intervals
+     * @return void
+     */
     private void sortAndCombine(){
         Collections.sort(intervals);
         list = new LinkedList<>();
