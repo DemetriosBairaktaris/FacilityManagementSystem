@@ -1,9 +1,6 @@
 
 package edu.luc.cs.comp473.project1.model.facility;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import edu.luc.cs.comp473.project1.dal.FacilityDAO;
 /**
  * 
