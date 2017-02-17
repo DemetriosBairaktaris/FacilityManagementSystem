@@ -32,7 +32,7 @@ public class MaintenanceRequest {
 
     /**
      * This method returns the problem description.
-     * @return problem
+     * @return problem description
      */
    public String getProblem(){
        return this.problem ; 
