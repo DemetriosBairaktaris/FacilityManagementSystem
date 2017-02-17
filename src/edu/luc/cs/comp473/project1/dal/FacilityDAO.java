@@ -11,7 +11,7 @@ import edu.luc.cs.comp473.project1.model.facility.Facility;
  */
 public class FacilityDAO {
     
-    private HashMap<Facility, Facility> facilityHashMap;
+    private HashMap<Integer,Facility> facilityHashMap;
     
     public FacilityDAO() {
         facilityHashMap = new HashMap<>();
@@ -32,14 +32,20 @@ public class FacilityDAO {
      * @param facility object to be placed into storage
      */
     public void insertFacility(Facility facility) {
-        facilityHashMap.put(facility, facility);
+        facilityHashMap.put(facility.getName().hashCode(), facility);
     }
     
     /**
      * This method removes a facility based on the facilities ID.
-     * @param facility
+     * @param name
+     * @return 
      */
-    public void removeFacility(Facility facility) {
-        facilityHashMap.remove(facility);
+    public void removeFacility(String name) {
+        facilityHashMap.remove(name.hashCode());
+    }
+    
+    @Override
+    public String toString(){
+        return facilityHashMap.toString();
     }
 }

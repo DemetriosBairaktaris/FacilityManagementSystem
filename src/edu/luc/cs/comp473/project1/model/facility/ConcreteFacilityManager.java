@@ -3,6 +3,8 @@ package edu.luc.cs.comp473.project1.model.facility;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import edu.luc.cs.comp473.project1.dal.FacilityDAO;
 /**
  * 
  * @author TeamDK
@@ -10,27 +12,27 @@ import java.util.List;
  */
 public class ConcreteFacilityManager implements FacilityManager {
     
-    private List<Facility> facilities ;
+    private FacilityDAO facilities ;
     
    
     public ConcreteFacilityManager(){
-        facilities = new LinkedList<>();
+        facilities = new FacilityDAO();
     }
     
     /**
      * @return facilities
      */
     @Override
-    public List<Facility> listFacilities() {
-        return facilities ; 
+    public String listFacilities() { //figure that out
+        return facilities.toString();
     }
     
     /**
      * @param facility
      */
     @Override
-    public void addNewFacility(Facility facility) {
-        facilities.add(facility);
+    public void addNewFacility(String name, String desc, String address) {
+        facilities.insertFacility(new Building(name,desc,address));
     }
     
     /**
@@ -38,8 +40,14 @@ public class ConcreteFacilityManager implements FacilityManager {
      * @return boolean
      */
     @Override
-    public boolean removeFacility(Facility facility) {
-        boolean val = facilities.remove(facility);
-        return val ; 
+    public void removeFacility(String name) {
+         facilities.removeFacility(name);
+         
+    }
+    
+    
+    @Override
+    public void addRoomToFacility(int roomNumber, int capacity, String name) {
+        facilities.getFacility(name).addFacilityDetail(new BasicRoom(roomNumber, capacity));
     }
 }

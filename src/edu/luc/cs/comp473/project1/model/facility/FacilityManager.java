@@ -13,19 +13,21 @@ public interface FacilityManager {
      * 
      * @return List<Facility>
      */
-    public List<Facility> listFacilities ();
+    public String listFacilities ();
     
     /**
      * 
      * @param facility
      * @return void
      */
-    public void addNewFacility(Facility facility);
+    public void addNewFacility(String name, String Desc, String address);
     
     /**
      * 
      * @param facility
      * @return boolean
      */
-    public boolean removeFacility(Facility facility);
+    public void removeFacility(String name);
+    
+    public void addRoomToFacility(int roomNumber, int capacity,String name);
 }
