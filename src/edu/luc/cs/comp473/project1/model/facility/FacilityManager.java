@@ -1,17 +1,17 @@
 
 package edu.luc.cs.comp473.project1.model.facility;
 
-import java.util.List;
+
 /**
  * 
  * @author TeamDK
  *
  */
 public interface FacilityManager {
-    //Facility//
+    
     /**
      * 
-     * @return List<Facility>
+     * @return String
      */
     public String listFacilities ();
     
@@ -25,9 +25,22 @@ public interface FacilityManager {
     /**
      * 
      * @param facility
-     * @return boolean
+     * @return void
      */
     public void removeFacility(String name);
     
+    /**
+     * 
+     * @param roomNumber
+     * @param capacity
+     * @param name
+     */
     public void addRoomToFacility(int roomNumber, int capacity,String name);
+    
+    /**
+     * 
+     * @param name
+     * @return
+     */
+    public Facility getFacility(String name);
 }
