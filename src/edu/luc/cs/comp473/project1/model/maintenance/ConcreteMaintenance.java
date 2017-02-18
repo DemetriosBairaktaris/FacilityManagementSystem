@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import edu.luc.cs.comp473.project1.model.System.SystemLog;
+
 /**
  * This class is the interface between the client and the domain model for the maintenance objects
  * @author TeamDK
@@ -20,8 +22,9 @@ public class ConcreteMaintenance implements Maintenance {
     private int orderNum;
     private int requestNum;
     private int numRequests;
+    private SystemLog sysLog;
     
-    public ConcreteMaintenance() {
+    public ConcreteMaintenance(SystemLog sysLog) {
         log = new Log();
         requests = new ArrayList<MaintenanceRequest>();
         orders = new ArrayList<Order>();
@@ -29,6 +32,8 @@ public class ConcreteMaintenance implements Maintenance {
         cost = new BigDecimal("0");
         orderNum = 0;
         requestNum = 0;
+        this.sysLog = sysLog;
+        sysLog.logCreate(this);
     }
     
     /**
@@ -36,7 +41,7 @@ public class ConcreteMaintenance implements Maintenance {
      * @param problem
      */
     public void makeFacilityMaintenanceRequest(String problem) {
-        MaintenanceRequest request = new MaintenanceRequest(problem, requestNum);
+        MaintenanceRequest request = new MaintenanceRequest(problem, requestNum, sysLog);
         requests.add(request);
         requestNum++;
     }

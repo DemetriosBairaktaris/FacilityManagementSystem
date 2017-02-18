@@ -9,6 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.luc.cs.comp473.project1.model.System.ConcreteSystemLog;
+import edu.luc.cs.comp473.project1.model.System.SystemLog;
 import edu.luc.cs.comp473.project1.model.maintenance.ConcreteMaintenance;
 
 public class TestMaintenance {
@@ -17,10 +19,12 @@ public class TestMaintenance {
     private BigDecimal laborCost;
     private BigDecimal partsCost;
     private Date date1, date2, date3, date4;
+    private SystemLog sysLog;
     
     @Before
     public void setUp() throws Exception {
-        maintenance = new ConcreteMaintenance();
+        sysLog = new ConcreteSystemLog();
+        maintenance = new ConcreteMaintenance(sysLog);
         laborCost = new BigDecimal("343.87");
         partsCost = new BigDecimal("210.45");
         date1 = new Date(1491022800000L); //April 1, 2017
