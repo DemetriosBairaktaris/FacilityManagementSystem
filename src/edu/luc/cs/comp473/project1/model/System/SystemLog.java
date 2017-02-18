@@ -1,5 +1,7 @@
 package edu.luc.cs.comp473.project1.model.System;
 
+import java.util.Date;
+
 public abstract class SystemLog {
     
    public void logCreate(Object s){
@@ -25,5 +27,9 @@ public abstract class SystemLog {
    
    public void logClose(Object s) {
        System.out.println("Closing " + s.getClass().getSimpleName() + ":\n" + s.toString() + "\n");
+   }
+   
+   public void logSchedule(Date start, Date end) {
+       System.out.println("Maintenance Scheduled for " + start.toString() + " to " + end.toString());
    }
 }

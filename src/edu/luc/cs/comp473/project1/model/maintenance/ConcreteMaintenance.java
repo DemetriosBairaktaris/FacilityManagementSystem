@@ -25,14 +25,14 @@ public class ConcreteMaintenance implements Maintenance {
     private SystemLog sysLog;
     
     public ConcreteMaintenance(SystemLog sysLog) {
+        this.sysLog = sysLog;
         log = new Log();
         requests = new ArrayList<MaintenanceRequest>();
         orders = new ArrayList<Order>();
-        schedule = new Schedule();
+        schedule = new Schedule(sysLog);
         cost = new BigDecimal("0");
         orderNum = 0;
         requestNum = 0;
-        this.sysLog = sysLog;
         sysLog.logCreate(this);
     }
     
