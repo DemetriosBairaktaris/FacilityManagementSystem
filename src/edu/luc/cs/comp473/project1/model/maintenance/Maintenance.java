@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface Maintenance {
 
-    public void makeFacilityMaintenanceRequest(String problem);
+    public void makeFacilityMaintRequest(String problem);
     public boolean scheduleMaintenance(Date date1, Date date2);
     public BigDecimal calcMaintenanceCostForFacility();
     public int calcProblemRateForFacility();
     public long calcDownTimeForFacility();
-    public List<MaintenanceRequest> listMaintenanceRequests();
+    public List<MaintenanceRequest> listMaintRequests();
     public List<Order> listMaintenance();
     public String listFacilityProblems();
     

@@ -40,7 +40,7 @@ public class ConcreteMaintenance implements Maintenance {
      * Makes a maintenance request and creates an order
      * @param problem
      */
-    public void makeFacilityMaintenanceRequest(String problem) {
+    public void makeFacilityMaintRequest(String problem) {
         MaintenanceRequest request = new MaintenanceRequest(problem, requestNum, sysLog);
         requests.add(request);
         requestNum++;
@@ -143,7 +143,7 @@ public class ConcreteMaintenance implements Maintenance {
      * 
      * @return all maintenance requests
      */
-    public List<MaintenanceRequest> listMaintenanceRequests() {
+    public List<MaintenanceRequest> listMaintRequests() {
         return requests;
     }
     

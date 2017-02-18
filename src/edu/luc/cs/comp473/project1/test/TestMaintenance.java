@@ -31,29 +31,28 @@ public class TestMaintenance {
         date2 = new Date(1491368400000L); //April 5, 2017
         date3 = new Date(1491109200000L); //April 2, 2017
         date4 = new Date(1491282000000L); //April 4, 2017
-        maintenance.makeFacilityMaintenanceRequest("Sink is leaking");
-        maintenance.makeFacilityMaintenanceRequest("Light bulb is burnt out.");
-        maintenance.makeFacilityMaintenanceRequest("Ceiling is cracking.");
+        maintenance.makeFacilityMaintRequest("Sink is leaking");
+        maintenance.makeFacilityMaintRequest("Light bulb is burnt out.");
+        maintenance.makeFacilityMaintRequest("Ceiling is cracking.");
         maintenance.createOrder("Repair sink plumbing.", 0);
         maintenance.createOrder("Replace light bulb.", 1);
         maintenance.createOrder("Patch ceiling crack.", 2);
         maintenance.setLaborCost(laborCost, 0);
         maintenance.setPartsCost(partsCost, 0);
     }
-
+    
+    @Test
+    public void testScheduleMaintenancec() {
+        assertTrue(maintenance.scheduleMaintenance(date1, date2));
+        assertFalse(maintenance.scheduleMaintenance(date3, date4));
+    }
+    
     @Test
     public void testCalcMaintenanceCostForFacility() {
         BigDecimal totalCost = new BigDecimal("0");
         totalCost = totalCost.add(laborCost);
         totalCost = totalCost.add(partsCost);
         assertEquals(0, totalCost.compareTo(maintenance.calcMaintenanceCostForFacility()));
-    }
-    
-    @Test
-    public void testListMaintenanceRequests() {
-        assertEquals(maintenance.listMaintenanceRequests().get(0).getProblem(), "Sink is leaking");
-        assertEquals(maintenance.listMaintenanceRequests().get(1).getProblem(), "Light bulb is burnt out.");
-        assertEquals(maintenance.listMaintenanceRequests().get(2).getProblem(), "Ceiling is cracking.");
     }
     
     @Test
@@ -68,16 +67,10 @@ public class TestMaintenance {
     @Test
     public void testCloseRequests() {
         maintenance.closeRequest(0);
-        assertFalse(maintenance.listMaintenanceRequests().get(0).getStatus());
+        assertFalse(maintenance.listMaintRequests().get(0).getStatus());
         maintenance.closeOrder(0, 0);
         maintenance.closeRequest(0);
-        assertTrue(maintenance.listMaintenanceRequests().get(0).getStatus());
-    }
-    
-    @Test
-    public void testScheduleMaintenancec() {
-        assertTrue(maintenance.scheduleMaintenance(date1, date2));
-        assertFalse(maintenance.scheduleMaintenance(date3, date4));
+        assertTrue(maintenance.listMaintRequests().get(0).getStatus());
     }
     
     @Test
@@ -93,14 +86,10 @@ public class TestMaintenance {
     }
     
     @Test
-    public void testListFacilityProblems() {
-        
-        String test = "Facility Problems:\n"
-            + "Sink is leaking\n"
-            + "Light bulb is burnt out.\n"
-            + "Ceiling is cracking.\n";
-        
-        assertEquals(test, maintenance.listFacilityProblems());
+    public void testListMaintenanceRequests() {
+        assertEquals(maintenance.listMaintRequests().get(0).getProblem(), "Sink is leaking");
+        assertEquals(maintenance.listMaintRequests().get(1).getProblem(), "Light bulb is burnt out.");
+        assertEquals(maintenance.listMaintRequests().get(2).getProblem(), "Ceiling is cracking.");
     }
     
     @Test
@@ -111,11 +100,22 @@ public class TestMaintenance {
         maintenance.closeOrder(2, 2);
         assertEquals(maintenance.listMaintenance().size(), 3);
         assertEquals(maintenance.listMaintenance().get(0).getDescription(), "Repair sink plumbing.");
+    }
+    
+    @Test
+    public void testListFacilityProblems() {
         
+        String test = "Facility Problems:\n"
+            + "Sink is leaking\n"
+            + "Light bulb is burnt out.\n"
+            + "Ceiling is cracking.\n";
+        
+        assertEquals(test, maintenance.listFacilityProblems());
     }
 
     @After
     public void tearDown() throws Exception {
+        sysLog = null;
         maintenance = null;
         laborCost = null;
         partsCost = null;
