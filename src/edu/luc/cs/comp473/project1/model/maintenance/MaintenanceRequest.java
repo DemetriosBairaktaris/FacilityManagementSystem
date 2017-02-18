@@ -8,10 +8,12 @@ package edu.luc.cs.comp473.project1.model.maintenance;
 public class MaintenanceRequest {
     private boolean status;
     private String problem;
+    private int num;
     
-    public MaintenanceRequest(String problem) {
+    public MaintenanceRequest(String problem, int num) {
         status = false;
         this.problem = problem;
+        this.num = num;
     }
     
     /**
@@ -37,5 +39,13 @@ public class MaintenanceRequest {
    public String getProblem(){
        return this.problem ; 
    }
+   
+   public int getRequestNum() {
+       return num;
+   }
 
+   @Override
+   public String toString() {
+       return "Maintenance Request: " + this.getRequestNum() + "\nfor: " + this.getProblem() + "\nStatus: " + this.getStatus(); 
+   }
 }

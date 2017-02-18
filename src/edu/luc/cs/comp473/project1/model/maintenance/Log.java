@@ -40,5 +40,4 @@ public class Log {
     public List<Order> getMaintenanceList() {
         return maintenance;
     }
-    
 }

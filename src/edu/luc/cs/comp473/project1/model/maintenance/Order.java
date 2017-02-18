@@ -14,15 +14,13 @@ public class Order {
     private boolean status;
     private Cost cost;
     private BigDecimal totalCost;
-    private Technician technician;
     
-    public Order(String desc, double orderNum, Technician technician) {
+    public Order(String desc, double orderNum) {
         this.desc = desc;
         this.orderNum = orderNum;
         status = false;
         cost = new Cost();
         totalCost = new BigDecimal("0");
-        this.technician = technician;
     }
     
     /**
@@ -83,11 +81,9 @@ public class Order {
         return totalCost;
     }
     
-    /**
-     * 
-     * @param technician
-     */
-    public void updateTechnician(Technician technician) {
-        this.technician = technician;
+    @Override
+    public String toString() {
+        return "Order: " + this.getOrderNum() + "\nStatus: " + this.getStatus() + "\nDescription: " + this.getDescription()
+        + "\nCost: $" + this.getCost().toString();
     }
 }
