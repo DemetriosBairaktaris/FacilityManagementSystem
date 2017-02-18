@@ -66,20 +66,31 @@ public class ConcreteMaintenance implements Maintenance {
      * creates an order for maintenance
      * @param desc
      */
-    public void createOrder(String desc) {
+    public void createOrder(String desc, int requestNum) {
         Order order = new Order(desc, orderNum);
         orders.add(order);
         orderNum++;
+        requests.get(requestNum).addOpenOrder();
     }
     
     /**
      * closes an order when finished
      * @param orderNum
      */
-    public void closeOrder(int orderNum) {
+    public void closeOrder(int orderNum, int requestNum) {
         Order order = orders.get(orderNum);
         order.setStatus(true);
         log.addOrder(order);
+        requests.get(requestNum).removeOpenOrder();
+    }
+    
+    public void closeRequest(int requestNum) {
+        if (requests.get(requestNum).getOpenOrders() == 0) {
+            requests.get(requestNum).setStatus(true);
+        }
+        else {
+            return;
+        }
     }
     
     /**

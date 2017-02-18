@@ -9,11 +9,13 @@ public class MaintenanceRequest {
     private boolean status;
     private String problem;
     private int num;
+    private int openOrders;
     
     public MaintenanceRequest(String problem, int num) {
         status = false;
         this.problem = problem;
         this.num = num;
+        openOrders = 0;
     }
     
     /**
@@ -42,6 +44,18 @@ public class MaintenanceRequest {
    
    public int getRequestNum() {
        return num;
+   }
+   
+   public int getOpenOrders() {
+       return openOrders;
+   }
+   
+   public void addOpenOrder() {
+       openOrders++;
+   }
+   
+   public void removeOpenOrder() {
+       openOrders--;
    }
 
    @Override

@@ -30,9 +30,9 @@ public class TestMaintenance {
         maintenance.makeFacilityMaintenanceRequest("Sink is leaking");
         maintenance.makeFacilityMaintenanceRequest("Light bulb is burnt out.");
         maintenance.makeFacilityMaintenanceRequest("Ceiling is cracking.");
-        maintenance.createOrder(maintenance.listMaintenanceRequests().get(0).getProblem());
-        maintenance.createOrder(maintenance.listMaintenanceRequests().get(1).getProblem());
-        maintenance.createOrder(maintenance.listMaintenanceRequests().get(2).getProblem());
+        maintenance.createOrder(maintenance.listMaintenanceRequests().get(0).getProblem(), 0);
+        maintenance.createOrder(maintenance.listMaintenanceRequests().get(1).getProblem(), 1);
+        maintenance.createOrder(maintenance.listMaintenanceRequests().get(2).getProblem(), 2);
         maintenance.setLaborCost(laborCost, 0);
         maintenance.setPartsCost(partsCost, 0);
     }
@@ -54,11 +54,20 @@ public class TestMaintenance {
     
     @Test
     public void testCloseOrder() {
-        maintenance.closeOrder(0);
+        maintenance.closeOrder(0, 0);
         assertTrue(maintenance.listMaintenance().get(0).getStatus());
-        maintenance.closeOrder(1);
-        maintenance.closeOrder(2);
+        maintenance.closeOrder(1, 1);
+        maintenance.closeOrder(2, 2);
         assertEquals(maintenance.listMaintenance().size(), 3);
+    }
+    
+    @Test
+    public void testCloseRequests() {
+        maintenance.closeRequest(0);
+        assertFalse(maintenance.listMaintenanceRequests().get(0).getStatus());
+        maintenance.closeOrder(0, 0);
+        maintenance.closeRequest(0);
+        assertTrue(maintenance.listMaintenanceRequests().get(0).getStatus());
     }
     
     @Test
