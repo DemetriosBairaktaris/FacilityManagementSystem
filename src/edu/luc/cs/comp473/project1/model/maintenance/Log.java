@@ -40,4 +40,9 @@ public class Log {
     public List<Order> getMaintenanceList() {
         return maintenance;
     }
+    
+    @Override
+    public String toString() {
+        return "Completed Maintenance Log";
+    }
 }

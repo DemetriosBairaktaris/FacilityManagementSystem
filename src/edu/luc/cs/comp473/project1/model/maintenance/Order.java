@@ -40,7 +40,7 @@ public class Order {
      * 
      * @return order number
      */
-    public double getOrderNum() {
+    public int getOrderNum() {
         return orderNum;
     }
 

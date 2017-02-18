@@ -87,6 +87,7 @@ public class ConcreteMaintenance implements Maintenance {
         order.setStatus(true);
         sysLog.logClose(order);
         log.addOrder(order);
+        sysLog.logAdd(order, log);
         requests.get(requestNum).removeOpenOrder();
     }
     
@@ -171,5 +172,10 @@ public class ConcreteMaintenance implements Maintenance {
         }
         
         return problems;
+    }
+    
+    @Override
+    public String toString() {
+        return "Master Maintenance Record.";
     }
 }
