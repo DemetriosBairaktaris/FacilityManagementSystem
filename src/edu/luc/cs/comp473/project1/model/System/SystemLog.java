@@ -22,4 +22,8 @@ public abstract class SystemLog {
        System.out.println("To "+r.getClass().getSimpleName()+":\n"+r.toString());
        System.out.println();
    }
+   
+   public void logClose(Object s) {
+       System.out.println("Closing " + s.getClass().getSimpleName() + ":\n" + s.toString() + "\n");
+   }
 }

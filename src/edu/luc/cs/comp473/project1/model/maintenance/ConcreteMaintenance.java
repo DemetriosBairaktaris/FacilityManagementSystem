@@ -72,7 +72,7 @@ public class ConcreteMaintenance implements Maintenance {
      * @param desc
      */
     public void createOrder(String desc, int requestNum) {
-        Order order = new Order(desc, orderNum);
+        Order order = new Order(desc, orderNum, sysLog);
         orders.add(order);
         orderNum++;
         requests.get(requestNum).addOpenOrder();
@@ -85,13 +85,16 @@ public class ConcreteMaintenance implements Maintenance {
     public void closeOrder(int orderNum, int requestNum) {
         Order order = orders.get(orderNum);
         order.setStatus(true);
+        sysLog.logClose(order);
         log.addOrder(order);
         requests.get(requestNum).removeOpenOrder();
     }
     
     public void closeRequest(int requestNum) {
-        if (requests.get(requestNum).getOpenOrders() == 0) {
-            requests.get(requestNum).setStatus(true);
+        MaintenanceRequest request = requests.get(requestNum);
+        if (request.getOpenOrders() == 0) {
+            request.setStatus(true);
+            sysLog.logClose(request);
         }
         else {
             return;

@@ -65,6 +65,6 @@ public class MaintenanceRequest {
 
    @Override
    public String toString() {
-       return "Maintenance Request: " + this.getRequestNum() + "\nFor: " + this.getProblem() + "\nStatus: " + this.getStatus(); 
+       return "Maintenance Request #" + this.getRequestNum() + "\nStatus: " + this.getStatus() + "\nProblem: " + this.getProblem(); 
    }
 }

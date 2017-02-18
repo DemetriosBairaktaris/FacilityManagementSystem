@@ -34,9 +34,9 @@ public class TestMaintenance {
         maintenance.makeFacilityMaintenanceRequest("Sink is leaking");
         maintenance.makeFacilityMaintenanceRequest("Light bulb is burnt out.");
         maintenance.makeFacilityMaintenanceRequest("Ceiling is cracking.");
-        maintenance.createOrder(maintenance.listMaintenanceRequests().get(0).getProblem(), 0);
-        maintenance.createOrder(maintenance.listMaintenanceRequests().get(1).getProblem(), 1);
-        maintenance.createOrder(maintenance.listMaintenanceRequests().get(2).getProblem(), 2);
+        maintenance.createOrder("Repair sink plumbing.", 0);
+        maintenance.createOrder("Replace light bulb.", 1);
+        maintenance.createOrder("Patch ceiling crack.", 2);
         maintenance.setLaborCost(laborCost, 0);
         maintenance.setPartsCost(partsCost, 0);
     }
@@ -101,6 +101,17 @@ public class TestMaintenance {
             + "Ceiling is cracking.\n";
         
         assertEquals(test, maintenance.listFacilityProblems());
+    }
+    
+    @Test
+    public void testListMaintenance() {
+        assertEquals(maintenance.listMaintenance().size(), 0);
+        maintenance.closeOrder(0, 0);
+        maintenance.closeOrder(1, 1);
+        maintenance.closeOrder(2, 2);
+        assertEquals(maintenance.listMaintenance().size(), 3);
+        assertEquals(maintenance.listMaintenance().get(0).getDescription(), "Repair sink plumbing.");
+        
     }
 
     @After
