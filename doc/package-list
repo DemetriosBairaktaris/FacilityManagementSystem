@@ -1,0 +1,5 @@
+edu.luc.cs.fms.dal
+edu.luc.cs.fms.model.facility
+edu.luc.cs.fms.model.maintenance
+edu.luc.cs.fms.model.system
+edu.luc.cs.fms.test
