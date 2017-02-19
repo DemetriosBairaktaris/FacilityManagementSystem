@@ -41,4 +41,8 @@ public class Log {
         return maintenance;
     }
     
+    @Override
+    public String toString() {
+        return "Completed Maintenance Log";
+    }
 }

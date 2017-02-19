@@ -49,5 +49,4 @@ public class Cost {
     public BigDecimal getPartsCost() {
         return partsCost;
     }
-    
 }
