@@ -2,6 +2,8 @@ package edu.luc.cs.comp473.project1.model.maintenance;
 
 import java.math.BigDecimal;
 
+import edu.luc.cs.comp473.project1.model.System.SystemLog;
+
 /**
  * This class tracks an order created as a result of a maintenance request
  * @author TeamDK
@@ -10,17 +12,20 @@ import java.math.BigDecimal;
 public class Order {
 
     private String desc;
-    private double orderNum;
+    private int orderNum;
     private boolean status;
     private Cost cost;
     private BigDecimal totalCost;
+    private SystemLog sysLog;
     
-    public Order(String desc, double orderNum) {
+    public Order(String desc, int orderNum, SystemLog sysLog) {
         this.desc = desc;
         this.orderNum = orderNum;
         status = false;
         cost = new Cost();
         totalCost = new BigDecimal("0");
+        this.sysLog = sysLog;
+        sysLog.logCreate(this);
     }
     
     /**
@@ -35,7 +40,7 @@ public class Order {
      * 
      * @return order number
      */
-    public double getOrderNum() {
+    public int getOrderNum() {
         return orderNum;
     }
 
@@ -79,5 +84,11 @@ public class Order {
         totalCost = totalCost.add(cost.getLaborCost());
         totalCost = totalCost.add(cost.getPartsCost());
         return totalCost;
+    }
+    
+    @Override
+    public String toString() {
+        return "Order: " + this.getOrderNum() + "\nStatus: " + this.getStatus() + "\nDescription: " + this.getDescription()
+        + "\nCost: $" + this.getCost().toString();
     }
 }
