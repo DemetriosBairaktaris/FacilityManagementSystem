@@ -1,4 +1,4 @@
-package edu.luc.cs.comp473.project1.user;
+package edu.luc.cs.fms.user;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
