@@ -6,6 +6,7 @@ import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
  * This class tracks an order created as a result of a maintenance request
+ * 
  * @author TeamDK
  *
  */
@@ -16,7 +17,7 @@ public class Order {
     private boolean status;
     private Cost cost;
     private BigDecimal totalCost;
-    
+
     public Order(String desc, int orderNum, SystemLog sysLog) {
         this.desc = desc;
         this.orderNum = orderNum;
@@ -25,7 +26,7 @@ public class Order {
         totalCost = new BigDecimal("0");
         sysLog.logCreate(this);
     }
-    
+
     /**
      * 
      * @return description
@@ -33,7 +34,7 @@ public class Order {
     public String getDescription() {
         return desc;
     }
-    
+
     /**
      * 
      * @return order number
@@ -44,12 +45,13 @@ public class Order {
 
     /**
      * True is complete, false is open
+     * 
      * @param status
      */
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
+
     /**
      * 
      * @return status of order
@@ -57,23 +59,25 @@ public class Order {
     public boolean getStatus() {
         return status;
     }
-    
+
     /**
      * sets labor cost in BigDecimal format
+     * 
      * @param cost
      */
     public void setLaborCost(BigDecimal cost) {
         this.cost.setLaborCost(cost);
     }
-    
+
     /**
      * sets part cost in BigDecimal format
+     * 
      * @param cost
      */
     public void setPartsCost(BigDecimal cost) {
         this.cost.setPartsCost(cost);
     }
-    
+
     /**
      * 
      * @return total cost of parts and labor
@@ -83,10 +87,10 @@ public class Order {
         totalCost = totalCost.add(cost.getPartsCost());
         return totalCost;
     }
-    
+
     @Override
     public String toString() {
-        return "Order: " + this.getOrderNum() + "\nStatus: " + this.getStatus() + "\nDescription: " + this.getDescription()
-        + "\nCost: $" + this.getCost().toString();
+        return "Order: " + this.getOrderNum() + "\nStatus: " + this.getStatus() + "\nDescription: "
+                + this.getDescription() + "\nCost: $" + this.getCost().toString();
     }
 }
