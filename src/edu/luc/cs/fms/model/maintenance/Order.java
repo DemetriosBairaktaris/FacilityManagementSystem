@@ -91,6 +91,6 @@ public class Order {
     @Override
     public String toString() {
         return "Order: " + this.getOrderNum() + "\nStatus: " + this.getStatus() + "\nDescription: "
-                + this.getDescription() + "\nCost: $" + this.cost;
+                + this.getDescription() + "\nCost: $" + cost.getLaborCost().add(cost.getPartsCost()).toString();
     }
 }

@@ -8,8 +8,17 @@ import java.util.GregorianCalendar;
 import edu.luc.cs.fms.model.facility.ConcreteFacilityManager;
 import edu.luc.cs.fms.model.facility.FacilityManager;
 
+/**
+ * 
+ * @author TeamDK
+ *
+ */
 public class User {
 
+    /**
+     * Main method that simulates user level interaction
+     * @param args
+     */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         FacilityManager manager = new ConcreteFacilityManager();
@@ -35,17 +44,26 @@ public class User {
             manager.addRoomToFacility(i, 50);
         }
         
+        //WTC example
         manager.getFacility(wtc);
         manager.makeFacilityMaintRequest("Lights not working.");
+        manager.makeFacilityMaintRequest("Broken Door");
         manager.scheduleMaintenance(start, end);
         manager.createOrder("Fix lights.", 0);
+        manager.createOrder("Replace door", 1);
         manager.setLaborCost(new BigDecimal("2000"), 0);
         manager.setPartsCost(new BigDecimal("500"), 0);
+        manager.setLaborCost(new BigDecimal("200"), 1);
+        manager.setPartsCost(new BigDecimal("500"), 1);
         manager.closeOrder(0, 0);
         manager.closeRequest(0);
-        System.out.println(manager.calcMaintenanceCostForFacility());
-        System.out.println(manager.calcProblemRateForFacility());
+        manager.closeOrder(1, 1);
+        manager.closeRequest(1);
+        System.out.println(wtc + " Facility Cost: $" + manager.calcMaintenanceCostForFacility());
+        System.out.println(wtc + " Facility Problem Rate: " + manager.calcProblemRateForFacility());
         
+        
+        //LSC example
     }
 
 }
