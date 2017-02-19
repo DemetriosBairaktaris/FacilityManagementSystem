@@ -42,5 +42,13 @@ public interface FacilityManager {
      * @param name
      * @return
      */
-    public Facility getFacility(String name);
+    public void getFacility(String name);
+    
+    /**
+     * Prints to Console the current facility that the manager is holding
+     * @return
+     */
+    public String printCurrentFacility();
+    
+    public String listRooms();
 }

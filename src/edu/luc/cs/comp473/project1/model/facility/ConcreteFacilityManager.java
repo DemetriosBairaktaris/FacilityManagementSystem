@@ -13,6 +13,7 @@ public class ConcreteFacilityManager implements FacilityManager {
     
     private FacilityDAO facilities ;
     private SystemLog log; 
+    private Facility currentFacility ; 
     
    
     public ConcreteFacilityManager(){
@@ -61,8 +62,31 @@ public class ConcreteFacilityManager implements FacilityManager {
     }
 
     @Override
-    public Facility getFacility(String name) {
+    public void getFacility(String name) {
         
-        return facilities.getFacility(name);
+       currentFacility =  facilities.getFacility(name);
+    }
+
+    @Override
+    public String printCurrentFacility() {
+        if (currentFacility ==null){
+            return "No facility is being focused on.";
+        }
+        else{
+            return "Current Facility Being Focused on:\n"+currentFacility.toString();
+        }
+    }
+    
+    public String listRooms(){
+        String result = "Rooms:\n";
+        if(currentFacility.getRooms().size()==0){
+            result+="None"; 
+        }
+        else{
+            for(Room r : currentFacility.getRooms()){
+                result+="Room "+r.getRoomNumber()+" - Capacity "+r.getCapacity()+"\n";
+            }
+        }
+        return result ; 
     }
 }

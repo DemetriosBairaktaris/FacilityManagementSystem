@@ -19,6 +19,7 @@ public class TestFacilityManager {
     public void setUp() throws Exception {
         manager = new ConcreteFacilityManager();
         manager.addNewFacility(name, desc, address);
+        
     }
 
     @After
@@ -44,9 +45,10 @@ public class TestFacilityManager {
         int roomNumber = 1;
         int capacity=20 ; 
         manager.addRoomToFacility(roomNumber, capacity, name);
-        Facility f = manager.getFacility(name);
-        assertTrue(f.getRooms().get(0).getRoomNumber()==1);
-        assertTrue(f.getRooms().get(0).getCapacity()==20);
+        manager.getFacility(name);
+        
+        assertEquals("Rooms:\nRoom 1 - Capacity 20\n"
+               ,manager.listRooms());
     }
 
 }
