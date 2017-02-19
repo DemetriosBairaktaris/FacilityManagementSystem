@@ -1,13 +1,11 @@
-/**
- * 
- * @author TeamDK
- *
- */
+
 package edu.luc.cs.comp473.project1.model.facility;
 
-import edu.luc.cs.comp473.project1.model.System.ConcreteSystemLog;
-import edu.luc.cs.comp473.project1.model.System.SystemLog;
-
+/*
+ * Concrete Implementation of Facility
+ * @author TeamDK
+ * 
+ */
 public class Building extends Facility{
     /**
      * 

@@ -126,9 +126,9 @@ public class ConcreteMaintenance implements Maintenance {
      * determines the problem rate for the facility
      * @return problems / year in days
      */
-    public int calcProblemRateForFacility() {
+    public float calcProblemRateForFacility() {
         numRequests = requests.size();
-        return numRequests / 365;
+        return ((float)numRequests) / 365;
     }
     
     /**
@@ -163,7 +163,7 @@ public class ConcreteMaintenance implements Maintenance {
         
         String problems = "Facility Problems:\n";
         
-        if (requests == null) {
+        if (requests.size()==0) {
             return "No facility problems.";
         }
         
