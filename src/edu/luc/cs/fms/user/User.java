@@ -44,6 +44,8 @@ public class User {
             manager.addRoomToFacility(i, 50);
         }
         
+        System.out.println(manager.listFacilities());
+        
         //WTC example
         manager.getFacility(wtc);
         manager.makeFacilityMaintRequest("Lights not working.");
@@ -59,11 +61,25 @@ public class User {
         manager.closeRequest(0);
         manager.closeOrder(1, 1);
         manager.closeRequest(1);
-        System.out.println(wtc + " Facility Cost: $" + manager.calcMaintenanceCostForFacility());
+        System.out.println(wtc + " Facility Maintenance Cost: $" + manager.calcMaintenanceCostForFacility());
         System.out.println(wtc + " Facility Problem Rate: " + manager.calcProblemRateForFacility());
+        System.out.println(wtc + " Down Time for Facility: " + manager.calcDownTimeForFacility() + " days");
+        System.out.println(wtc + " List of Maintenance Requests:");
+        for (int i = 0; i < manager.listMaintRequests().size(); i++){
+            System.out.println(manager.listMaintRequests().get(i).toString() + "\n");
+        }
+        System.out.println(wtc + " List of Maintenance Performed:");
+        for (int i = 0; i < manager.listMaintRequests().size(); i++){
+            System.out.println(manager.listMaintenance().get(i).toString() + "\n");
+        }
+        System.out.println(manager.listFacilityProblems());
         
         
         //LSC example
+        
+        //Remove facilities
+        manager.removeFacility(lsc);
+        manager.removeFacility(wtc);
     }
 
 }
