@@ -59,7 +59,7 @@ public class FacilityDAO {
         else{
             for(Integer i: facilityHashMap.keySet()){
                 result+="id:  "+i+"\n"+
-                facilityHashMap.get(i).toString();        
+                facilityHashMap.get(i).toString()+"\n";        
             }
         }
         return result;

@@ -38,7 +38,7 @@ public class TestFacilityManager {
     @Test
     public void testListFacilities() {
         assertEquals("Facilities:\nid:  "+name.hashCode()+"\n"+name+":  "+desc+"\n"+
-                "Address:  "+address
+                "Address:  "+address+"\n"
                 ,manager.listFacilities());
     }
     
@@ -52,8 +52,9 @@ public class TestFacilityManager {
     public void testAddRoomToFacility(){
         int roomNumber = 1;
         int capacity=20 ; 
-        manager.addRoomToFacility(roomNumber, capacity, name);
         manager.getFacility(name);
+        manager.addRoomToFacility(roomNumber, capacity);
+        
         
         assertEquals("Rooms:\nRoom 1 - Capacity 20\n"
                ,manager.listRooms());

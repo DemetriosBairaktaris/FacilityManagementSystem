@@ -34,9 +34,9 @@ public interface FacilityManager extends Maintenance{
      * 
      * @param roomNumber
      * @param capacity
-     * @param name
+     * 
      */
-    public void addRoomToFacility(int roomNumber, int capacity,String name);
+    public void addRoomToFacility(int roomNumber, int capacity);
     
     /**
      * 
@@ -49,7 +49,7 @@ public interface FacilityManager extends Maintenance{
      * Prints to Console the current facility that the manager is holding
      * @return
      */
-    public String printCurrentFacility();
+    public String CurrentFacility();
     
     public String listRooms();
 }

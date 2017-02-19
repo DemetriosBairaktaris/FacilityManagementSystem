@@ -58,8 +58,8 @@ public class ConcreteFacilityManager implements FacilityManager {
      * @param name
      */
     @Override
-    public void addRoomToFacility(int roomNumber, int capacity, String name) {
-        facilities.getFacility(name).addFacilityDetail(new BasicRoom(roomNumber, capacity));
+    public void addRoomToFacility(int roomNumber, int capacity) {
+        currentFacility.addFacilityDetail(new BasicRoom(roomNumber, capacity));
     }
     
     @Override
@@ -74,7 +74,7 @@ public class ConcreteFacilityManager implements FacilityManager {
     }
 
     @Override
-    public String printCurrentFacility() {
+    public String CurrentFacility() {
         if (currentFacility ==null){
             return "No facility is being focused on.";
         }
