@@ -1,13 +1,14 @@
 
 package edu.luc.cs.comp473.project1.model.facility;
 
+import edu.luc.cs.comp473.project1.model.maintenance.Maintenance;
 
 /**
  * 
  * @author TeamDK
  *
  */
-public interface FacilityManager {
+public interface FacilityManager extends Maintenance{
     
     /**
      * 

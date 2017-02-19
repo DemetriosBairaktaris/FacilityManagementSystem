@@ -1,9 +1,15 @@
 
 package edu.luc.cs.comp473.project1.model.facility;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
 import edu.luc.cs.comp473.project1.dal.FacilityDAO;
 import edu.luc.cs.comp473.project1.model.System.ConcreteSystemLog;
 import edu.luc.cs.comp473.project1.model.System.SystemLog;
+import edu.luc.cs.comp473.project1.model.maintenance.MaintenanceRequest;
+import edu.luc.cs.comp473.project1.model.maintenance.Order;
 /**
  * 
  * @author TeamDK
@@ -76,7 +82,11 @@ public class ConcreteFacilityManager implements FacilityManager {
             return "Current Facility Being Focused on:\n"+currentFacility.toString();
         }
     }
-    
+    /*
+     * (non-Javadoc)
+     * @see edu.luc.cs.comp473.project1.model.facility.FacilityManager#listRooms()
+     */
+    @Override
     public String listRooms(){
         String result = "Rooms:\n";
         if(currentFacility.getRooms().size()==0){
@@ -89,4 +99,76 @@ public class ConcreteFacilityManager implements FacilityManager {
         }
         return result ; 
     }
+
+    @Override
+    public void makeFacilityMaintRequest(String problem) {
+        this.currentFacility.getMaintenance().makeFacilityMaintRequest(problem);
+        
+    }
+
+    @Override
+    public boolean scheduleMaintenance(Date date1, Date date2) {
+        return this.currentFacility.getMaintenance().scheduleMaintenance(date1, date2);
+    }
+
+    @Override
+    public BigDecimal calcMaintenanceCostForFacility() {
+        return this.currentFacility.getMaintenance().calcMaintenanceCostForFacility();
+    }
+
+    @Override
+    public float calcProblemRateForFacility() {
+       return this.currentFacility.getMaintenance().calcProblemRateForFacility();
+    }
+
+    @Override
+    public long calcDownTimeForFacility() {
+        return this.currentFacility.getMaintenance().calcDownTimeForFacility();
+    }
+
+    @Override
+    public List<MaintenanceRequest> listMaintRequests() {
+        return this.currentFacility.getMaintenance().listMaintRequests() ;
+    }
+
+    @Override
+    public List<Order> listMaintenance() {
+        return this.currentFacility.getMaintenance().listMaintenance() ;
+    }
+
+    @Override
+    public String listFacilityProblems() {
+       return this.currentFacility.getMaintenance().listFacilityProblems();
+    }
+
+    @Override
+    public void createOrder(String desc,int orderNum) {
+        this.currentFacility.getMaintenance().createOrder(desc,orderNum);
+        
+    }
+
+    @Override
+    public void setLaborCost(BigDecimal cost, int orderNum) {
+        this.currentFacility.getMaintenance().setLaborCost(cost, orderNum); 
+        
+    }
+
+    @Override
+    public void setPartsCost(BigDecimal cost, int orderNum) {
+        this.currentFacility.getMaintenance().setPartsCost(cost, orderNum);
+        
+    }
+
+    @Override
+    public void closeRequest(int requestNum) {
+        this.currentFacility.getMaintenance().closeRequest(requestNum);
+    }
+
+    @Override
+    public void closeOrder(int orderNum, int requestNum) {
+        this.currentFacility.getMaintenance().closeOrder(orderNum, requestNum);
+        
+    }
+    
+    
 }

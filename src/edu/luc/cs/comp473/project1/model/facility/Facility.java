@@ -6,6 +6,7 @@ import java.util.List;
 
 import edu.luc.cs.comp473.project1.model.System.ConcreteSystemLog;
 import edu.luc.cs.comp473.project1.model.System.SystemLog;
+import edu.luc.cs.comp473.project1.model.maintenance.ConcreteMaintenance;
 import edu.luc.cs.comp473.project1.model.maintenance.Maintenance;
 
 /**
@@ -39,10 +40,10 @@ public abstract class Facility {
         this.rooms = new ArrayList<>();
         this.inspections = new ArrayList<>();
         this.inspections = new ArrayList<>();
-        this.maintenance = new Maintenance();
-        this.use = new Use();
         s = new ConcreteSystemLog();
         s.logCreate(this);
+        this.maintenance = new ConcreteMaintenance(s);
+        this.use = new Use();
     }
     
     /**
@@ -84,13 +85,11 @@ public abstract class Facility {
     /**
      * 
      * @return Maintenance
-//     */
-//    public Maintenance getMaintenance() {
-//        //return maintenance;
-//        return null
-//        
-//    }
-    
+     */
+    public Maintenance getMaintenance(){
+        return maintenance;
+    }
+ 
     /**
      * Retrieves all the rooms associated with this facility
      * 
