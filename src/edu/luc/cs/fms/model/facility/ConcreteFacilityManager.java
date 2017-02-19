@@ -32,7 +32,8 @@ public class ConcreteFacilityManager implements FacilityManager {
      * @return facilities
      */
     @Override
-    public String listFacilities() { // figure that out
+    public String listFacilities() {
+        //TODO figure that out
         return facilities.toString();
     }
 
@@ -48,15 +49,12 @@ public class ConcreteFacilityManager implements FacilityManager {
     @Override
     public void removeFacility(String name) {
         facilities.removeFacility(name);
-
     }
 
-    /*
+    /**
+     * 
      * @param roomNumber
-     * 
      * @param capacity
-     * 
-     * @param name
      */
     @Override
     public void addRoomToFacility(int roomNumber, int capacity) {
@@ -70,7 +68,6 @@ public class ConcreteFacilityManager implements FacilityManager {
 
     @Override
     public void getFacility(String name) {
-
         currentFacility = facilities.getFacility(name);
     }
 
@@ -83,12 +80,6 @@ public class ConcreteFacilityManager implements FacilityManager {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * edu.luc.cs.comp473.project1.model.facility.FacilityManager#listRooms()
-     */
     @Override
     public String listRooms() {
         String result = "Rooms:\n";
@@ -105,7 +96,6 @@ public class ConcreteFacilityManager implements FacilityManager {
     @Override
     public void makeFacilityMaintRequest(String problem) {
         this.currentFacility.getMaintenance().makeFacilityMaintRequest(problem);
-
     }
 
     @Override
@@ -144,21 +134,19 @@ public class ConcreteFacilityManager implements FacilityManager {
     }
 
     @Override
-    public void createOrder(String desc, int orderNum) {
-        this.currentFacility.getMaintenance().createOrder(desc, orderNum);
+    public void createOrder(String desc, int requestNum) {
+        this.currentFacility.getMaintenance().createOrder(desc, requestNum);
 
     }
 
     @Override
     public void setLaborCost(BigDecimal cost, int orderNum) {
         this.currentFacility.getMaintenance().setLaborCost(cost, orderNum);
-
     }
 
     @Override
     public void setPartsCost(BigDecimal cost, int orderNum) {
         this.currentFacility.getMaintenance().setPartsCost(cost, orderNum);
-
     }
 
     @Override
@@ -169,7 +157,6 @@ public class ConcreteFacilityManager implements FacilityManager {
     @Override
     public void closeOrder(int orderNum, int requestNum) {
         this.currentFacility.getMaintenance().closeOrder(orderNum, requestNum);
-
     }
 
 }

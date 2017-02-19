@@ -24,7 +24,7 @@ public interface Maintenance {
 
     public void createOrder(String desc, int orderNum);
 
-    public void setLaborCost(BigDecimal cost, int orderNum);
+    public void setLaborCost(BigDecimal cost, int requestNum);
 
     public void setPartsCost(BigDecimal cost, int orderNum);
 
