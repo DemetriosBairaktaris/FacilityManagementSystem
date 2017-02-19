@@ -4,7 +4,9 @@ import edu.luc.cs.comp473.project1.model.facility.*;
 
 import static org.junit.Assert.*;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.junit.After;
 import org.junit.Before;
@@ -102,21 +104,28 @@ public class TestFacility {
                ,facility.listActualUsage());
     }
     
-    @SuppressWarnings("deprecation")
     @Test
     public void testCalcUsageRate(){
         //Simple Case: 1 Day : should be 1/365
         Date one,two,three ;
-        one = new Date(2018,0,1);
-        two = new Date(2018,0,2);
+        Calendar c = new GregorianCalendar();
+      
+        c.set(2018, 0, 1);
+        one = c.getTime();
+       
+        c.set(2018,0,2); 
+        two = c.getTime();
         facility.assignFacilityToUse(one, two);
         assertEquals((1.0/365),facility.calcUsageRate(),0.005);
         
         
        //Complex Case: OverLapping Intervals
-        one = new Date(2018,2,30);
-        two = new Date(2018,3,10);
-        three = new Date(2018,1,20);
+        c.set(2018,2,30);
+        one = c.getTime();
+        c.set(2018, 3,10);
+        two = c.getTime();
+        c.set(2018,1,20);
+        three = c.getTime();
         facility.assignFacilityToUse(one, two);
         facility.assignFacilityToUse(three, one);
         facility.assignFacilityToUse(three, two); // total should be 2-20-2018 -- 4-10-2018

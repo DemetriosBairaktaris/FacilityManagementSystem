@@ -75,8 +75,8 @@ public class TestMaintenance {
     
     @Test
     public void testCalcProblemRateForFacility() {
-        int num = 3 / 365;
-        assertEquals(num, maintenance.calcProblemRateForFacility());
+        float num = (float) (3.0/365.0);
+        assertEquals(num, maintenance.calcProblemRateForFacility(),0.0005);
     }
     
     @Test

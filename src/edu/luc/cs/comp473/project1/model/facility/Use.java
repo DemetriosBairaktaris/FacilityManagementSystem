@@ -86,7 +86,7 @@ public class Use {
      * 
      * @return double
      */
-    @SuppressWarnings("deprecation")
+    
     public double calcUsageRate(){
         double totalMinutes = 0 ;
         if(newIntervalAdded){
