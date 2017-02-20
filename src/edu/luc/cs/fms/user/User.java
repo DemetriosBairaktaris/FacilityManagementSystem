@@ -70,7 +70,7 @@ public class User {
         manager.closeOrder(1, 1);
         manager.closeRequest(1);
         System.out.println(wtc + " Facility Maintenance Cost: $" + manager.calcMaintenanceCostForFacility());
-        System.out.println(wtc + " Facility Problem Rate: " + manager.calcProblemRateForFacility());
+        System.out.println(wtc + " Facility Problem Rate: " + manager.calcProblemRateForFacility()+" per 365 days");
         System.out.println(wtc + " Down Time for Facility: " + manager.calcDownTimeForFacility() + " days");
         System.out.println(wtc + " List of Maintenance Requests:");
         for (int i = 0; i < manager.listMaintRequests().size(); i++){
@@ -86,14 +86,15 @@ public class User {
         manager.assignFacilityToUse(date1,date2);
         System.out.println(manager.listActualUsage());
         System.out.print("Available Capacity for "+manager.getFacilityInformation()+":");
-        System.out.println(manager.requestAvailableCapacity()+"\n");
+        System.out.println(manager.requestAvailableCapacity()+" open spots \n");
         System.out.println("Actual Usage for "+ manager.getFacilityInformation());
         System.out.println(manager.listActualUsage());
-        System.out.println("Usage Rate: "+(manager.calcUsageRate()*100)+"%\n");
+        System.out.println("Usage Rate: "+(manager.calcUsageRate()*100)+"% of year\n");
         System.out.println("Inspection passed: "+manager.inspect());
-        System.out.println("List of Inspections: "+manager.listInspections());
-        System.out.println("Facility in use during"+ date1+" - "+date2+":\n"
+        System.out.println("List of Inspections: \n"+manager.listInspections());
+        System.out.println("Facility in use during "+ date1+" - "+date2+":\n"
         +manager.isInUseDuringInterval(date1, date2));
+        System.out.println();
 
 
         //LSC example
@@ -128,7 +129,7 @@ public class User {
         manager.closeRequest(1);
         manager.closeRequest(2);
         System.out.println(lsc + " Facility Maintenance Cost: $" + manager.calcMaintenanceCostForFacility());
-        System.out.println(lsc + " Facility Problem Rate: " + manager.calcProblemRateForFacility());
+        System.out.println(lsc + " Facility Problem Rate: " + manager.calcProblemRateForFacility()+" per 365 days");
         System.out.println(lsc + " Down Time for Facility: " + manager.calcDownTimeForFacility() + " days");
         System.out.println(lsc + " List of Maintenance Requests:");
         for (int i = 0; i < manager.listMaintRequests().size(); i++){
@@ -143,15 +144,16 @@ public class User {
         //usage
         manager.assignFacilityToUse(date1,date2);
         System.out.println(manager.listActualUsage());
-        System.out.print("Available Capacity for "+manager.getFacilityInformation()+":");
-        System.out.println(manager.requestAvailableCapacity()+"\n");
+        System.out.print("Available Capacity for "+manager.getFacilityInformation()+":\n");
+        System.out.println(manager.requestAvailableCapacity()+" open spots\n");
         System.out.println("Actual Usage for "+ manager.getFacilityInformation());
         System.out.println(manager.listActualUsage());
-        System.out.println("Usage Rate: "+(manager.calcUsageRate()*100)+"%\n");
+        System.out.println("Usage Rate: "+(manager.calcUsageRate()*100)+"% of year\n");
         System.out.println("Inspection passed: "+manager.inspect());
-        System.out.println("List of Inspections: "+manager.listInspections());
-        System.out.println("Facility in use during"+ date1+" - "+date2+":\n"
+        System.out.println("List of Inspections: \n"+manager.listInspections());
+        System.out.println("Facility in use during "+ date1+" - "+date2+":\n"
         +manager.isInUseDuringInterval(date1, date2));
+        System.out.println();
 
         //Removing facilities
         manager.removeFacility(lsc);

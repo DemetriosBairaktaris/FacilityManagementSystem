@@ -55,11 +55,11 @@ public abstract class SystemLog {
     }
 
     /**
-     * logs the scheduling of two dates for maintenace
+     * logs the scheduling of two dates for maintenance
      * @param start
      * @param end
      */
     public void logSchedule(Date start, Date end) {
-        System.out.println("Maintenance Scheduled for " + start.toString() + " to " + end.toString());
+        System.out.println("Maintenance Scheduled for " + start.toString() + " to " + end.toString()+"\n");
     }
 }
