@@ -112,4 +112,10 @@ public interface FacilityManager extends Maintenance {
      */
      public double calcUsageRate();
      
+     /**
+      * 
+      * @return
+      */
+     public boolean inspect();
+     
 }

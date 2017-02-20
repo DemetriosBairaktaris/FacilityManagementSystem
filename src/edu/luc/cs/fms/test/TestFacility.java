@@ -140,12 +140,12 @@ public class TestFacility {
 
     @Test
     public void testListInspections() {
-        Inspection one = facility.inspect();
-        Inspection two = facility.inspect();
-        one.setPassed(false);
-        two.setPassed(true);
+        facility.inspect() ; 
+        facility.inspect() ; 
+        Date d = new Date();
+        
 
-        assertEquals("Inspections:\n" + one.getDate() + ":  failed\n" + two.getDate() + ":  passed\n",
+        assertEquals("Inspections:\n" + d + ":  passed\n" + d + ":  passed\n",
                 facility.listInspections());
     }
 

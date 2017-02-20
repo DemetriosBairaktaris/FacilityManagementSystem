@@ -117,7 +117,24 @@ public class User {
         }
         System.out.println(manager.listFacilityProblems());
         
-        //Remove facilities
+        dates.set(2017, 5, 3);
+        Date date1 = dates.getTime();
+        dates.set(2017, 5, 10);
+        Date date2 = dates.getTime();
+        //USE Facility 
+        manager.assignFacilityToUse(date1,date2);
+        System.out.println(manager.listActualUsage());
+        System.out.print("Available Capacity for "+manager.getFacilityInformation()+":");
+        System.out.println(manager.requestAvailableCapacity()+"\n");
+        System.out.println("Actual Usage for "+ manager.getFacilityInformation());
+        System.out.println(manager.listActualUsage());
+        System.out.println("Usage Rate: "+(manager.calcUsageRate()*100)+"%\n");
+        System.out.println("Inspection passed: "+manager.inspect());
+        System.out.println("List of Inspections: "+manager.listInspections());
+        System.out.println("Facility in use during"+ date1+" - "+date2+":\n"
+        +manager.isInUseDuringInterval(date1, date2));
+        
+        //Removing
         manager.removeFacility(lsc);
         manager.removeFacility(wtc);
     }
