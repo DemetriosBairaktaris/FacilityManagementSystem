@@ -6,7 +6,7 @@ package edu.luc.cs.fms.model.facility;
  * @author TeamDK
  * 
  */
-public class Building extends Facility{
+public class Building extends Facility {
     /**
      * 
      * @param name

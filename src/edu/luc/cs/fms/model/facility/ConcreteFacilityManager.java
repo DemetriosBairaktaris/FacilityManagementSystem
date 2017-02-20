@@ -10,100 +10,108 @@ import edu.luc.cs.fms.model.maintenance.MaintenanceRequest;
 import edu.luc.cs.fms.model.maintenance.Order;
 import edu.luc.cs.fms.model.system.ConcreteSystemLog;
 import edu.luc.cs.fms.model.system.SystemLog;
+
 /**
  * 
  * @author TeamDK
  *
  */
 public class ConcreteFacilityManager implements FacilityManager {
-    
-    private FacilityDAO facilities ;
-    private SystemLog log; 
-    private Facility currentFacility ; 
-    
-   
-    public ConcreteFacilityManager(){
+
+    private FacilityDAO facilities;
+    private SystemLog log;
+    private Facility currentFacility;
+
+    public ConcreteFacilityManager() {
         facilities = new FacilityDAO();
         log = new ConcreteSystemLog();
         log.logCreate(this);
     }
-    
+
     /**
      * @return facilities
      */
     @Override
-    public String listFacilities() { //figure that out
+    public String listFacilities() { 
         return facilities.toString();
     }
-    
-    
+
     @Override
     public void addNewFacility(String name, String desc, String address) {
-        facilities.insertFacility(new Building(name,desc,address));
+        facilities.insertFacility(new Building(name, desc, address));
     }
-    
+
     /**
      * @param facility
      * @return boolean
      */
     @Override
     public void removeFacility(String name) {
-         facilities.removeFacility(name);
-         
+        facilities.removeFacility(name);
     }
-    
-    /*
+
+    /**
+     * 
      * @param roomNumber
      * @param capacity
-     * @param name
      */
     @Override
-    public void addRoomToFacility(int roomNumber, int capacity) {
+    public void addFacilityDetail(int roomNumber, int capacity) {
         currentFacility.addFacilityDetail(new BasicRoom(roomNumber, capacity));
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return this.listFacilities();
     }
 
     @Override
     public void getFacility(String name) {
-        
-       currentFacility =  facilities.getFacility(name);
+        currentFacility = facilities.getFacility(name);
     }
 
     @Override
     public String CurrentFacility() {
-        if (currentFacility ==null){
+        if (currentFacility == null) {
             return "No facility is being focused on.";
-        }
-        else{
-            return "Current Facility Being Focused on:\n"+currentFacility.toString();
+        } else {
+            return "Current Facility Being Focused on:\n" + currentFacility.toString();
         }
     }
-    /*
-     * (non-Javadoc)
-     * @see edu.luc.cs.comp473.project1.model.facility.FacilityManager#listRooms()
-     */
+
     @Override
-    public String listRooms(){
+    public String listRooms() {
         String result = "Rooms:\n";
-        if(currentFacility.getRooms().size()==0){
-            result+="None"; 
-        }
-        else{
-            for(Room r : currentFacility.getRooms()){
-                result+="Room "+r.getRoomNumber()+" - Capacity "+r.getCapacity()+"\n";
+        if (currentFacility.getRooms().size() == 0) {
+            result += "None";
+        } else {
+            for (Room r : currentFacility.getRooms()) {
+                result += "Room " + r.getRoomNumber() + " - Capacity " + r.getCapacity() + "\n";
             }
         }
-        return result ; 
+        return result; 
+    }
+    
+    public boolean assignFacilityToUse(Date date1, Date date2){
+       return currentFacility.assignFacilityToUse(date1, date2);
+    }
+    
+    public double calcUsageRate(){
+        return currentFacility.calcUsageRate();
+    }
+    
+    @Override
+    public String listActualUsage() {
+       return currentFacility.listActualUsage();
+    }
+    
+    public boolean isInUseDuringInterval(Date date1, Date date2){
+        return currentFacility.isInUseDuringInterval(date1, date2);
     }
 
     @Override
     public void makeFacilityMaintRequest(String problem) {
         this.currentFacility.getMaintenance().makeFacilityMaintRequest(problem);
-        
     }
 
     @Override
@@ -118,7 +126,7 @@ public class ConcreteFacilityManager implements FacilityManager {
 
     @Override
     public float calcProblemRateForFacility() {
-       return this.currentFacility.getMaintenance().calcProblemRateForFacility();
+        return this.currentFacility.getMaintenance().calcProblemRateForFacility();
     }
 
     @Override
@@ -128,35 +136,33 @@ public class ConcreteFacilityManager implements FacilityManager {
 
     @Override
     public List<MaintenanceRequest> listMaintRequests() {
-        return this.currentFacility.getMaintenance().listMaintRequests() ;
+        return this.currentFacility.getMaintenance().listMaintRequests();
     }
 
     @Override
     public List<Order> listMaintenance() {
-        return this.currentFacility.getMaintenance().listMaintenance() ;
+        return this.currentFacility.getMaintenance().listMaintenance();
     }
 
     @Override
     public String listFacilityProblems() {
-       return this.currentFacility.getMaintenance().listFacilityProblems();
+        return this.currentFacility.getMaintenance().listFacilityProblems();
     }
 
     @Override
-    public void createOrder(String desc,int orderNum) {
-        this.currentFacility.getMaintenance().createOrder(desc,orderNum);
-        
+    public void createOrder(String desc, int requestNum) {
+        this.currentFacility.getMaintenance().createOrder(desc, requestNum);
+
     }
 
     @Override
     public void setLaborCost(BigDecimal cost, int orderNum) {
-        this.currentFacility.getMaintenance().setLaborCost(cost, orderNum); 
-        
+        this.currentFacility.getMaintenance().setLaborCost(cost, orderNum);
     }
 
     @Override
     public void setPartsCost(BigDecimal cost, int orderNum) {
         this.currentFacility.getMaintenance().setPartsCost(cost, orderNum);
-        
     }
 
     @Override
@@ -167,8 +173,28 @@ public class ConcreteFacilityManager implements FacilityManager {
     @Override
     public void closeOrder(int orderNum, int requestNum) {
         this.currentFacility.getMaintenance().closeOrder(orderNum, requestNum);
+    }
+
+    @Override
+    public String getFacilityInformation() {
+        // TODO Auto-generated method stub
+        return currentFacility.toString();
+    }
+
+    @Override
+    public int requestAvailableCapacity() {
+        // TODO Auto-generated method stub
+        return currentFacility.requestAvailableCapacity();
+    }
+
+    @Override
+    public void vacateFacility() {
+        currentFacility.vacateFacility();
         
     }
-    
-    
+
+    @Override
+    public String listInspections() {
+        return currentFacility.listInspections();
+    }
 }
