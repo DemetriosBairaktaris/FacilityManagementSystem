@@ -22,9 +22,9 @@ public interface Maintenance {
 
     public String listFacilityProblems();
 
-    public void createOrder(String desc, int orderNum);
+    public void createOrder(String desc, int requestNum);
 
-    public void setLaborCost(BigDecimal cost, int requestNum);
+    public void setLaborCost(BigDecimal cost, int orderNum);
 
     public void setPartsCost(BigDecimal cost, int orderNum);
 
