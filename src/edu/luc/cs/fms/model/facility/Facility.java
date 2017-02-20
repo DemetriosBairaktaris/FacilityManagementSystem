@@ -136,7 +136,7 @@ public abstract class Facility {
     /**
      * @return void
      */
-    public void vacateFacility(){
+    public void vacateFacility(){ //
         s.logVacate(this);
         for (Room room: this.getRooms()){
            room.vacate();
@@ -149,7 +149,7 @@ public abstract class Facility {
      * @param two
      * @return boolean
      */
-    public boolean isInUseDuringInterval(Date one, Date two){
+    public boolean isInUseDuringInterval(Date one, Date two){ //
         return use.isInUseDuringInterval(one,two); 
     }
     
@@ -159,7 +159,7 @@ public abstract class Facility {
      * @param two
      * @return boolean
      */
-    public boolean assignFacilityToUse(Date one, Date two){
+    public boolean assignFacilityToUse(Date one, Date two){//
         return use.assignFacilityToUse(one, two);
     }
     
@@ -167,7 +167,7 @@ public abstract class Facility {
      * 
      * @return String
      */
-    public String listInspections(){
+    public String listInspections(){ 
         String inspectionResults = "Inspections:\n";
         if(inspections.size()==0){inspectionResults+="No Inspections done, yet";}
         else{
@@ -189,7 +189,7 @@ public abstract class Facility {
      * 
      * @return String
      */
-    public String listActualUsage(){
+    public String listActualUsage(){//
         return use.listActualUsage();
     }
     
@@ -197,7 +197,7 @@ public abstract class Facility {
      * 
      * @return double
      */
-    public double calcUsageRate(){
+    public double calcUsageRate(){ //
         return use.calcUsageRate();
     }
     
@@ -205,7 +205,7 @@ public abstract class Facility {
      * 
      * @return Inspection
      */
-    public Inspection inspect(){
+    public Inspection inspect(){ 
         s.logInspect(this);
         Inspection i = new Inspection(new Date());
         inspections.add(i);
