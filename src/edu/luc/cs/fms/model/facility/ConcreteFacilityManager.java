@@ -197,4 +197,9 @@ public class ConcreteFacilityManager implements FacilityManager {
     public String listInspections() {
         return currentFacility.listInspections();
     }
+
+    @Override
+    public boolean inspect() {
+        return currentFacility.inspect(); 
+    }
 }
