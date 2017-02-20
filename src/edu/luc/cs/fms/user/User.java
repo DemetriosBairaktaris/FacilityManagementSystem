@@ -76,6 +76,46 @@ public class User {
         
         
         //LSC example
+        manager.getFacility(lsc);
+        manager.makeFacilityMaintRequest("Hazmat needed in chem lab.");
+        manager.makeFacilityMaintRequest("Broken Window.");
+        manager.makeFacilityMaintRequest("Broken furniture in main hall.");
+        manager.scheduleMaintenance(start, end);
+        manager.createOrder("Call Hazmat.", 0);
+        manager.createOrder("Monitor Hazmat cleanup", 0);
+        manager.createOrder("Sanitize area after Hazmat.", 0);
+        manager.createOrder("Replace glass panes in window.", 1);
+        manager.createOrder("Replace with new furniture", 2);
+        manager.setLaborCost(new BigDecimal("2000"), 0);
+        manager.setPartsCost(new BigDecimal("0"), 0);
+        manager.setLaborCost(new BigDecimal("300"), 1);
+        manager.setPartsCost(new BigDecimal("0"), 1);
+        manager.setLaborCost(new BigDecimal("400"), 2);
+        manager.setPartsCost(new BigDecimal("100"), 2);
+        manager.setLaborCost(new BigDecimal("800"), 3);
+        manager.setPartsCost(new BigDecimal("1000"), 3);
+        manager.setLaborCost(new BigDecimal("100"), 4);
+        manager.setPartsCost(new BigDecimal("1200"), 4);
+        manager.closeOrder(0, 0);
+        manager.closeOrder(1, 0);
+        manager.closeOrder(2, 0);
+        manager.closeOrder(3, 1);
+        manager.closeOrder(4, 2);
+        manager.closeRequest(0);
+        manager.closeRequest(1);
+        manager.closeRequest(2);
+        System.out.println(lsc + " Facility Maintenance Cost: $" + manager.calcMaintenanceCostForFacility());
+        System.out.println(lsc + " Facility Problem Rate: " + manager.calcProblemRateForFacility());
+        System.out.println(lsc + " Down Time for Facility: " + manager.calcDownTimeForFacility() + " days");
+        System.out.println(lsc + " List of Maintenance Requests:");
+        for (int i = 0; i < manager.listMaintRequests().size(); i++){
+            System.out.println(manager.listMaintRequests().get(i).toString() + "\n");
+        }
+        System.out.println(lsc + " List of Maintenance Performed:");
+        for (int i = 0; i < manager.listMaintenance().size(); i++){
+            System.out.println(manager.listMaintenance().get(i).toString() + "\n");
+        }
+        System.out.println(manager.listFacilityProblems());
         
         //Remove facilities
         manager.removeFacility(lsc);
