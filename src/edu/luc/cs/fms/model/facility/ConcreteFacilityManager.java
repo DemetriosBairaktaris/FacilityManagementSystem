@@ -32,7 +32,7 @@ public class ConcreteFacilityManager implements FacilityManager {
      * @return facilities
      */
     @Override
-    public String listFacilities() { //figure that out
+    public String listFacilities() { 
         return facilities.toString();
     }
     
@@ -58,7 +58,7 @@ public class ConcreteFacilityManager implements FacilityManager {
      * @param name
      */
     @Override
-    public void addRoomToFacility(int roomNumber, int capacity) {
+    public void addFacilityDetail(int roomNumber, int capacity) {
         currentFacility.addFacilityDetail(new BasicRoom(roomNumber, capacity));
     }
     
@@ -75,7 +75,7 @@ public class ConcreteFacilityManager implements FacilityManager {
 
     @Override
     public String CurrentFacility() {
-        if (currentFacility ==null){
+        if (currentFacility == null){
             return "No facility is being focused on.";
         }
         else{
@@ -98,6 +98,24 @@ public class ConcreteFacilityManager implements FacilityManager {
             }
         }
         return result ; 
+        
+    }
+    
+    public boolean assignFacilityToUse(Date date1, Date date2){
+       return currentFacility.assignFacilityToUse(date1, date2);
+    }
+    
+    public double calcUsageRate(){
+        return currentFacility.calcUsageRate();
+    }
+    
+    @Override
+    public String listActualUsage() {
+       return currentFacility.listActualUsage();
+    }
+    
+    public boolean isInUseDuringInterval(Date date1, Date date2){
+        return currentFacility.isInUseDuringInterval(date1, date2);
     }
 
     @Override
@@ -169,6 +187,28 @@ public class ConcreteFacilityManager implements FacilityManager {
         this.currentFacility.getMaintenance().closeOrder(orderNum, requestNum);
         
     }
-    
+
+    @Override
+    public String getFacilityInformation() {
+        // TODO Auto-generated method stub
+        return currentFacility.toString();
+    }
+
+    @Override
+    public int requestAvailableCapacity() {
+        // TODO Auto-generated method stub
+        return currentFacility.requestAvailableCapacity();
+    }
+
+    @Override
+    public void vacateFacility() {
+        currentFacility.vacateFacility();
+        
+    }
+
+    @Override
+    public String listInspections() {
+        return currentFacility.listInspections();
+    }
     
 }
