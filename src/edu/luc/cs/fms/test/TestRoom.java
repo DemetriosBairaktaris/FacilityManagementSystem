@@ -38,8 +38,7 @@ public class TestRoom {
     @Test
     public void testGetAvailableCapacity() throws Exception {
         int initCapacity = room.getCapacity();
-        room.addInhabitant("Steve");
-        assertTrue(initCapacity == (room.getAvailableCapacity() + 1));
+        assertTrue(initCapacity == (room.getAvailableCapacity()));
     }
 
     @After
