@@ -1,4 +1,3 @@
-
 package edu.luc.cs.fms.model.facility;
 
 import java.math.BigDecimal;
@@ -12,7 +11,7 @@ import edu.luc.cs.fms.model.system.ConcreteSystemLog;
 import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
- * 
+ * Concrete facility manager that interfaces with the user model
  * @author TeamDK
  *
  */
@@ -28,9 +27,6 @@ public class ConcreteFacilityManager implements FacilityManager {
         log.logCreate(this);
     }
 
-    /**
-     * @return facilities
-     */
     @Override
     public String listFacilities() { 
         return facilities.toString();
@@ -41,20 +37,11 @@ public class ConcreteFacilityManager implements FacilityManager {
         facilities.insertFacility(new Building(name, desc, address));
     }
 
-    /**
-     * @param facility
-     * @return boolean
-     */
     @Override
     public void removeFacility(String name) {
         facilities.removeFacility(name);
     }
 
-    /**
-     * 
-     * @param roomNumber
-     * @param capacity
-     */
     @Override
     public void addFacilityDetail(int roomNumber, int capacity) {
         currentFacility.addFacilityDetail(new BasicRoom(roomNumber, capacity));
@@ -71,7 +58,7 @@ public class ConcreteFacilityManager implements FacilityManager {
     }
 
     @Override
-    public String CurrentFacility() {
+    public String currentFacility() {
         if (currentFacility == null) {
             return "No facility is being focused on.";
         } else {
@@ -82,6 +69,7 @@ public class ConcreteFacilityManager implements FacilityManager {
     @Override
     public String listRooms() {
         String result = "Rooms:\n";
+
         if (currentFacility.getRooms().size() == 0) {
             result += "None";
         } else {
@@ -91,20 +79,23 @@ public class ConcreteFacilityManager implements FacilityManager {
         }
         return result; 
     }
-    
+
+    @Override
     public boolean assignFacilityToUse(Date date1, Date date2){
        return currentFacility.assignFacilityToUse(date1, date2);
     }
-    
+
+    @Override
     public double calcUsageRate(){
         return currentFacility.calcUsageRate();
     }
-    
+
     @Override
     public String listActualUsage() {
        return currentFacility.listActualUsage();
     }
-    
+
+    @Override
     public boolean isInUseDuringInterval(Date date1, Date date2){
         return currentFacility.isInUseDuringInterval(date1, date2);
     }
@@ -152,7 +143,6 @@ public class ConcreteFacilityManager implements FacilityManager {
     @Override
     public void createOrder(String desc, int requestNum) {
         this.currentFacility.getMaintenance().createOrder(desc, requestNum);
-
     }
 
     @Override
@@ -177,20 +167,17 @@ public class ConcreteFacilityManager implements FacilityManager {
 
     @Override
     public String getFacilityInformation() {
-        // TODO Auto-generated method stub
         return currentFacility.toString();
     }
 
     @Override
     public int requestAvailableCapacity() {
-        // TODO Auto-generated method stub
         return currentFacility.requestAvailableCapacity();
     }
 
     @Override
     public void vacateFacility() {
         currentFacility.vacateFacility();
-        
     }
 
     @Override
