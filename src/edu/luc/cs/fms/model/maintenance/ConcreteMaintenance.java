@@ -8,7 +8,9 @@ import java.util.List;
 import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
- * This class is the interface between the client and the domain model for the maintenance objects
+ * This class is the interface between the client and the domain model for the
+ * maintenance objects
+ * 
  * @author TeamDK
  *
  */
@@ -23,7 +25,7 @@ public class ConcreteMaintenance implements Maintenance {
     private int requestNum;
     private int numRequests;
     private SystemLog sysLog;
-    
+
     public ConcreteMaintenance(SystemLog sysLog) {
         this.sysLog = sysLog;
         log = new Log();
@@ -35,9 +37,10 @@ public class ConcreteMaintenance implements Maintenance {
         requestNum = 0;
         sysLog.logCreate(this);
     }
-    
+
     /**
      * Makes a maintenance request and creates an order
+     * 
      * @param problem
      */
     public void makeFacilityMaintRequest(String problem) {
@@ -45,9 +48,10 @@ public class ConcreteMaintenance implements Maintenance {
         requests.add(request);
         requestNum++;
     }
-    
+
     /**
      * Schedules the maintenance to be performed in the schedule
+     * 
      * @param date1
      * @param date2
      * @return true for successful, false for failure
@@ -55,7 +59,7 @@ public class ConcreteMaintenance implements Maintenance {
     public boolean scheduleMaintenance(Date date1, Date date2) {
         return schedule.scheduleMaintenance(date1, date2);
     }
-    
+
     /**
      * 
      * @return total cost for facility
@@ -66,9 +70,10 @@ public class ConcreteMaintenance implements Maintenance {
         }
         return cost;
     }
-    
+
     /**
      * creates an order for maintenance
+     * 
      * @param desc
      */
     public void createOrder(String desc, int requestNum) {
@@ -77,9 +82,10 @@ public class ConcreteMaintenance implements Maintenance {
         orderNum++;
         requests.get(requestNum).addOpenOrder();
     }
-    
+
     /**
      * closes an order when finished
+     * 
      * @param orderNum
      */
     public void closeOrder(int orderNum, int requestNum) {
@@ -90,20 +96,20 @@ public class ConcreteMaintenance implements Maintenance {
         sysLog.logAdd(order, log);
         requests.get(requestNum).removeOpenOrder();
     }
-    
+
     public void closeRequest(int requestNum) {
         MaintenanceRequest request = requests.get(requestNum);
         if (request.getOpenOrders() == 0) {
             request.setStatus(true);
             sysLog.logClose(request);
-        }
-        else {
+        } else {
             return;
         }
     }
-    
+
     /**
      * sets the cost of parts on an order
+     * 
      * @param cost
      * @param orderNum
      */
@@ -111,9 +117,10 @@ public class ConcreteMaintenance implements Maintenance {
         Order order = orders.get(orderNum);
         order.setLaborCost(cost);
     }
-    
+
     /**
      * sets the cost of labor on an order
+     * 
      * @param cost
      * @param orderNum
      */
@@ -121,16 +128,17 @@ public class ConcreteMaintenance implements Maintenance {
         Order order = orders.get(orderNum);
         order.setPartsCost(cost);
     }
-    
+
     /**
      * determines the problem rate for the facility
+     * 
      * @return problems / year in days
      */
     public float calcProblemRateForFacility() {
         numRequests = requests.size();
-        return ((float)numRequests) / 365;
+        return ((float) numRequests) / 365;
     }
-    
+
     /**
      * 
      * @return total down time for the scheduled maintenance
@@ -138,7 +146,7 @@ public class ConcreteMaintenance implements Maintenance {
     public long calcDownTimeForFacility() {
         return schedule.calcDownTimeForFacility();
     }
-    
+
     /**
      * 
      * @return all maintenance requests
@@ -146,7 +154,7 @@ public class ConcreteMaintenance implements Maintenance {
     public List<MaintenanceRequest> listMaintRequests() {
         return requests;
     }
-    
+
     /**
      * 
      * @return all maintenance added to the log
@@ -154,26 +162,26 @@ public class ConcreteMaintenance implements Maintenance {
     public List<Order> listMaintenance() {
         return log.getMaintenanceList();
     }
-    
+
     /**
      * 
      * @return all problems from maintenance requests
      */
     public String listFacilityProblems() {
-        
+
         String problems = "Facility Problems:\n";
-        
-        if (requests.size()==0) {
+
+        if (requests.size() == 0) {
             return "No facility problems.";
         }
-        
+
         for (int i = 0; i < requests.size(); i++) {
             problems = problems.concat(requests.get(i).getProblem() + "\n");
         }
-        
+
         return problems;
     }
-    
+
     @Override
     public String toString() {
         return "Master Maintenance Record.";

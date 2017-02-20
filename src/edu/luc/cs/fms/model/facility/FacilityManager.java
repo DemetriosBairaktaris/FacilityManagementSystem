@@ -10,14 +10,14 @@ import edu.luc.cs.fms.model.maintenance.Maintenance;
  * @author TeamDK
  *
  */
-public interface FacilityManager extends Maintenance{
-    
+public interface FacilityManager extends Maintenance {
+
     /**
      * 
      * @return String
      */
-    public String listFacilities ();
-    
+    public String listFacilities();
+
     /**
      * 
      * @return
@@ -36,7 +36,7 @@ public interface FacilityManager extends Maintenance{
      * @return void
      */
     public void addNewFacility(String name, String Desc, String address);
-    
+
     /**
      * 
      * @param roomNumber
@@ -57,7 +57,7 @@ public interface FacilityManager extends Maintenance{
      * @param name
      */
     public void getFacility(String name);
-    
+
     /**
      * Returns to Console the current facility that the manager is holding as String
      * @return String
