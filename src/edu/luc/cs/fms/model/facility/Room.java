@@ -15,7 +15,6 @@ public abstract class Room {
 
     private int roomNumber;
     private int capacity;
-    private List<String> inhabitants ; 
     private SystemLog s;
 
     /**
@@ -25,7 +24,6 @@ public abstract class Room {
     public Room(int roomNumber, int capacity) {
         this.roomNumber = roomNumber;
         this.capacity = capacity;
-        inhabitants = new ArrayList<>(capacity);
         s = new ConcreteSystemLog();
         s.logCreate(this);
         
@@ -52,22 +50,7 @@ public abstract class Room {
      * @return int
      */
     public int getAvailableCapacity(){
-        return capacity - inhabitants.size();
-    }
-    
-    /**
-     * adds an inhabitant to the room
-     * @param name
-     * @throws Exception
-     * @return void
-     */
-    public void addInhabitant(String name) throws Exception{
-        if(!isAvailable()){
-           throw new Exception("NO VACANCY EXCEPTION IN ROOM "+ roomNumber);
-        }
-        else{
-            inhabitants.add(name);
-        }
+        return capacity ;
     }
     
     /**
@@ -83,7 +66,6 @@ public abstract class Room {
      * @return void
      */
     public void vacate(){
-        inhabitants.clear();
         s.logVacate(this);
     }
     
