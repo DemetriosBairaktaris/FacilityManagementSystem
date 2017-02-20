@@ -1,6 +1,8 @@
 package edu.luc.cs.fms.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -12,6 +14,11 @@ import org.junit.Test;
 
 import edu.luc.cs.fms.model.facility.*;
 
+/**
+ * 
+ * @author TeamDK
+ *
+ */
 public class TestFacility {
 
     private Facility facility;
@@ -25,7 +32,11 @@ public class TestFacility {
         facility.addFacilityDetail(new BasicRoom(1, 20));
         facility.addFacilityDetail(new BasicRoom(2, 25));
         facility.addFacilityDetail(new BasicRoom(11, 20));
+    }
 
+    @After
+    public void tearDown() throws Exception {
+        facility = null;
     }
 
     @Test
@@ -40,7 +51,6 @@ public class TestFacility {
 
     @Test
     public void testGetFacilityInformation() {
-
         assertEquals(name + ":  " + desc + "\n" + "Address:  " + address + "\n" + "Available Capacity:  "
                 + facility.requestAvailableCapacity(), facility.getFacilityInformation());
     }
@@ -53,7 +63,7 @@ public class TestFacility {
     }
 
     @Test
-    public void testAddFacilityDetail() { // hold off for now
+    public void testAddFacilityDetail() {
         assertEquals(3, facility.getRooms().size());
         facility.addFacilityDetail(new BasicRoom(5, 13));
         assertEquals(4, facility.getRooms().size());
@@ -84,7 +94,6 @@ public class TestFacility {
 
     @Test
     public void testListActualUsage() {
-
         Date currentDate = new Date();
         Date one = new Date(currentDate.getTime() + 30000);
         Date two = new Date(currentDate.getTime() + 40000);
@@ -92,7 +101,6 @@ public class TestFacility {
         Date four = new Date(currentDate.getTime() + 60000);
         facility.assignFacilityToUse(one, two);
         facility.assignFacilityToUse(three, four);
-
         assertEquals("Usage Dates:\n" + one.toString() + " - " + two.toString() + "\n" + three.toString() + " - "
                 + four.toString() + "\n", facility.listActualUsage());
     }
@@ -102,15 +110,12 @@ public class TestFacility {
         // Simple Case: 1 Day : should be 1/365
         Date one, two, three;
         Calendar c = new GregorianCalendar();
-
         c.set(2018, 0, 1);
         one = c.getTime();
-
         c.set(2018, 0, 2);
         two = c.getTime();
         facility.assignFacilityToUse(one, two);
         assertEquals((1.0 / 365), facility.calcUsageRate(), 0.005);
-
         // Complex Case: OverLapping Intervals
         c.set(2018, 2, 30);
         one = c.getTime();
@@ -142,15 +147,7 @@ public class TestFacility {
         facility.inspect() ; 
         facility.inspect() ; 
         Date d = new Date();
-        
-
         assertEquals("Inspections:\n" + d + ":  passed\n" + d + ":  passed\n",
                 facility.listInspections());
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        facility = null;
-
     }
 }

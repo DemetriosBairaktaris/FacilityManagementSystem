@@ -1,4 +1,3 @@
-
 package edu.luc.cs.fms.model.facility;
 
 import java.util.Date;
@@ -14,108 +13,103 @@ public interface FacilityManager extends Maintenance {
 
     /**
      * 
-     * @return String
+     * @return list of facilities in a string
      */
     public String listFacilities();
 
     /**
      * 
-     * @return
+     * @return all pertinent facility information in a string
      */
     public String getFacilityInformation();
-    
+
     /**
      * 
-     * @return
+     * @return available capacity
      */
     public int requestAvailableCapacity();
-    
+
     /**
-     * 
-     * @param facility
-     * @return void
+     * creates a new facility object
+     * @param name
+     * @param Desc
+     * @param address
      */
     public void addNewFacility(String name, String Desc, String address);
 
     /**
-     * 
+     * adds a new room or detail to the facility
      * @param roomNumber
      * @param capacity
-     * 
      */
     public void addFacilityDetail(int roomNumber, int capacity);
-    
+
     /**
-     * 
-     * @param facility
-     * @return void
+     * removes a facility from management
+     * @param name
      */
     public void removeFacility(String name);
-   
+
     /**
-     * 
+     * returns a facility
      * @param name
      */
     public void getFacility(String name);
 
     /**
-     * Returns to Console the current facility that the manager is holding as String
-     * @return String
+     * shows the current facility in a string
+     * @return
      */
-    public String CurrentFacility();
-    
+    public String currentFacility();
+
     /**
-     * 
-     * @return String
+     * lists all rooms and their information
+     * @return
      */
     public String listRooms();
-    
-/////////////////////////////USE METHODS///////////////////////////////////////////
+
     /**
-     * 
+     * checks if facility is in use during specific interval
      * @param date1
      * @param date2
-     * @return
+     * @return true if successful
      */
     public boolean isInUseDuringInterval(Date date1, Date date2);
-    
+
     /**
-     * 
+     * assigns facility for usage in a specified date range
      * @param date1
      * @param date2
-     * @return
+     * @return true if successful
      */
     public boolean assignFacilityToUse(Date date1, Date date2);
-    
+
     /**
-     * 
+     * vacates a facility
      */
     public void vacateFacility();
-    
-     /**
-      * 
-      * @return
-      */
-    public String listInspections();
-    
+
     /**
-     * 
-     * @return
+     * lists all inspections
+     * @return list of inspections
      */
-    
+    public String listInspections();
+
+    /**
+     * lists actual usage 
+     * @return actual usage
+     */
     public String listActualUsage();
-    
-    
+
     /**
      * 
-     * @return
+     * @return calculated usage rate
      */
      public double calcUsageRate();
-     
+
      /**
-      * 
-      * @return
+      * inspects a facility
+      * @return true if passed
       */
      public boolean inspect();
-     
 }

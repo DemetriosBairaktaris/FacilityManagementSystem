@@ -30,22 +30,21 @@ public class Schedule {
     }
 
     /**
-     * schedules the requests maintenance
-     * 
-     * @param date1
-     * @param date2
+     * schedules the request's maintenance
+     * @param start
+     * @param end
      * @return true if successful, false if failure
      */
-    public boolean scheduleMaintenance(Date date1, Date date2) {
+    public boolean scheduleMaintenance(Date start, Date end) {
 
-        if (currentDate.getTime() > date1.getTime()) {
+        if (currentDate.getTime() > start.getTime()) {
             return false;
-        } else if (date1.getTime() >= date2.getTime()) {
+        } else if (start.getTime() >= end.getTime()) {
             return false;
-        } else if (checkAvailability(date1, date2)) {
-            startDate.add(date1);
-            endDate.add(date2);
-            sysLog.logSchedule(date1, date2);
+        } else if (checkAvailability(start, end)) {
+            startDate.add(start);
+            endDate.add(end);
+            sysLog.logSchedule(start, end);
             return true;
         } else {
             return false;
@@ -53,48 +52,38 @@ public class Schedule {
     }
 
     /**
-     * 
      * @return total down time for facility from total maintenance
      */
     public long calcDownTimeForFacility() {
-
         if (startDate.size() == 0) {
             return 0;
         } else {
             for (int i = 0; i < endDate.size(); i++) {
                 downTime += endDate.get(i).getTime() - startDate.get(i).getTime();
             }
-
             downTime = TimeUnit.MILLISECONDS.toDays(downTime);
-
             return downTime;
         }
-
     }
 
     /**
-     * 
-     * @param date1
-     * @param date2
+     * @param start
+     * @param end
      * @return true if available, false if unavailable
      */
-    private boolean checkAvailability(Date date1, Date date2) {
-
+    private boolean checkAvailability(Date start, Date end) {
         if (startDate.size() == 0) {
             return true;
         }
-
         for (int i = 0; i < startDate.size(); i++) {
-            if (startDate.get(i).before(date1)) {
-                if (endDate.get(i).after(date2)) {
+            if (startDate.get(i).before(start)) {
+                if (endDate.get(i).after(end)) {
                     return false;
-                } else if (endDate.get(i).before(date2)) {
+                } else if (endDate.get(i).before(end)) {
                     return false;
                 }
             }
         }
-
         return true;
     }
-
 }

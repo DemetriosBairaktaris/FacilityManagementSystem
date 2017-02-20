@@ -1,4 +1,3 @@
-
 package edu.luc.cs.fms.model.facility;
 
 import java.util.Date;
@@ -12,23 +11,21 @@ import edu.luc.cs.fms.model.system.SystemLog;
  *
  */
 public class Inspection {
+
     private Date dateOfInspection;
     private boolean passed;
     private SystemLog s;
 
-    /**
-     * 
-     * @param d
-     */
     public Inspection(Date d) {
         dateOfInspection = d;
+        passed = false;
         s = new ConcreteSystemLog();
         s.logCreate(this);
     }
 
     /**
      * 
-     * @return Date
+     * @return Date of inspection
      */
     public Date getDate() {
         return dateOfInspection;
@@ -36,21 +33,22 @@ public class Inspection {
 
     /**
      * 
-     * @return boolean
+     * @return true if passed
      */
     public boolean getPassed() {
         return this.passed;
     }
 
     /**
-     * 
-     * @param v
+     * sets if the inspection passed
+     * @param passed
      * @return void
      */
-    public void setPassed(boolean v) {
-        this.passed = v;
+    public void setPassed(boolean passed) {
+        this.passed = passed;
     }
 
+    @Override
     public String toString() {
         return "Inspection Date:  " + this.getDate() + "\nPassed:  " + this.getPassed();
     }

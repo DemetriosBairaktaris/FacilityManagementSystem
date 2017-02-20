@@ -21,7 +21,6 @@ public class Cost {
 
     /**
      * Sets the labor cost
-     * 
      * @param cost
      */
     public void setLaborCost(BigDecimal cost) {
@@ -30,7 +29,6 @@ public class Cost {
 
     /**
      * retrieves the labor cost
-     * 
      * @return laborCost
      */
     public BigDecimal getLaborCost() {
@@ -39,7 +37,6 @@ public class Cost {
 
     /**
      * sets parts cost
-     * 
      * @param cost
      */
     public void setPartsCost(BigDecimal cost) {
@@ -48,7 +45,6 @@ public class Cost {
 
     /**
      * retrieves parts cost
-     * 
      * @return partsCost
      */
     public BigDecimal getPartsCost() {

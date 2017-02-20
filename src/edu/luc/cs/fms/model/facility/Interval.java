@@ -12,26 +12,21 @@ import edu.luc.cs.fms.model.system.SystemLog;
  *
  */
 public class Interval implements Comparable<Interval> {
+
     private Date startDate;
     private Date endDate;
     private SystemLog s;
 
-    /**
-     * 
-     * @param one
-     * @param two
-     */
-    public Interval(Date one, Date two) {
-        startDate = one;
-        endDate = two;
+    public Interval(Date startDate, Date endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
         s = new ConcreteSystemLog();
         s.logCreate(this);
-
     }
 
     /**
      * 
-     * @return Date
+     * @return starting date
      */
     public Date getStartDate() {
         return startDate;
@@ -39,35 +34,28 @@ public class Interval implements Comparable<Interval> {
 
     /**
      * 
-     * @return Date
+     * @return end date
      */
     public Date getEndDate() {
         return endDate;
     }
-
+    
     /**
-     * @param o
-     * @return int
-     */
-    @Override
-    public int compareTo(Interval o) {
-        return this.startDate.compareTo(o.getStartDate());
-    }
-
-    /**
-     * @return String
-     */
-    @Override
-    public String toString() {
-        return startDate.toString() + " - " + endDate.toString();
-    }
-
-    /**
-     * 
+     * changes the end date if necessary
      * @param endDate
      * @return void
      */
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public int compareTo(Interval interval) {
+        return this.startDate.compareTo(interval.getStartDate());
+    }
+
+    @Override
+    public String toString() {
+        return startDate.toString() + " - " + endDate.toString();
     }
 }

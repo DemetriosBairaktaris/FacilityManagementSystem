@@ -1,6 +1,8 @@
 package edu.luc.cs.fms.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,6 +15,11 @@ import edu.luc.cs.fms.model.maintenance.ConcreteMaintenance;
 import edu.luc.cs.fms.model.system.ConcreteSystemLog;
 import edu.luc.cs.fms.model.system.SystemLog;
 
+/**
+ * 
+ * @author TeamDK
+ *
+ */
 public class TestMaintenance {
 
     private ConcreteMaintenance maintenance;
@@ -39,6 +46,18 @@ public class TestMaintenance {
         maintenance.createOrder("Patch ceiling crack.", 2);
         maintenance.setLaborCost(laborCost, 0);
         maintenance.setPartsCost(partsCost, 0);
+    }
+    
+    @After
+    public void tearDown() throws Exception {
+        sysLog = null;
+        maintenance = null;
+        laborCost = null;
+        partsCost = null;
+        date1 = null;
+        date2 = null;
+        date3 = null;
+        date4 = null;
     }
 
     @Test
@@ -104,22 +123,8 @@ public class TestMaintenance {
 
     @Test
     public void testListFacilityProblems() {
-
         String test = "Facility Problems:\n" + "Sink is leaking\n" + "Light bulb is burnt out.\n"
                 + "Ceiling is cracking.\n";
-
         assertEquals(test, maintenance.listFacilityProblems());
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        sysLog = null;
-        maintenance = null;
-        laborCost = null;
-        partsCost = null;
-        date1 = null;
-        date2 = null;
-        date3 = null;
-        date4 = null;
     }
 }

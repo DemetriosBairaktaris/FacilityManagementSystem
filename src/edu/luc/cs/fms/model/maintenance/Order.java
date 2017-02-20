@@ -28,7 +28,6 @@ public class Order {
     }
 
     /**
-     * 
      * @return description
      */
     public String getDescription() {
@@ -36,7 +35,6 @@ public class Order {
     }
 
     /**
-     * 
      * @return order number
      */
     public int getOrderNum() {
@@ -45,7 +43,6 @@ public class Order {
 
     /**
      * True is complete, false is open
-     * 
      * @param status
      */
     public void setStatus(boolean status) {
@@ -53,7 +50,6 @@ public class Order {
     }
 
     /**
-     * 
      * @return status of order
      */
     public boolean getStatus() {
@@ -62,7 +58,6 @@ public class Order {
 
     /**
      * sets labor cost in BigDecimal format
-     * 
      * @param cost
      */
     public void setLaborCost(BigDecimal cost) {
@@ -71,7 +66,6 @@ public class Order {
 
     /**
      * sets part cost in BigDecimal format
-     * 
      * @param cost
      */
     public void setPartsCost(BigDecimal cost) {
@@ -79,7 +73,6 @@ public class Order {
     }
 
     /**
-     * 
      * @return total cost of parts and labor
      */
     public BigDecimal getCost() {

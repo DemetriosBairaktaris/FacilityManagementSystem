@@ -23,8 +23,7 @@ public class FacilityDAO {
      * This method retrieves the Facility from the memory using the hash code
      * for its name as the ID.
      * 
-     * @param name
-     *            name of facility
+     * @param name of facility
      * @return requested Facility object
      */
     public Facility getFacility(String name) {
@@ -34,8 +33,7 @@ public class FacilityDAO {
     /**
      * This method inserts a Facility object for storage.
      * 
-     * @param facility
-     *            object to be placed into storage
+     * @param facility object to be placed into storage
      */
     public void insertFacility(Facility facility) {
         facilityHashMap.put(facility.getName().hashCode(), facility);

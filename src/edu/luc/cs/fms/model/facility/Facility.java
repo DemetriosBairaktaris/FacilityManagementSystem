@@ -19,7 +19,6 @@ public abstract class Facility {
 
     private String name;
     private String description;
-
     private String address;
     private List<Room> rooms;
     private List<Inspection> inspections;
@@ -27,14 +26,7 @@ public abstract class Facility {
     private Use use;
     private SystemLog s;
 
-    /**
-     * 
-     * @param name
-     * @param desc
-     * @param address
-     */
     public Facility(String name, String desc, String address) {
-
         this.name = name;
         this.description = desc;
         this.address = address;
@@ -66,25 +58,20 @@ public abstract class Facility {
     }
 
     /**
-     * 
+     * Retrieves the facility address
      * @return address
      */
     public String getAddress() {
         return address;
     }
 
-    /**
-     * String representation of a facility
-     * 
-     * @return String
-     */
     @Override
     public String toString() {
         return this.name + ":  " + this.description + "\n" + "Address:  " + this.address;
     }
 
     /**
-     * 
+     * Allows calling maintenance methods by retrieving object
      * @return Maintenance
      */
     public Maintenance getMaintenance() {
@@ -93,7 +80,6 @@ public abstract class Facility {
 
     /**
      * Retrieves all the rooms associated with this facility
-     * 
      * @return list of Room objects
      */
     public List<Room> getRooms() {
@@ -104,14 +90,11 @@ public abstract class Facility {
      * @return String
      */
     public String getFacilityInformation() {
-        // TODO
         return this.toString() + "\n" + "Available Capacity:  " + this.requestAvailableCapacity();
-
     }
 
     /**
-     * adds a details the facility
-     * 
+     * adds a room to the facility
      * @param room
      */
     public void addFacilityDetail(Room room) {
@@ -120,12 +103,10 @@ public abstract class Facility {
     }
 
     /**
-     * 
+     * returns the available capacity
      * @return int
      */
     public int requestAvailableCapacity() {
-        // TODO have this go through all rooms in all buildings to calculate
-        // capacity
         int availCapacity = 0;
         for (Room room : rooms) {
             availCapacity += room.getAvailableCapacity();
@@ -133,49 +114,46 @@ public abstract class Facility {
         return availCapacity;
     }
 
-    /** Use Methods ***********************************************/
-
     /**
-     * @return void
+     * vacates a facility and makes it available
      */
     public void vacateFacility() {
         s.logVacate(this);
         for (Room room : this.getRooms()) {
             room.vacate();
         }
-
     }
 
     /**
-     * 
-     * @param one
-     * @param two
+     * Checks if facility is in use during a specified date range
+     * @param start
+     * @param end
      * @return boolean
      */
-    public boolean isInUseDuringInterval(Date one, Date two) {
-        return use.isInUseDuringInterval(one, two);
+    public boolean isInUseDuringInterval(Date start, Date end) {
+        return use.isInUseDuringInterval(start, end);
     }
 
     /**
-     * 
-     * @param one
-     * @param two
+     * assigns the facility to use for specified date range
+     * @param start
+     * @param end
      * @return boolean
      */
-    public boolean assignFacilityToUse(Date one, Date two) {
-        return use.assignFacilityToUse(one, two);
+    public boolean assignFacilityToUse(Date start, Date end) {
+        return use.assignFacilityToUse(start, end);
     }
 
     /**
-     * 
+     * lists all the inspection results if any
      * @return String
      */
     public String listInspections() {
         String inspectionResults = "Inspections:\n";
+
         if (inspections.size() == 0) {
             inspectionResults += "No Inspections done, yet";
         } else {
-
             for (Inspection i : inspections) {
                 inspectionResults = inspectionResults.concat(i.getDate() + ":  ");
                 if (i.getPassed()) {
@@ -189,7 +167,7 @@ public abstract class Facility {
     }
 
     /**
-     * 
+     * lists the actual usage of the facility
      * @return String
      */
     public String listActualUsage() {
@@ -197,7 +175,7 @@ public abstract class Facility {
     }
 
     /**
-     * 
+     * determines the usage rate
      * @return double
      */
     public double calcUsageRate() {
@@ -205,12 +183,12 @@ public abstract class Facility {
     }
 
     /**
-     * 
+     * checks if any maintenance requests are open
      * @return Inspection
      */
     public boolean inspect() {
-        
         Inspection i = new Inspection(new Date());
+        
         inspections.add(i);
         i.setPassed(true);
         for(MaintenanceRequest m : maintenance.listMaintRequests()){

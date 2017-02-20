@@ -18,7 +18,7 @@ public class Log {
     }
 
     /**
-     * 
+     * adds an order to the log
      * @param order
      */
     public void addOrder(Order order) {
@@ -26,7 +26,7 @@ public class Log {
     }
 
     /**
-     * 
+     * retrieves an order from the log
      * @param index
      * @return selected order
      */
@@ -35,8 +35,8 @@ public class Log {
     }
 
     /**
-     * 
-     * @return all maintenance performed
+     * returns all orders
+     * @return all orders
      */
     public List<Order> getMaintenanceList() {
         return maintenance;

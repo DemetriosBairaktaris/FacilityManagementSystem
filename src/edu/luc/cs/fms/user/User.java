@@ -20,33 +20,41 @@ public class User {
      * @param args
      */
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         FacilityManager manager = new ConcreteFacilityManager();
         Calendar dates = new GregorianCalendar();
         String wtc = "WTC";
         String lsc = "LSC";
-        
         dates.set(2017, 5, 1);
         Date start = dates.getTime();
         dates.set(2017, 5, 5);
         Date end = dates.getTime();
-        
+        dates.set(2017, 5, 3);
+        Date date1 = dates.getTime();
+        dates.set(2017, 5, 10);
+        Date date2 = dates.getTime();
+
+        //adding facilities
         manager.addNewFacility(wtc, "Loyola University Chicago Water Tower Campus", "111 E. Pearson St.");
         manager.addNewFacility(lsc, "Loyola University Chicago Lake Shore Campus", "1032 W. Sheridan Rd.");
-        
+
+        //adding rooms for wtc
         for (int i = 100; i < 200; i += 10) {
             manager.getFacility(wtc);
             manager.addFacilityDetail(i, 40);
         }
-        
+
+        //adding rooms for lsc
         for (int i = 100; i < 400; i += 10) {
             manager.getFacility(lsc);
             manager.addFacilityDetail(i, 50);
         }
         
+        //listing facilities
         System.out.println(manager.listFacilities());
         
         //WTC example
+
+        //maintenance
         manager.getFacility(wtc);
         manager.makeFacilityMaintRequest("Lights not working.");
         manager.makeFacilityMaintRequest("Broken Door");
@@ -73,9 +81,24 @@ public class User {
             System.out.println(manager.listMaintenance().get(i).toString() + "\n");
         }
         System.out.println(manager.listFacilityProblems());
-        
-        
+
+        //usage
+        manager.assignFacilityToUse(date1,date2);
+        System.out.println(manager.listActualUsage());
+        System.out.print("Available Capacity for "+manager.getFacilityInformation()+":");
+        System.out.println(manager.requestAvailableCapacity()+"\n");
+        System.out.println("Actual Usage for "+ manager.getFacilityInformation());
+        System.out.println(manager.listActualUsage());
+        System.out.println("Usage Rate: "+(manager.calcUsageRate()*100)+"%\n");
+        System.out.println("Inspection passed: "+manager.inspect());
+        System.out.println("List of Inspections: "+manager.listInspections());
+        System.out.println("Facility in use during"+ date1+" - "+date2+":\n"
+        +manager.isInUseDuringInterval(date1, date2));
+
+
         //LSC example
+
+        //maintenance
         manager.getFacility(lsc);
         manager.makeFacilityMaintRequest("Hazmat needed in chem lab.");
         manager.makeFacilityMaintRequest("Broken Window.");
@@ -116,12 +139,8 @@ public class User {
             System.out.println(manager.listMaintenance().get(i).toString() + "\n");
         }
         System.out.println(manager.listFacilityProblems());
-        
-        dates.set(2017, 5, 3);
-        Date date1 = dates.getTime();
-        dates.set(2017, 5, 10);
-        Date date2 = dates.getTime();
-        //USE Facility 
+
+        //usage
         manager.assignFacilityToUse(date1,date2);
         System.out.println(manager.listActualUsage());
         System.out.print("Available Capacity for "+manager.getFacilityInformation()+":");
@@ -133,10 +152,9 @@ public class User {
         System.out.println("List of Inspections: "+manager.listInspections());
         System.out.println("Facility in use during"+ date1+" - "+date2+":\n"
         +manager.isInUseDuringInterval(date1, date2));
-        
-        //Removing
+
+        //Removing facilities
         manager.removeFacility(lsc);
         manager.removeFacility(wtc);
     }
-
 }
