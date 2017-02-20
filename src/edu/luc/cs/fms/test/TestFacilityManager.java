@@ -52,9 +52,11 @@ public class TestFacilityManager {
         int roomNumber = 1;
         int capacity = 20;
         manager.getFacility(name);
-        manager.addRoomToFacility(roomNumber, capacity);
-
-        assertEquals("Rooms:\nRoom 1 - Capacity 20\n", manager.listRooms());
+        manager.addFacilityDetail(roomNumber, capacity);
+        
+        
+        assertEquals("Rooms:\nRoom 1 - Capacity 20\n"
+               ,manager.listRooms());
     }
 
     @Test

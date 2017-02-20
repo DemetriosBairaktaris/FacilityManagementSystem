@@ -32,8 +32,7 @@ public class ConcreteFacilityManager implements FacilityManager {
      * @return facilities
      */
     @Override
-    public String listFacilities() {
-        //TODO figure that out
+    public String listFacilities() { 
         return facilities.toString();
     }
 
@@ -57,7 +56,7 @@ public class ConcreteFacilityManager implements FacilityManager {
      * @param capacity
      */
     @Override
-    public void addRoomToFacility(int roomNumber, int capacity) {
+    public void addFacilityDetail(int roomNumber, int capacity) {
         currentFacility.addFacilityDetail(new BasicRoom(roomNumber, capacity));
     }
 
@@ -90,7 +89,24 @@ public class ConcreteFacilityManager implements FacilityManager {
                 result += "Room " + r.getRoomNumber() + " - Capacity " + r.getCapacity() + "\n";
             }
         }
-        return result;
+        return result; 
+    }
+    
+    public boolean assignFacilityToUse(Date date1, Date date2){
+       return currentFacility.assignFacilityToUse(date1, date2);
+    }
+    
+    public double calcUsageRate(){
+        return currentFacility.calcUsageRate();
+    }
+    
+    @Override
+    public String listActualUsage() {
+       return currentFacility.listActualUsage();
+    }
+    
+    public boolean isInUseDuringInterval(Date date1, Date date2){
+        return currentFacility.isInUseDuringInterval(date1, date2);
     }
 
     @Override
@@ -159,4 +175,26 @@ public class ConcreteFacilityManager implements FacilityManager {
         this.currentFacility.getMaintenance().closeOrder(orderNum, requestNum);
     }
 
+    @Override
+    public String getFacilityInformation() {
+        // TODO Auto-generated method stub
+        return currentFacility.toString();
+    }
+
+    @Override
+    public int requestAvailableCapacity() {
+        // TODO Auto-generated method stub
+        return currentFacility.requestAvailableCapacity();
+    }
+
+    @Override
+    public void vacateFacility() {
+        currentFacility.vacateFacility();
+        
+    }
+
+    @Override
+    public String listInspections() {
+        return currentFacility.listInspections();
+    }
 }

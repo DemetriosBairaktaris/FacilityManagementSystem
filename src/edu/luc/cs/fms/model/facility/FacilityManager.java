@@ -1,6 +1,8 @@
 
 package edu.luc.cs.fms.model.facility;
 
+import java.util.Date;
+
 import edu.luc.cs.fms.model.maintenance.Maintenance;
 
 /**
@@ -18,6 +20,18 @@ public interface FacilityManager extends Maintenance {
 
     /**
      * 
+     * @return
+     */
+    public String getFacilityInformation();
+    
+    /**
+     * 
+     * @return
+     */
+    public int requestAvailableCapacity();
+    
+    /**
+     * 
      * @param facility
      * @return void
      */
@@ -25,32 +39,77 @@ public interface FacilityManager extends Maintenance {
 
     /**
      * 
-     * @param facility
-     * @return void
-     */
-    public void removeFacility(String name);
-
-    /**
-     * 
      * @param roomNumber
      * @param capacity
      * 
      */
-    public void addRoomToFacility(int roomNumber, int capacity);
-
+    public void addFacilityDetail(int roomNumber, int capacity);
+    
+    /**
+     * 
+     * @param facility
+     * @return void
+     */
+    public void removeFacility(String name);
+   
     /**
      * 
      * @param name
-     * @return
      */
     public void getFacility(String name);
 
     /**
-     * Prints to Console the current facility that the manager is holding
+     * Returns to Console the current facility that the manager is holding as String
+     * @return String
+     */
+    public String CurrentFacility();
+    
+    /**
+     * 
+     * @return String
+     */
+    public String listRooms();
+    
+/////////////////////////////USE METHODS///////////////////////////////////////////
+    /**
+     * 
+     * @param date1
+     * @param date2
+     * @return
+     */
+    public boolean isInUseDuringInterval(Date date1, Date date2);
+    
+    /**
+     * 
+     * @param date1
+     * @param date2
+     * @return
+     */
+    public boolean assignFacilityToUse(Date date1, Date date2);
+    
+    /**
+     * 
+     */
+    public void vacateFacility();
+    
+     /**
+      * 
+      * @return
+      */
+    public String listInspections();
+    
+    /**
      * 
      * @return
      */
-    public String CurrentFacility();
-
-    public String listRooms();
+    
+    public String listActualUsage();
+    
+    
+    /**
+     * 
+     * @return
+     */
+     public double calcUsageRate();
+     
 }

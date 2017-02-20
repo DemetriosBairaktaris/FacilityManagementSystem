@@ -36,12 +36,12 @@ public class User {
         
         for (int i = 100; i < 200; i += 10) {
             manager.getFacility(wtc);
-            manager.addRoomToFacility(i, 40);
+            manager.addFacilityDetail(i, 40);
         }
         
         for (int i = 100; i < 400; i += 10) {
             manager.getFacility(lsc);
-            manager.addRoomToFacility(i, 50);
+            manager.addFacilityDetail(i, 50);
         }
         
         System.out.println(manager.listFacilities());
