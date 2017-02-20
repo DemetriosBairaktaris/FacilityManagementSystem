@@ -130,9 +130,8 @@ public class TestFacility {
         int initialCapacity = facility.requestAvailableCapacity();
         facility.vacateFacility();
         assertEquals(initialCapacity, facility.requestAvailableCapacity());
-        facility.getRooms().get(0).addInhabitant("Steve");
         int currentCapacity = facility.requestAvailableCapacity();
-        assertTrue(initialCapacity > currentCapacity);
+        assertTrue(initialCapacity == currentCapacity);
         facility.vacateFacility();
         currentCapacity = facility.requestAvailableCapacity();
         assertEquals(currentCapacity, initialCapacity);
