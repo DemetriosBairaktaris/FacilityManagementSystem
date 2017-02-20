@@ -1,6 +1,5 @@
 package edu.luc.cs.fms.model.facility;
 
-
 /*
  * Concrete implementation of Room
  * @author TeamDK
