@@ -74,7 +74,7 @@ public class ConcreteFacilityManager implements FacilityManager {
             result += "None";
         } else {
             for (Room r : currentFacility.getRooms()) {
-                result += "Room " + r.getRoomNumber() + " - Capacity " + r.getCapacity() + "\n";
+                result += "Room " + r.getRoomNumber() + " - Capacity " + r.getAvailableCapacity() + "\n";
             }
         }
         return result; 
