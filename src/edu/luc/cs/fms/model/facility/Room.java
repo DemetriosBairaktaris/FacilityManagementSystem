@@ -31,14 +31,6 @@ public abstract class Room {
     }
 
     /**
-     * gets the capacity of the room
-     * @return total capacity
-     */
-    public int getCapacity() {
-        return capacity;
-    }
-
-    /**
      * gets the available capacity of the room
      * @return available capacity
      */
@@ -64,6 +56,6 @@ public abstract class Room {
 
     @Override
     public String toString() {
-        return "Room Number:  " + this.getRoomNumber() + "\nCapacity:  " + this.getCapacity();
+        return "Room Number:  " + this.getRoomNumber() + "\nCapacity:  " + this.getAvailableCapacity();
     }
 }

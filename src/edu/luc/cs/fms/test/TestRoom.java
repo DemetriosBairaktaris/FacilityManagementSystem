@@ -36,14 +36,10 @@ public class TestRoom {
         assertEquals(room.getRoomNumber(), roomNum);
     }
 
-    @Test
-    public void testGetCapacity() {
-        assertEquals(room.getCapacity(), capacity);
-    }
 
     @Test
     public void testGetAvailableCapacity() throws Exception {
-        int initCapacity = room.getCapacity();
-        assertTrue(initCapacity == (room.getAvailableCapacity()));
+        int initCapacity = room.getAvailableCapacity();
+        assertTrue(initCapacity == capacity);
     }
 }
