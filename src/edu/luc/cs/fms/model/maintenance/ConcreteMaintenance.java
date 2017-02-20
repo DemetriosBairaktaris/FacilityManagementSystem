@@ -38,32 +38,20 @@ public class ConcreteMaintenance implements Maintenance {
         sysLog.logCreate(this);
     }
 
-    /**
-     * Makes a maintenance request and creates an order
-     * 
-     * @param problem
-     */
+    @Override
     public void makeFacilityMaintRequest(String problem) {
         MaintenanceRequest request = new MaintenanceRequest(problem, requestNum, sysLog);
+        
         requests.add(request);
         requestNum++;
     }
 
-    /**
-     * Schedules the maintenance to be performed in the schedule
-     * 
-     * @param date1
-     * @param date2
-     * @return true for successful, false for failure
-     */
-    public boolean scheduleMaintenance(Date date1, Date date2) {
-        return schedule.scheduleMaintenance(date1, date2);
+    @Override
+    public boolean scheduleMaintenance(Date start, Date end) {
+        return schedule.scheduleMaintenance(start, end);
     }
 
-    /**
-     * 
-     * @return total cost for facility
-     */
+    @Override
     public BigDecimal calcMaintenanceCostForFacility() {
         for (int i = 0; i < orders.size(); i++) {
             cost = cost.add(orders.get(i).getCost());
@@ -71,11 +59,7 @@ public class ConcreteMaintenance implements Maintenance {
         return cost;
     }
 
-    /**
-     * creates an order for maintenance
-     * 
-     * @param desc
-     */
+    @Override
     public void createOrder(String desc, int requestNum) {
         Order order = new Order(desc, orderNum, sysLog);
         orders.add(order);
@@ -83,13 +67,10 @@ public class ConcreteMaintenance implements Maintenance {
         requests.get(requestNum).addOpenOrder();
     }
 
-    /**
-     * closes an order when finished
-     * 
-     * @param orderNum
-     */
+    @Override
     public void closeOrder(int orderNum, int requestNum) {
         Order order = orders.get(orderNum);
+        
         order.setStatus(true);
         sysLog.logClose(order);
         log.addOrder(order);
@@ -97,6 +78,7 @@ public class ConcreteMaintenance implements Maintenance {
         requests.get(requestNum).removeOpenOrder();
     }
 
+    @Override
     public void closeRequest(int requestNum) {
         MaintenanceRequest request = requests.get(requestNum);
         if (request.getOpenOrders() == 0) {
@@ -107,68 +89,41 @@ public class ConcreteMaintenance implements Maintenance {
         }
     }
 
-    /**
-     * sets the cost of parts on an order
-     * 
-     * @param cost
-     * @param orderNum
-     */
+    @Override
     public void setPartsCost(BigDecimal cost, int orderNum) {
         Order order = orders.get(orderNum);
         order.setLaborCost(cost);
     }
 
-    /**
-     * sets the cost of labor on an order
-     * 
-     * @param cost
-     * @param orderNum
-     */
+    @Override
     public void setLaborCost(BigDecimal cost, int orderNum) {
         Order order = orders.get(orderNum);
         order.setPartsCost(cost);
     }
 
-    /**
-     * determines the problem rate for the facility
-     * 
-     * @return problems / year in days
-     */
+    @Override
     public float calcProblemRateForFacility() {
         numRequests = requests.size();
         return ((float) numRequests) / 365;
     }
 
-    /**
-     * 
-     * @return total down time for the scheduled maintenance
-     */
+    @Override
     public long calcDownTimeForFacility() {
         return schedule.calcDownTimeForFacility();
     }
 
-    /**
-     * 
-     * @return all maintenance requests
-     */
+    @Override
     public List<MaintenanceRequest> listMaintRequests() {
         return requests;
     }
 
-    /**
-     * 
-     * @return all maintenance added to the log
-     */
+    @Override
     public List<Order> listMaintenance() {
         return log.getMaintenanceList();
     }
 
-    /**
-     * 
-     * @return all problems from maintenance requests
-     */
+    @Override
     public String listFacilityProblems() {
-
         String problems = "Facility Problems:\n";
 
         if (requests.size() == 0) {
@@ -178,12 +133,11 @@ public class ConcreteMaintenance implements Maintenance {
         for (int i = 0; i < requests.size(); i++) {
             problems = problems.concat(requests.get(i).getProblem() + "\n");
         }
-
         return problems;
     }
 
     @Override
     public String toString() {
-        return "Master Maintenance Record.";
+        return "Facility Maintenance Record.";
     }
 }

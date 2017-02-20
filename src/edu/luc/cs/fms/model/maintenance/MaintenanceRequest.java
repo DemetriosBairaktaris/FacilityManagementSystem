@@ -9,6 +9,7 @@ import edu.luc.cs.fms.model.system.SystemLog;
  *
  */
 public class MaintenanceRequest {
+
     private boolean status;
     private String problem;
     private int num;
@@ -23,7 +24,6 @@ public class MaintenanceRequest {
     }
 
     /**
-     * 
      * @return status
      */
     public boolean getStatus() {
@@ -31,7 +31,7 @@ public class MaintenanceRequest {
     }
 
     /**
-     * 
+     * sets the status of the reqeust
      * @param status
      */
     public void setStatus(boolean status) {
@@ -39,26 +39,39 @@ public class MaintenanceRequest {
     }
 
     /**
-     * This method returns the problem description.
-     * 
+     * This method returns the problem description
      * @return problem description
      */
     public String getProblem() {
         return this.problem;
     }
 
+    /**
+     * 
+     * @return request number
+     */
     public int getRequestNum() {
         return num;
     }
 
+    /**
+     * 
+     * @return number of open orders
+     */
     public int getOpenOrders() {
         return openOrders;
     }
 
+    /**
+     * adds an open order
+     */
     public void addOpenOrder() {
         openOrders++;
     }
 
+    /**
+     * removes an order once closed
+     */
     public void removeOpenOrder() {
         openOrders--;
     }
