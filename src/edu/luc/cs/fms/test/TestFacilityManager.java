@@ -1,6 +1,8 @@
 package edu.luc.cs.fms.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -15,7 +17,13 @@ import org.junit.Test;
 import edu.luc.cs.fms.model.facility.ConcreteFacilityManager;
 import edu.luc.cs.fms.model.facility.FacilityManager;
 
+/**
+ * 
+ * @author TeamDK
+ *
+ */
 public class TestFacilityManager {
+
     private FacilityManager manager;
     private String name = "Cuneo";
     private String desc = "Building Containing classrooms";
@@ -27,7 +35,6 @@ public class TestFacilityManager {
         manager = new ConcreteFacilityManager();
         manager.addNewFacility(name, desc, address);
         c = new GregorianCalendar();
-
     }
 
     @After
@@ -53,10 +60,7 @@ public class TestFacilityManager {
         int capacity = 20;
         manager.getFacility(name);
         manager.addFacilityDetail(roomNumber, capacity);
-        
-        
-        assertEquals("Rooms:\nRoom 1 - Capacity 20\n"
-               ,manager.listRooms());
+        assertEquals("Rooms:\nRoom 1 - Capacity 20\n", manager.listRooms());
     }
 
     @Test
@@ -83,7 +87,6 @@ public class TestFacilityManager {
         d1 = c.getTime();
         c.set(2018, 3, 8);
         d2 = c.getTime();
-
         manager.getFacility(name);
         manager.makeFacilityMaintRequest(problem);
         manager.createOrder("Clean Windows", 0);
@@ -91,7 +94,6 @@ public class TestFacilityManager {
         manager.setPartsCost(new BigDecimal(5.00), 0);
         manager.scheduleMaintenance(d1, d2);
         assertEquals(25.00, manager.calcMaintenanceCostForFacility().doubleValue(), 0.005);
-
     }
 
     @Test
@@ -101,7 +103,6 @@ public class TestFacilityManager {
         manager.makeFacilityMaintRequest("2");
         System.out.println(manager.listMaintRequests());
         assertEquals(2.0 / 365.0, manager.calcProblemRateForFacility(), 0.00005);
-
     }
 
     @Test
@@ -113,14 +114,11 @@ public class TestFacilityManager {
         c.set(2018, 3, 8);
         date2 = c.getTime();
         manager.scheduleMaintenance(date1, date2);
-        assertEquals(TimeUnit.MILLISECONDS.toDays((date2.getTime() - date1.getTime())),
-                manager.calcDownTimeForFacility());
+        assertEquals(TimeUnit.MILLISECONDS.toDays((date2.getTime() - date1.getTime())), manager.calcDownTimeForFacility());
     }
 
     @Test
     public void testListFacilityProblems() {
-        // "Maintenance Request #" + this.getRequestNum() + "\nStatus: " +
-        // this.getStatus() + "\nProblem: " + this.getProblem();
         String problem1 = "Bathroom is flooded";
         String problem2 = "Clock is crooked";
         manager.getFacility(name);
