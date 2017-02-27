@@ -5,6 +5,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import edu.luc.cs.fms.model.facility.ConcreteFacilityManager;
 import edu.luc.cs.fms.model.facility.FacilityManager;
 
@@ -20,6 +23,9 @@ public class User {
      * @param args
      */
     public static void main(String[] args) {
+        
+        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
+        
         FacilityManager manager = new ConcreteFacilityManager();
         Calendar dates = new GregorianCalendar();
         String wtc = "WTC";
