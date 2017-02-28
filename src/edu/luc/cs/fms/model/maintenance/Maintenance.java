@@ -42,13 +42,13 @@ public interface Maintenance {
      * retrieves a list of maintenance requests
      * @return
      */
-    public List<MaintenanceRequest> listMaintRequests();
+    public List<ConcreteMaintenanceRequest> listMaintRequests();
 
     /**
      * retrieves list of maintenance performed
      * @return
      */
-    public List<Order> listMaintenance();
+    public List<ConcreteOrder> listMaintenance();
 
     /**
      * lists the problems in the maintenance requests

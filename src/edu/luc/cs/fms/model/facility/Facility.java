@@ -6,7 +6,7 @@ import java.util.List;
 
 import edu.luc.cs.fms.model.maintenance.ConcreteMaintenance;
 import edu.luc.cs.fms.model.maintenance.Maintenance;
-import edu.luc.cs.fms.model.maintenance.MaintenanceRequest;
+import edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest;
 import edu.luc.cs.fms.model.system.ConcreteSystemLog;
 import edu.luc.cs.fms.model.system.SystemLog;
 
@@ -191,7 +191,7 @@ public abstract class Facility {
         
         inspections.add(i);
         i.setPassed(true);
-        for(MaintenanceRequest m : maintenance.listMaintRequests()){
+        for(ConcreteMaintenanceRequest m : maintenance.listMaintRequests()){
             if (!m.getStatus()){
                 i.setPassed(false);
                 break; 
