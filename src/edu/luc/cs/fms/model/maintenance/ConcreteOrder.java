@@ -15,14 +15,16 @@ public class ConcreteOrder {
     private String desc;
     private int orderNum;
     private boolean status;
-    private ConcreteCost cost;
+    private PartsCost partsCost;
+    private LaborCost laborCost;
     private BigDecimal totalCost;
 
     public ConcreteOrder(String desc, int orderNum, SystemLog sysLog) {
         this.desc = desc;
         this.orderNum = orderNum;
         status = false;
-        cost = new ConcreteCost();
+        partsCost = new PartsCost();
+        laborCost = new LaborCost();
         totalCost = new BigDecimal("0");
         sysLog.logCreate(this);
     }
@@ -61,7 +63,7 @@ public class ConcreteOrder {
      * @param cost
      */
     public void setLaborCost(BigDecimal cost) {
-        this.cost.setLaborCost(cost);
+        laborCost.setCost(cost);
     }
 
     /**
@@ -69,21 +71,21 @@ public class ConcreteOrder {
      * @param cost
      */
     public void setPartsCost(BigDecimal cost) {
-        this.cost.setPartsCost(cost);
+        partsCost.setCost(cost);
     }
 
     /**
      * @return total cost of parts and labor
      */
     public BigDecimal getCost() {
-        totalCost = totalCost.add(cost.getLaborCost());
-        totalCost = totalCost.add(cost.getPartsCost());
+        totalCost = totalCost.add(partsCost.getCost());
+        totalCost = totalCost.add(laborCost.getCost());
         return totalCost;
     }
 
     @Override
     public String toString() {
         return "Order: " + this.getOrderNum() + "\nStatus: " + this.getStatus() + "\nDescription: "
-                + this.getDescription() + "\nCost: $" + cost.getLaborCost().add(cost.getPartsCost()).toString();
+                + this.getDescription() + "\nCost: $" + laborCost.getCost().add(partsCost.getCost()).toString();
     }
 }
