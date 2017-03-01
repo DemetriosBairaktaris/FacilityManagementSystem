@@ -16,4 +16,7 @@
     <bean id="labor" class="edu.luc.cs.fms.model.maintenance.LaborCost" scope="prototype" />
     <bean id="parts" class="edu.luc.cs.fms.model.maintenance.PartsCost" scope="prototype" />
     
+    <!-- Facility Beans -->
+    <bean id="manager" class="edu.luc.cs.fms.model.facility.ConcreteFacilityManager" scope="prototype" />
+    
 </beans>
