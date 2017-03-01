@@ -4,8 +4,16 @@
     xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-
-    <description>Spring Context for Project</description>
-
+    <description>Spring Context for FMS Project</description>
     <context:component-scan base-package="edu.luc.cs.fms" />
+    
+    <!-- Maintenance Beans -->
+    <bean id="maintenance" class="edu.luc.cs.fms.model.maintenance.ConcreteMaintenance" scope="prototype" />
+    <bean id="request" class="edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest" scope="prototype" />
+    <bean id="log" class="edu.luc.cs.fms.model.maintenance.ConcreteLog" scope="prototype" />
+    <bean id="order" class="edu.luc.cs.fms.model.maintenance.ConcreteOrder" scope="prototype" />
+    <bean id="schedule" class="edu.luc.cs.fms.model.maintenance.ConcreteSchedule" scope="prototype" />
+    <bean id="labor" class="edu.luc.cs.fms.model.maintenance.LaborCost" scope="prototype" />
+    <bean id="parts" class="edu.luc.cs.fms.model.maintenance.PartsCost" scope="prototype" />
+    
 </beans>
