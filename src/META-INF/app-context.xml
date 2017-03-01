@@ -18,5 +18,16 @@
     
     <!-- Facility Beans -->
     <bean id="manager" class="edu.luc.cs.fms.model.facility.ConcreteFacilityManager" scope="prototype" />
+    <bean id="building" class="edu.luc.cs.fms.model.facility.Building" scope="prototype" />
+    <bean id="room" class="edu.luc.cs.fms.model.facility.BasicRoom" scope="prototype" />
+    <bean id="inspection" class="edu.luc.cs.fms.model.facility.ConcreteInspection" scope="prototype" />
+    <bean id="interval" class="edu.luc.cs.fms.model.facility.ConcreteInterval" scope="prototype" />
+    <bean id="use" class="edu.luc.cs.fms.model.facility.ConcreteUse" scope="prototype" />
+    
+    <!-- DAL Bean -->
+    <bean id="dao" class="edu.luc.cs.fms.dal.ConcreteFacilityDAO" />
+    
+    <!-- System Bean -->
+    <bean id="system" class="edu.luc.cs.fms.model.system.ConcreteSystemLog" />
     
 </beans>

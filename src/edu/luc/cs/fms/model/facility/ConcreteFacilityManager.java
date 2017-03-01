@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import edu.luc.cs.fms.dal.FacilityDAO;
+import edu.luc.cs.fms.dal.ConcreteFacilityDAO;
 import edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest;
 import edu.luc.cs.fms.model.maintenance.ConcreteOrder;
 import edu.luc.cs.fms.model.system.ConcreteSystemLog;
@@ -17,12 +17,12 @@ import edu.luc.cs.fms.model.system.SystemLog;
  */
 public class ConcreteFacilityManager implements FacilityManager {
 
-    private FacilityDAO facilities;
+    private ConcreteFacilityDAO facilities;
     private SystemLog log;
     private Facility currentFacility;
 
     public ConcreteFacilityManager() {
-        facilities = new FacilityDAO();
+        facilities = new ConcreteFacilityDAO();
         log = new ConcreteSystemLog();
         log.logCreate(this);
     }
