@@ -24,7 +24,7 @@ public class User {
      */
     public static void main(String[] args) {
         
-        //ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
         
         FacilityManager manager = new ConcreteFacilityManager();
         Calendar dates = new GregorianCalendar();
