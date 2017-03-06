@@ -16,10 +16,10 @@ import edu.luc.cs.fms.model.system.SystemLog;
  */
 public class ConcreteMaintenance implements Maintenance {
 
-    private Log log;
-    private List<MaintenanceRequest> requests;
-    private List<Order> orders;
-    private Schedule schedule;
+    private ConcreteLog log;
+    private List<ConcreteMaintenanceRequest> requests;
+    private List<ConcreteOrder> orders;
+    private ConcreteSchedule schedule;
     private BigDecimal cost;
     private int orderNum;
     private int requestNum;
@@ -28,10 +28,10 @@ public class ConcreteMaintenance implements Maintenance {
 
     public ConcreteMaintenance(SystemLog sysLog) {
         this.sysLog = sysLog;
-        log = new Log();
-        requests = new ArrayList<MaintenanceRequest>();
-        orders = new ArrayList<Order>();
-        schedule = new Schedule(sysLog);
+        log = new ConcreteLog();
+        requests = new ArrayList<ConcreteMaintenanceRequest>();
+        orders = new ArrayList<ConcreteOrder>();
+        schedule = new ConcreteSchedule(sysLog);
         cost = new BigDecimal("0");
         orderNum = 0;
         requestNum = 0;
@@ -40,7 +40,7 @@ public class ConcreteMaintenance implements Maintenance {
 
     @Override
     public void makeFacilityMaintRequest(String problem) {
-        MaintenanceRequest request = new MaintenanceRequest(problem, requestNum, sysLog);
+        ConcreteMaintenanceRequest request = new ConcreteMaintenanceRequest(problem, requestNum, sysLog);
         
         requests.add(request);
         requestNum++;
@@ -61,7 +61,7 @@ public class ConcreteMaintenance implements Maintenance {
 
     @Override
     public void createOrder(String desc, int requestNum) {
-        Order order = new Order(desc, orderNum, sysLog);
+        ConcreteOrder order = new ConcreteOrder(desc, orderNum, sysLog);
         orders.add(order);
         orderNum++;
         requests.get(requestNum).addOpenOrder();
@@ -69,7 +69,7 @@ public class ConcreteMaintenance implements Maintenance {
 
     @Override
     public void closeOrder(int orderNum, int requestNum) {
-        Order order = orders.get(orderNum);
+        ConcreteOrder order = orders.get(orderNum);
         
         order.setStatus(true);
         sysLog.logClose(order);
@@ -80,7 +80,7 @@ public class ConcreteMaintenance implements Maintenance {
 
     @Override
     public void closeRequest(int requestNum) {
-        MaintenanceRequest request = requests.get(requestNum);
+        ConcreteMaintenanceRequest request = requests.get(requestNum);
         if (request.getOpenOrders() == 0) {
             request.setStatus(true);
             sysLog.logClose(request);
@@ -91,13 +91,13 @@ public class ConcreteMaintenance implements Maintenance {
 
     @Override
     public void setPartsCost(BigDecimal cost, int orderNum) {
-        Order order = orders.get(orderNum);
+        ConcreteOrder order = orders.get(orderNum);
         order.setLaborCost(cost);
     }
 
     @Override
     public void setLaborCost(BigDecimal cost, int orderNum) {
-        Order order = orders.get(orderNum);
+        ConcreteOrder order = orders.get(orderNum);
         order.setPartsCost(cost);
     }
 
@@ -113,12 +113,12 @@ public class ConcreteMaintenance implements Maintenance {
     }
 
     @Override
-    public List<MaintenanceRequest> listMaintRequests() {
+    public List<ConcreteMaintenanceRequest> listMaintRequests() {
         return requests;
     }
 
     @Override
-    public List<Order> listMaintenance() {
+    public List<ConcreteOrder> listMaintenance() {
         return log.getMaintenanceList();
     }
 

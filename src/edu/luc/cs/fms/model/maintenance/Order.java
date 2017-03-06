@@ -2,88 +2,42 @@ package edu.luc.cs.fms.model.maintenance;
 
 import java.math.BigDecimal;
 
-import edu.luc.cs.fms.model.system.SystemLog;
-
-/**
- * This class tracks an order created as a result of a maintenance request
- * 
- * @author TeamDK
- *
- */
-public class Order {
-
-    private String desc;
-    private int orderNum;
-    private boolean status;
-    private Cost cost;
-    private BigDecimal totalCost;
-
-    public Order(String desc, int orderNum, SystemLog sysLog) {
-        this.desc = desc;
-        this.orderNum = orderNum;
-        status = false;
-        cost = new Cost();
-        totalCost = new BigDecimal("0");
-        sysLog.logCreate(this);
-    }
-
+public interface Order {
     /**
      * @return description
      */
-    public String getDescription() {
-        return desc;
-    }
+    public String getDescription();
 
     /**
      * @return order number
      */
-    public int getOrderNum() {
-        return orderNum;
-    }
+    public int getOrderNum();
 
     /**
      * True is complete, false is open
      * @param status
      */
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
+    public void setStatus(boolean status);
 
     /**
      * @return status of order
      */
-    public boolean getStatus() {
-        return status;
-    }
+    public boolean getStatus();
 
     /**
      * sets labor cost in BigDecimal format
      * @param cost
      */
-    public void setLaborCost(BigDecimal cost) {
-        this.cost.setLaborCost(cost);
-    }
+    public void setLaborCost(BigDecimal cost);
 
     /**
      * sets part cost in BigDecimal format
      * @param cost
      */
-    public void setPartsCost(BigDecimal cost) {
-        this.cost.setPartsCost(cost);
-    }
+    public void setPartsCost(BigDecimal cost);
 
     /**
      * @return total cost of parts and labor
      */
-    public BigDecimal getCost() {
-        totalCost = totalCost.add(cost.getLaborCost());
-        totalCost = totalCost.add(cost.getPartsCost());
-        return totalCost;
-    }
-
-    @Override
-    public String toString() {
-        return "Order: " + this.getOrderNum() + "\nStatus: " + this.getStatus() + "\nDescription: "
-                + this.getDescription() + "\nCost: $" + cost.getLaborCost().add(cost.getPartsCost()).toString();
-    }
+    public BigDecimal getCost();
 }

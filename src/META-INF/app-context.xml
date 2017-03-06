@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <description>Spring Context for FMS Project</description>
+    <context:component-scan base-package="edu.luc.cs.fms" />
+    
+    <!-- Maintenance Beans -->
+    <bean id="maintenance" class="edu.luc.cs.fms.model.maintenance.ConcreteMaintenance" scope="prototype" />
+    <bean id="request" class="edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest" scope="prototype" />
+    <bean id="log" class="edu.luc.cs.fms.model.maintenance.ConcreteLog" scope="prototype" />
+    <bean id="order" class="edu.luc.cs.fms.model.maintenance.ConcreteOrder" scope="prototype" />
+    <bean id="schedule" class="edu.luc.cs.fms.model.maintenance.ConcreteSchedule" scope="prototype" />
+    <bean id="labor" class="edu.luc.cs.fms.model.maintenance.LaborCost" scope="prototype" />
+    <bean id="parts" class="edu.luc.cs.fms.model.maintenance.PartsCost" scope="prototype" />
+    
+    <!-- Facility Beans -->
+    <bean id="manager" class="edu.luc.cs.fms.model.facility.ConcreteFacilityManager" scope="prototype" />
+    <bean id="building" class="edu.luc.cs.fms.model.facility.Building" scope="prototype" />
+    <bean id="room" class="edu.luc.cs.fms.model.facility.BasicRoom" scope="prototype" />
+    <bean id="inspection" class="edu.luc.cs.fms.model.facility.ConcreteInspection" scope="prototype" />
+    <bean id="interval" class="edu.luc.cs.fms.model.facility.ConcreteInterval" scope="prototype" />
+    <bean id="use" class="edu.luc.cs.fms.model.facility.ConcreteUse" scope="prototype" />
+    
+    <!-- DAL Bean -->
+    <bean id="dao" class="edu.luc.cs.fms.dal.ConcreteFacilityDAO" />
+    
+    <!-- System Bean -->
+    <bean id="system" class="edu.luc.cs.fms.model.system.ConcreteSystemLog" />
+    
+</beans>
