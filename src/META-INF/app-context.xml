@@ -32,6 +32,9 @@
     </bean>
     
     <bean id="building" class="edu.luc.cs.fms.model.facility.Building" scope="prototype" >
+        <constructor-arg type="java.lang.String" value="Water Tower Campus" /> <!-- used for tests -->
+        <constructor-arg type="java.lang.String" value="LUC Campus located at Water Tower Place." />
+        <constructor-arg type="java.lang.String" value="911 Clark Street" />
         <constructor-arg ref="system" />
         <property name="maintenance" ref="maintenance" />
         <property name="rooms" ref="list" />
