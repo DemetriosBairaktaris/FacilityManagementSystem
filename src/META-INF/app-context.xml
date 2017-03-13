@@ -7,27 +7,102 @@
     <description>Spring Context for FMS Project</description>
     <context:component-scan base-package="edu.luc.cs.fms" />
     
-    <!-- Maintenance Beans -->
-    <bean id="maintenance" class="edu.luc.cs.fms.model.maintenance.ConcreteMaintenance" scope="prototype" />
-    <bean id="request" class="edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest" scope="prototype" />
-    <bean id="log" class="edu.luc.cs.fms.model.maintenance.ConcreteLog" scope="prototype" />
-    <bean id="order" class="edu.luc.cs.fms.model.maintenance.ConcreteOrder" scope="prototype" />
-    <bean id="schedule" class="edu.luc.cs.fms.model.maintenance.ConcreteSchedule" scope="prototype" />
-    <bean id="labor" class="edu.luc.cs.fms.model.maintenance.LaborCost" scope="prototype" />
-    <bean id="parts" class="edu.luc.cs.fms.model.maintenance.PartsCost" scope="prototype" />
+    <!-- Utility beans -->
+    <bean id="map" class="java.util.HashMap" />
+    <bean id="list" class="java.util.ArrayList" scope="prototype" />
+    <bean id="decimal" class="java.math.BigDecimal" scope="prototype" >
+        <constructor-arg>
+            <value>0</value>
+        </constructor-arg>
+    </bean>
+    <bean id="date" class="java.util.Date" scope="prototype" />
     
-    <!-- Facility Beans -->
-    <bean id="manager" class="edu.luc.cs.fms.model.facility.ConcreteFacilityManager" scope="prototype" />
-    <bean id="building" class="edu.luc.cs.fms.model.facility.Building" scope="prototype" />
+    <!-- DAL Bean 
+    <bean id="dao" class="edu.luc.cs.fms.dal.ConcreteFacilityDAO" >
+        <property name="facilityHashMap" ref="map" />
+    </bean>
+    
+    System Bean -->
+    <bean id="system" class="edu.luc.cs.fms.model.system.ConcreteSystemLog" />
+    
+    <!-- Facility Beans 
+    <bean id="manager" class="edu.luc.cs.fms.model.facility.ConcreteFacilityManager" scope="prototype" >
+        <property name="facilities" ref="dao" />
+        <property name="sysLog" ref="system" />
+        <property name="facility" ref="building" />
+    </bean>
+    
+    <bean id="building" class="edu.luc.cs.fms.model.facility.Building" scope="prototype" >
+        <property name="maintenance" ref="maintenance" />
+        <property name="rooms" ref="list" />
+        <property name="inspections" ref="list" />
+        <property name="use" ref="use" />
+    </bean>
+    
     <bean id="room" class="edu.luc.cs.fms.model.facility.BasicRoom" scope="prototype" />
-    <bean id="inspection" class="edu.luc.cs.fms.model.facility.ConcreteInspection" scope="prototype" />
-    <bean id="interval" class="edu.luc.cs.fms.model.facility.ConcreteInterval" scope="prototype" />
+    
+    <bean id="inspection" class="edu.luc.cs.fms.model.facility.ConcreteInspection" scope="prototype" >
+        <property name="date" ref="date" />
+        <property name="passed" value="false" />
+    </bean>
+    
+    <bean id="interval" class="edu.luc.cs.fms.model.facility.ConcreteInterval" scope="prototype" >
+        <property name="endDate" ref="date" />
+        <property name="startDate" ref="date" />
+    </bean>
+    
     <bean id="use" class="edu.luc.cs.fms.model.facility.ConcreteUse" scope="prototype" />
     
-    <!-- DAL Bean -->
-    <bean id="dao" class="edu.luc.cs.fms.dal.ConcreteFacilityDAO" />
+    Maintenance Beans -->
+    <bean id="log" class="edu.luc.cs.fms.model.maintenance.ConcreteLog" scope="prototype" >
+        <property name="maintenance" ref="list" />
+    </bean>
     
-    <!-- System Bean -->
-    <bean id="system" class="edu.luc.cs.fms.model.system.ConcreteSystemLog" />
+    <bean id="request" class="edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest" scope="prototype">
+        <constructor-arg ref="java.lang.String" />
+        <constructor-arg ref="int" />
+        <constructor-arg ref="system" />
+        <property name="openOrders" value="0" />
+        <property name="status" value="false" />
+    </bean>
+    
+    <bean id="maintenance" class="edu.luc.cs.fms.model.maintenance.ConcreteMaintenance" scope="prototype">
+        <constructor-arg ref="system" />
+        <property name="log" ref="log" />
+        <property name="requests" ref="list" />
+        <property name="orders" ref="list" />
+        <property name="schedule" ref="schedule" />
+        <property name="cost" ref="decimal" />
+        <property name="orderNum" value="0" />
+        <property name="numRequests" value="0" />
+    </bean>
+    
+    <bean id="order" class="edu.luc.cs.fms.model.maintenance.ConcreteOrder" scope="prototype" >
+        <constructor-arg ref="java.lang.String" />
+        <constructor-arg ref="int" />
+        <constructor-arg ref="system" />
+        <property name="laborCost" ref="labor" />
+        <property name="partsCost" ref="parts" />
+        <property name="totalCost" ref="decimal" />
+        <property name="status" value="false" />
+    </bean>
+    
+    <bean id="schedule" class="edu.luc.cs.fms.model.maintenance.ConcreteSchedule" scope="prototype" >
+        <constructor-arg ref="system" />
+        <property name="currentDate" ref="date" />
+        <property name="startDate" ref="list" />
+        <property name="endDate" ref="list" />
+        <property name="downTime">
+            <value>0</value>
+        </property>
+    </bean>
+    
+    <bean id="labor" class="edu.luc.cs.fms.model.maintenance.LaborCost" scope="prototype" >
+        <property name="cost" ref="decimal" />
+    </bean>
+    
+    <bean id="parts" class="edu.luc.cs.fms.model.maintenance.PartsCost" scope="prototype" >
+        <property name="cost" ref="decimal" />
+    </bean>
     
 </beans>

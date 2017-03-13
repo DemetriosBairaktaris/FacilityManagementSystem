@@ -8,19 +8,23 @@ import edu.luc.cs.fms.model.system.SystemLog;
  * @author TeamDK
  *
  */
-public class ConcreteMaintenanceRequest {
+public class ConcreteMaintenanceRequest implements MaintenanceRequest{
 
     private boolean status;
     private String problem;
-    private int num;
+    private int requestNum;
     private int openOrders;
 
-    public ConcreteMaintenanceRequest(String problem, int num, SystemLog sysLog) {
-        status = false;
+    public ConcreteMaintenanceRequest(String problem, int requestNum, SystemLog sysLog) {
+        //status = false;
         this.problem = problem;
-        this.num = num;
-        openOrders = 0;
+        this.requestNum = requestNum;
+        //openOrders = 0;
         sysLog.logCreate(this);
+    }
+    
+    public void setOpenOrders(int openOrders) {
+      this.openOrders = openOrders;
     }
 
     /**
@@ -31,7 +35,7 @@ public class ConcreteMaintenanceRequest {
     }
 
     /**
-     * sets the status of the reqeust
+     * sets the status of the request
      * @param status
      */
     public void setStatus(boolean status) {
@@ -51,7 +55,7 @@ public class ConcreteMaintenanceRequest {
      * @return request number
      */
     public int getRequestNum() {
-        return num;
+        return requestNum;
     }
 
     /**

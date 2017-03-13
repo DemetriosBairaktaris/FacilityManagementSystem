@@ -13,7 +13,7 @@ import edu.luc.cs.fms.model.system.SystemLog;
  * @author TeamDK
  *
  */
-public class ConcreteSchedule {
+public class ConcreteSchedule implements Schedule {
 
     private Date currentDate;
     private List<Date> startDate;
@@ -22,12 +22,37 @@ public class ConcreteSchedule {
     private SystemLog sysLog;
 
     public ConcreteSchedule(SystemLog sysLog) {
-        currentDate = new Date();
-        startDate = new ArrayList<Date>();
-        endDate = new ArrayList<Date>();
-        downTime = 0;
+        //currentDate = new Date();
+        //startDate = new ArrayList<Date>();
+        //endDate = new ArrayList<Date>();
+        //downTime = 0;
         this.sysLog = sysLog;
     }
+    
+    public void setCurrentDate(Date currentDate) {
+      this.currentDate = currentDate;
+    };
+    public Date getCurrentDate() {
+      return currentDate;
+    };
+    public void setStartDate(List<Date> startDate) {
+      this.startDate = startDate;
+    };
+    public List<Date> getStartDate() {
+      return startDate;
+    };
+    public void setEndDate(List<Date> endDate) {
+      this.endDate = endDate;
+    };
+    public List<Date> getEndDate() {
+      return endDate;
+    };
+    public void setDownTime(long downTime) {
+      this.downTime = downTime;
+    };
+    public long getDownTime() {
+      return downTime;
+    };
 
     /**
      * schedules the request's maintenance

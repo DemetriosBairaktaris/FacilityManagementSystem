@@ -3,6 +3,14 @@ package edu.luc.cs.fms.model.maintenance;
 import java.math.BigDecimal;
 
 public interface Order {
+  
+    public void setLabor(LaborCost laborCost);
+    public LaborCost getLabor();
+    public void setParts(PartsCost partsCost);
+    public PartsCost getParts();
+    public void setTotal(BigDecimal totalCost);
+    public BigDecimal getTotal();
+  
     /**
      * @return description
      */

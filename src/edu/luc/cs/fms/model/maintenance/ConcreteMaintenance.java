@@ -28,15 +28,59 @@ public class ConcreteMaintenance implements Maintenance {
 
     public ConcreteMaintenance(SystemLog sysLog) {
         this.sysLog = sysLog;
-        log = new ConcreteLog();
-        requests = new ArrayList<ConcreteMaintenanceRequest>();
-        orders = new ArrayList<ConcreteOrder>();
-        schedule = new ConcreteSchedule(sysLog);
-        cost = new BigDecimal("0");
-        orderNum = 0;
-        requestNum = 0;
+        //log = new ConcreteLog();
+        //requests = new ArrayList<ConcreteMaintenanceRequest>();
+        //orders = new ArrayList<ConcreteOrder>();
+        //schedule = new ConcreteSchedule(sysLog);
+        //cost = new BigDecimal("0");
+        //orderNum = 0;
+        //requestNum = 0;
         sysLog.logCreate(this);
     }
+    
+    public void setLog(ConcreteLog log) {
+      this.log = log;
+    };
+    public ConcreteLog getLog() {
+      return log;
+    };
+    public void setRequests(List<ConcreteMaintenanceRequest> requests) {
+      this.requests = requests;
+    };
+    public List<ConcreteMaintenanceRequest> getRequests() {
+      return requests;
+    };
+    public void setOrders(List<ConcreteOrder> orders) {
+      this.orders = orders;
+    };
+    public List<ConcreteOrder> getOrders() {
+      return orders;
+    };
+    public void setSchedule(ConcreteSchedule schedule) {
+      this.schedule = schedule;
+    };
+    public ConcreteSchedule getSchedule() {
+      return schedule;
+    };
+    public void setCost(BigDecimal cost) {
+      this.cost = cost;
+    };
+    public BigDecimal getCost() {
+      return cost;
+    };
+    public void setOrderNum(int orderNum) {
+      this.orderNum = orderNum;
+    };
+    public int getOrderNum() {
+      return orderNum;
+    };
+    public void setNumRequests(int numRequests) {
+      this.numRequests = numRequests;
+    };
+    public int getNumRequests() {
+      return numRequests;
+    };
+  
 
     @Override
     public void makeFacilityMaintRequest(String problem) {

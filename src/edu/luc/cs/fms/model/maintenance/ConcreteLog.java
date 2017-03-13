@@ -9,14 +9,21 @@ import java.util.List;
  * @author TeamDK
  *
  */
-public class ConcreteLog {
+public class ConcreteLog implements Log{
 
     private List<ConcreteOrder> maintenance;
 
     public ConcreteLog() {
-        maintenance = new ArrayList<ConcreteOrder>();
+        //maintenance = new ArrayList<ConcreteOrder>();
     }
 
+    public void setMaintenance(List<ConcreteOrder> maintenance) {
+      this.maintenance = maintenance;
+    };
+    public List<ConcreteOrder> getMaintenance() {
+      return maintenance;
+    };
+    
     /**
      * adds an order to the log
      * @param order

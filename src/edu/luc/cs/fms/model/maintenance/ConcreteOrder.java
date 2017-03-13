@@ -10,7 +10,7 @@ import edu.luc.cs.fms.model.system.SystemLog;
  * @author TeamDK
  *
  */
-public class ConcreteOrder {
+public class ConcreteOrder implements Order{
 
     private String desc;
     private int orderNum;
@@ -22,12 +22,32 @@ public class ConcreteOrder {
     public ConcreteOrder(String desc, int orderNum, SystemLog sysLog) {
         this.desc = desc;
         this.orderNum = orderNum;
-        status = false;
-        partsCost = new PartsCost();
-        laborCost = new LaborCost();
-        totalCost = new BigDecimal("0");
+        //status = false;
+        //partsCost = new PartsCost();
+        //laborCost = new LaborCost();
+        //totalCost = new BigDecimal("0");
         sysLog.logCreate(this);
     }
+    
+    public void setLabor(LaborCost laborCost) {
+      this.laborCost = laborCost;
+    };
+    public LaborCost getLabor() {
+      return laborCost;
+    };
+    public void setParts(PartsCost partsCost) {
+      this.partsCost = partsCost;
+    };
+    public PartsCost getParts() {
+      return partsCost;
+    };
+    public void setTotal(BigDecimal totalCost) {
+      this.totalCost = totalCost;
+    };
+    public BigDecimal getTotal() {
+      return totalCost;
+    };
+    
 
     /**
      * @return description
@@ -86,6 +106,6 @@ public class ConcreteOrder {
     @Override
     public String toString() {
         return "Order: " + this.getOrderNum() + "\nStatus: " + this.getStatus() + "\nDescription: "
-                + this.getDescription() + "\nCost: $" + laborCost.getCost().add(partsCost.getCost()).toString();
+                + this.getDescription() + "\nCost: $" ;//+ laborCost.getCost().add(partsCost.getCost()).toString();
     }
 }

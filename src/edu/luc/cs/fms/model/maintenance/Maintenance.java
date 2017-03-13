@@ -6,6 +6,21 @@ import java.util.List;
 
 public interface Maintenance {
 
+    public void setLog(ConcreteLog log);
+    public ConcreteLog getLog();
+    public void setRequests(List<ConcreteMaintenanceRequest> requests);
+    public List<ConcreteMaintenanceRequest> getRequests();
+    public void setOrders(List<ConcreteOrder> orders);
+    public List<ConcreteOrder> getOrders();
+    public void setSchedule(ConcreteSchedule schedule);
+    public ConcreteSchedule getSchedule();
+    public void setCost(BigDecimal cost);
+    public BigDecimal getCost();
+    public void setOrderNum(int orderNum);
+    public int getOrderNum();
+    public void setNumRequests(int numRequests);
+    public int getNumRequests();
+  
     /**
      * makes a maintenance request
      * @param problem

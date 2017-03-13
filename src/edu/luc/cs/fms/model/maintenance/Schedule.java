@@ -1,8 +1,19 @@
 package edu.luc.cs.fms.model.maintenance;
 
 import java.util.Date;
+import java.util.List;
 
 public interface Schedule {
+  
+    public void setCurrentDate(Date currentDate);
+    public Date getCurrentDate();
+    public void setStartDate(List<Date> startDate);
+    public List<Date> getStartDate();
+    public void setEndDate(List<Date> endDate);
+    public List<Date> getEndDate();
+    public void setDownTime(long downTime);
+    public long getDownTime();
+  
     /**
      * schedules the request's maintenance
      * @param start
