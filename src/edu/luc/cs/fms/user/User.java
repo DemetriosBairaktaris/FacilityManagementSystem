@@ -26,7 +26,8 @@ public class User {
         
         ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
         
-        FacilityManager manager = new ConcreteFacilityManager();
+        //FacilityManager manager = new ConcreteFacilityManager();
+        FacilityManager manager = (FacilityManager) context.getBean("manager");
         Calendar dates = new GregorianCalendar();
         String wtc = "WTC";
         String lsc = "LSC";

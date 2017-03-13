@@ -32,13 +32,18 @@
     </bean>
     
     <bean id="building" class="edu.luc.cs.fms.model.facility.Building" scope="prototype" >
+        <constructor-arg ref="system" />
         <property name="maintenance" ref="maintenance" />
         <property name="rooms" ref="list" />
         <property name="inspections" ref="list" />
         <property name="use" ref="use" />
     </bean>
     
-    <bean id="room" class="edu.luc.cs.fms.model.facility.BasicRoom" scope="prototype" />
+    <bean id="room" class="edu.luc.cs.fms.model.facility.BasicRoom" scope="prototype" >
+        <constructor-arg type="int" value="101"/> <!-- values for testing -->
+        <constructor-arg type="int" value="40"/>
+        <constructor-arg ref="system" />
+    </bean>
     
     <bean id="inspection" class="edu.luc.cs.fms.model.facility.ConcreteInspection" scope="prototype" >
         <constructor-arg ref="date" />

@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import edu.luc.cs.fms.model.facility.*;
+import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
  * 
@@ -27,14 +28,16 @@ public class TestFacility {
     private String name = "Water Tower Campus";
     private String desc = "LUC Campus located at Water Tower Place.";
     private String address = "911 Clark Street";
+    private SystemLog sysLog;
 
     @Before
     public void setUp() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
         facility = (Facility) context.getBean("building");
-        facility.addFacilityDetail(new BasicRoom(1, 20));
-        facility.addFacilityDetail(new BasicRoom(2, 25));
-        facility.addFacilityDetail(new BasicRoom(11, 20));
+        sysLog = (SystemLog) context.getBean("system");
+        facility.addFacilityDetail(new BasicRoom(1, 20, sysLog));
+        facility.addFacilityDetail(new BasicRoom(2, 25, sysLog));
+        facility.addFacilityDetail(new BasicRoom(11, 20, sysLog));
     }
 
     @After
@@ -61,14 +64,14 @@ public class TestFacility {
     @Test
     public void testRequestAvailableCapacity() {
         assertEquals(65, facility.requestAvailableCapacity());
-        facility.addFacilityDetail(new BasicRoom(5, 5));
+        facility.addFacilityDetail(new BasicRoom(5, 5, sysLog));
         assertEquals(70, facility.requestAvailableCapacity());
     }
 
     @Test
     public void testAddFacilityDetail() {
         assertEquals(3, facility.getRooms().size());
-        facility.addFacilityDetail(new BasicRoom(5, 13));
+        facility.addFacilityDetail(new BasicRoom(5, 13, sysLog));
         assertEquals(4, facility.getRooms().size());
     }
 

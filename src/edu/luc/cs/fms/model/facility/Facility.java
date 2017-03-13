@@ -12,6 +12,14 @@ import edu.luc.cs.fms.model.maintenance.Maintenance;
  */
 public interface Facility {
 
+    public void setRooms(List<Room> rooms);
+    public void setInspections(List<ConcreteInspection> inspections);
+    public List<ConcreteInspection> getInspections();
+    public void setMaintenance(Maintenance maintenance);
+    public void setUse(ConcreteUse use);
+    public ConcreteUse getUse();
+    
+  
     /**
      * Retrieves a facility name.
      * 

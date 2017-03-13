@@ -59,7 +59,7 @@ public class ConcreteFacilityManager implements FacilityManager {
 
     @Override
     public void addFacilityDetail(int roomNumber, int capacity) {
-        currentFacility.addFacilityDetail(new BasicRoom(roomNumber, capacity));
+        currentFacility.addFacilityDetail(new BasicRoom(roomNumber, capacity, sysLog));
     }
 
     @Override

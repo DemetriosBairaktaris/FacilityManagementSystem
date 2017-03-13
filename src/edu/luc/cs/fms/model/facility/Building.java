@@ -31,14 +31,37 @@ public class Building implements Facility {
         this.name = name;
         this.description = desc;
         this.address = address;
-        this.rooms = new ArrayList<>();
-        this.inspections = new ArrayList<>();
-        this.inspections = new ArrayList<>();
+        //this.rooms = new ArrayList<>();
+        //this.inspections = new ArrayList<>();
         this.sysLog = sysLog;
         sysLog.logCreate(this);
-        this.maintenance = new ConcreteMaintenance(sysLog);
-        this.use = new ConcreteUse(sysLog);
+        //this.maintenance = new ConcreteMaintenance(sysLog);
+        //this.use = new ConcreteUse(sysLog);
     }
+    
+    public void setName(String name) {
+      this.name = name;
+    }
+    
+    public void setRooms(List<Room> rooms) {
+      this.rooms = rooms;
+    };
+    public void setInspections(List<ConcreteInspection> inspections) {
+      this.inspections = inspections;
+    };
+    public List<ConcreteInspection> getInspections() {
+      return inspections;
+    };
+    public void setMaintenance(Maintenance maintenance) {
+      this.maintenance = maintenance;
+    };
+    public void setUse(ConcreteUse use) {
+      this.use = use;
+    };
+    public ConcreteUse getUse() {
+      return use;
+    };
+    
     
     public String getName() {
         return this.name;
