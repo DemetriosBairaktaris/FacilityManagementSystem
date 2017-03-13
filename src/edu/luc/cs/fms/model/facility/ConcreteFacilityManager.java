@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import edu.luc.cs.fms.dal.ConcreteFacilityDAO;
+import edu.luc.cs.fms.model.maintenance.ConcreteLog;
 import edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest;
 import edu.luc.cs.fms.model.maintenance.ConcreteOrder;
+import edu.luc.cs.fms.model.maintenance.ConcreteSchedule;
 import edu.luc.cs.fms.model.system.ConcreteSystemLog;
 import edu.luc.cs.fms.model.system.SystemLog;
 
@@ -18,14 +20,27 @@ import edu.luc.cs.fms.model.system.SystemLog;
 public class ConcreteFacilityManager implements FacilityManager {
 
     private ConcreteFacilityDAO facilities;
-    private SystemLog log;
+    private SystemLog sysLog;
     private Facility currentFacility;
 
     public ConcreteFacilityManager() {
-        facilities = new ConcreteFacilityDAO();
-        log = new ConcreteSystemLog();
-        log.logCreate(this);
+        //facilities = new ConcreteFacilityDAO();
+        //log = new ConcreteSystemLog();
+        //sysLog.logCreate(this);
     }
+    
+    public void setSysLog(SystemLog sysLog) {
+      this.sysLog = sysLog;
+    };
+    public SystemLog getSysLog() {
+      return sysLog;
+    };
+    public void setFacilities(ConcreteFacilityDAO facilities) {
+      this.facilities = facilities;
+    };
+    public ConcreteFacilityDAO getFacilities() {
+      return facilities;
+    };
 
     @Override
     public String listFacilities() { 
@@ -34,7 +49,7 @@ public class ConcreteFacilityManager implements FacilityManager {
 
     @Override
     public void addNewFacility(String name, String desc, String address) {
-        facilities.insertFacility(new Building(name, desc, address));
+        facilities.insertFacility(new Building(name, desc, address, sysLog));
     }
 
     @Override
@@ -188,5 +203,89 @@ public class ConcreteFacilityManager implements FacilityManager {
     @Override
     public boolean inspect() {
         return currentFacility.inspect(); 
+    }
+
+    @Override
+    public void setLog(ConcreteLog log) {
+      // TODO Auto-generated method stub
+      
+    }
+
+    @Override
+    public ConcreteLog getLog() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    @Override
+    public void setRequests(List<ConcreteMaintenanceRequest> requests) {
+      // TODO Auto-generated method stub
+      
+    }
+
+    @Override
+    public List<ConcreteMaintenanceRequest> getRequests() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    @Override
+    public void setOrders(List<ConcreteOrder> orders) {
+      // TODO Auto-generated method stub
+      
+    }
+
+    @Override
+    public List<ConcreteOrder> getOrders() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    @Override
+    public void setSchedule(ConcreteSchedule schedule) {
+      // TODO Auto-generated method stub
+      
+    }
+
+    @Override
+    public ConcreteSchedule getSchedule() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    @Override
+    public void setCost(BigDecimal cost) {
+      // TODO Auto-generated method stub
+      
+    }
+
+    @Override
+    public BigDecimal getCost() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    @Override
+    public void setOrderNum(int orderNum) {
+      // TODO Auto-generated method stub
+      
+    }
+
+    @Override
+    public int getOrderNum() {
+      // TODO Auto-generated method stub
+      return 0;
+    }
+
+    @Override
+    public void setNumRequests(int numRequests) {
+      // TODO Auto-generated method stub
+      
+    }
+
+    @Override
+    public int getNumRequests() {
+      // TODO Auto-generated method stub
+      return 0;
     }
 }

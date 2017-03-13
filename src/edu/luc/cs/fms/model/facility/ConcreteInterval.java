@@ -15,13 +15,13 @@ public class ConcreteInterval implements Interval, Comparable<ConcreteInterval> 
 
     private Date startDate;
     private Date endDate;
-    private SystemLog s;
+    private SystemLog sysLog;
 
-    public ConcreteInterval(Date startDate, Date endDate) {
+    public ConcreteInterval(Date startDate, Date endDate, SystemLog sysLog) {
         this.startDate = startDate;
         this.endDate = endDate;
-        s = new ConcreteSystemLog();
-        s.logCreate(this);
+        this.sysLog = sysLog;
+        sysLog.logCreate(this);
     }
 
     /**

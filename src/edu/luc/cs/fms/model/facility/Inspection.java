@@ -4,6 +4,7 @@ import java.util.Date;
 
 public interface Inspection {
 
+  
     /**
      * @return Date of inspection
      */

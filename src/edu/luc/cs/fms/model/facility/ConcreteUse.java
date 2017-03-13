@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.luc.cs.fms.model.system.SystemLog;
+
 /**
  * 
  * @author TeamDK
@@ -18,12 +20,39 @@ public class ConcreteUse implements Use{
     private Date currentDate;
     private float minutesPerYear;
     private boolean newIntervalAdded;
+    private SystemLog sysLog;
 
-    public ConcreteUse() {
+    public ConcreteUse(SystemLog sysLog) {
         intervals = new ArrayList<>();
         minutesPerYear = 525600;
         newIntervalAdded = false;
+        this.sysLog = sysLog;
     }
+    
+    public void setIntervals(List<ConcreteInterval> intervals) {
+      this.intervals = intervals;
+    };
+    public List<ConcreteInterval> getIntervals() {
+      return intervals;
+    };
+    public void setList(List<ConcreteInterval> list) {
+      this.list = list;
+    };
+    public List<ConcreteInterval> getList() {
+      return list;
+    };
+    public void setMinutesPerYear(float minutesPerYear) {
+      this.minutesPerYear = minutesPerYear;
+    };
+    public float getMinutesPerYear() {
+      return minutesPerYear;
+    };
+    public void setNewIntervalAdded(boolean newIntervalAdded) {
+      this.newIntervalAdded = newIntervalAdded;
+    };
+    public boolean getNewIntervalAdded() {
+      return newIntervalAdded;
+    };
 
     @Override
     public String listActualUsage() {
@@ -48,7 +77,7 @@ public class ConcreteUse implements Use{
         } else if (start.getTime() >= end.getTime()) {
             return false;
         } else {
-            intervals.add(new ConcreteInterval(start, end));
+            intervals.add(new ConcreteInterval(start, end, sysLog));
             newIntervalAdded = true;
             return true;
         }

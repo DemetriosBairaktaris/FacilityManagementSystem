@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import edu.luc.cs.fms.model.facility.BasicRoom;
 import edu.luc.cs.fms.model.facility.Room;
@@ -23,7 +25,8 @@ public class TestRoom {
 
     @Before
     public void setUp() throws Exception {
-        room = new BasicRoom(roomNum, capacity);
+        ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
+        room = (Room) context.getBean("room");
     }
 
     @After

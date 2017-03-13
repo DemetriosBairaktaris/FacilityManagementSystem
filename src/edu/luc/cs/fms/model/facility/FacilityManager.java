@@ -2,7 +2,9 @@ package edu.luc.cs.fms.model.facility;
 
 import java.util.Date;
 
+import edu.luc.cs.fms.dal.ConcreteFacilityDAO;
 import edu.luc.cs.fms.model.maintenance.Maintenance;
+import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
  * 
@@ -11,6 +13,11 @@ import edu.luc.cs.fms.model.maintenance.Maintenance;
  */
 public interface FacilityManager extends Maintenance {
 
+    public void setSysLog(SystemLog sysLog);
+    public SystemLog getSysLog();
+    public void setFacilities(ConcreteFacilityDAO facilities);
+    public ConcreteFacilityDAO getFacilities();
+  
     /**
      * 
      * @return list of facilities in a string

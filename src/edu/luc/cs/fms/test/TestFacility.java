@@ -11,6 +11,8 @@ import java.util.GregorianCalendar;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import edu.luc.cs.fms.model.facility.*;
 
@@ -28,7 +30,8 @@ public class TestFacility {
 
     @Before
     public void setUp() throws Exception {
-        facility = new Building(name, desc, address);
+        ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
+        facility = (Facility) context.getBean("building");
         facility.addFacilityDetail(new BasicRoom(1, 20));
         facility.addFacilityDetail(new BasicRoom(2, 25));
         facility.addFacilityDetail(new BasicRoom(11, 20));

@@ -1,6 +1,7 @@
 package edu.luc.cs.fms.model.facility;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 
@@ -9,6 +10,16 @@ import java.util.Date;
  */
 public interface Use {
 
+    public void setIntervals(List<ConcreteInterval> intervals);
+    public List<ConcreteInterval> getIntervals();
+    public void setList(List<ConcreteInterval> list);
+    public List<ConcreteInterval> getList();
+    public void setMinutesPerYear(float minutesPerYear);
+    public float getMinutesPerYear();
+    public void setNewIntervalAdded(boolean newIntervalAdded);
+    public boolean getNewIntervalAdded();
+    
+  
     /**
      * @return list of actual usage
      */

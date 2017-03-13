@@ -17,19 +17,18 @@
     </bean>
     <bean id="date" class="java.util.Date" scope="prototype" />
     
-    <!-- DAL Bean 
+    <!-- DAL Bean -->
     <bean id="dao" class="edu.luc.cs.fms.dal.ConcreteFacilityDAO" >
         <property name="facilityHashMap" ref="map" />
     </bean>
     
-    System Bean -->
+    <!-- System Bean -->
     <bean id="system" class="edu.luc.cs.fms.model.system.ConcreteSystemLog" />
     
-    <!-- Facility Beans 
+    <!-- Facility Beans -->
     <bean id="manager" class="edu.luc.cs.fms.model.facility.ConcreteFacilityManager" scope="prototype" >
         <property name="facilities" ref="dao" />
         <property name="sysLog" ref="system" />
-        <property name="facility" ref="building" />
     </bean>
     
     <bean id="building" class="edu.luc.cs.fms.model.facility.Building" scope="prototype" >
@@ -42,18 +41,26 @@
     <bean id="room" class="edu.luc.cs.fms.model.facility.BasicRoom" scope="prototype" />
     
     <bean id="inspection" class="edu.luc.cs.fms.model.facility.ConcreteInspection" scope="prototype" >
-        <property name="date" ref="date" />
+        <constructor-arg ref="date" />
+        <constructor-arg ref="system" />
         <property name="passed" value="false" />
     </bean>
     
     <bean id="interval" class="edu.luc.cs.fms.model.facility.ConcreteInterval" scope="prototype" >
-        <property name="endDate" ref="date" />
-        <property name="startDate" ref="date" />
+        <constructor-arg ref="date" />
+        <constructor-arg ref="date" />
+        <constructor-arg ref="system" />
     </bean>
     
-    <bean id="use" class="edu.luc.cs.fms.model.facility.ConcreteUse" scope="prototype" />
+    <bean id="use" class="edu.luc.cs.fms.model.facility.ConcreteUse" scope="prototype" >
+        <constructor-arg ref="system" />
+        <property name="intervals" ref="list" />
+        <property name="list" ref="list" />
+        <property name="minutesPerYear" value="525600" />
+        <property name="newIntervalAdded" value="false" />
+    </bean>
     
-    Maintenance Beans -->
+    <!-- Maintenance Beans -->
     <bean id="log" class="edu.luc.cs.fms.model.maintenance.ConcreteLog" scope="prototype" >
         <property name="maintenance" ref="list" />
     </bean>

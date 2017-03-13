@@ -16,8 +16,15 @@ public class ConcreteFacilityDAO implements FacilityDAO {
     private Map<Integer, Facility> facilityHashMap;
 
     public ConcreteFacilityDAO() {
-        facilityHashMap = new HashMap<Integer, Facility>();
+        //facilityHashMap = new HashMap<Integer, Facility>();
     }
+    
+    public void setFacilityHashMap(Map<Integer, Facility> facilityHashMap) {
+      this.facilityHashMap = facilityHashMap;
+    };
+    public Map<Integer, Facility> getFacilityHashMap() {
+      return facilityHashMap;
+    };
 
     /**
      * This method retrieves the Facility from the memory using the hash code
