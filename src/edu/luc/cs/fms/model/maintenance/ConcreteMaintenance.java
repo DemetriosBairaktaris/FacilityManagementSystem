@@ -84,6 +84,7 @@ public class ConcreteMaintenance implements Maintenance {
 
     @Override
     public void makeFacilityMaintRequest(String problem) {
+      //TODO fix this
         ConcreteMaintenanceRequest request = new ConcreteMaintenanceRequest(problem, requestNum, sysLog);
         
         requests.add(request);
@@ -105,6 +106,7 @@ public class ConcreteMaintenance implements Maintenance {
 
     @Override
     public void createOrder(String desc, int requestNum) {
+      //TODO fix this
         ConcreteOrder order = new ConcreteOrder(desc, orderNum, sysLog);
         orders.add(order);
         orderNum++;
