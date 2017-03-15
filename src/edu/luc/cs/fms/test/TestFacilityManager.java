@@ -15,8 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import edu.luc.cs.fms.model.facility.ConcreteFacilityManager;
 import edu.luc.cs.fms.model.facility.FacilityManager;
 
 /**
@@ -31,10 +29,11 @@ public class TestFacilityManager {
     private String desc = "Building Containing classrooms";
     private String address = "23 west loyola ave";
     private Calendar c;
+    ApplicationContext context ; 
 
     @Before
     public void setUp() throws Exception {
-        ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
+        context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
         manager = (FacilityManager) context.getBean("manager");
         manager.addNewFacility(name, desc, address);
         c = new GregorianCalendar();
@@ -84,6 +83,7 @@ public class TestFacilityManager {
 
     @Test
     public void TestCalcMaintenanceCostForFacility() {
+        
         String problem = "Dirty Windows";
         Date d1, d2;
         c.set(2018, 1, 8);
@@ -93,8 +93,10 @@ public class TestFacilityManager {
         manager.getFacility(name);
         manager.makeFacilityMaintRequest(problem);
         manager.createOrder("Clean Windows", 0);
-        manager.setLaborCost(new BigDecimal(20), 0);
-        manager.setPartsCost(new BigDecimal(5.00), 0);
+        
+        
+        manager.setLaborCost(BigDecimal.valueOf(20), 0);
+        manager.setPartsCost(BigDecimal.valueOf(5), 0);
         manager.scheduleMaintenance(d1, d2);
         assertEquals(25.00, manager.calcMaintenanceCostForFacility().doubleValue(), 0.005);
     }

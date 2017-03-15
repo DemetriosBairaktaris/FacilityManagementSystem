@@ -3,19 +3,16 @@ package edu.luc.cs.fms.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import edu.luc.cs.fms.model.facility.*;
-import edu.luc.cs.fms.model.system.SystemLog;
+
 
 /**
  * 
@@ -24,23 +21,32 @@ import edu.luc.cs.fms.model.system.SystemLog;
  */
 public class TestFacility {
 
-    private Building facility;
+    private Facility facility;
     private String name = "Water Tower Campus";
     private String description = "LUC Campus located at Water Tower Place.";
     private String address = "911 Clark Street";
-    private SystemLog sysLog;
+    ApplicationContext context ; 
 
     @Before
     public void setUp() throws Exception {
-        ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
-        facility = (Building) context.getBean("building");
+        context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
+        facility = (Facility) context.getBean("facility");
         facility.setAddress(address);
         facility.setName(name);
         facility.setDescription(description);
-        sysLog = (SystemLog) context.getBean("system");
-        facility.addFacilityDetail(new BasicRoom(1, 20, sysLog));
-        facility.addFacilityDetail(new BasicRoom(2, 25, sysLog));
-        facility.addFacilityDetail(new BasicRoom(11, 20, sysLog));
+        
+        Room room1 = (Room) context.getBean("room");
+        room1.setCapacity(20);
+        room1.setRoomNumber(1);
+        Room room2 = (Room) context.getBean("room");
+        room2.setCapacity(25);
+        room2.setRoomNumber(2);
+        Room room3 = (Room) context.getBean("room");
+        room3.setCapacity(20);
+        room3.setRoomNumber(11);
+        facility.addFacilityDetail(room1);
+        facility.addFacilityDetail(room2);
+        facility.addFacilityDetail(room3);
     }
 
     @After
@@ -67,14 +73,20 @@ public class TestFacility {
     @Test
     public void testRequestAvailableCapacity() {
         assertEquals(65, facility.requestAvailableCapacity());
-        facility.addFacilityDetail(new BasicRoom(5, 5, sysLog));
+        Room newRoom = (Room) context.getBean("room");
+        newRoom.setCapacity(5);
+        newRoom.setRoomNumber(5);
+        facility.addFacilityDetail(newRoom);
         assertEquals(70, facility.requestAvailableCapacity());
     }
 
     @Test
     public void testAddFacilityDetail() {
         assertEquals(3, facility.getRooms().size());
-        facility.addFacilityDetail(new BasicRoom(5, 13, sysLog));
+        Room newRoom = (Room) context.getBean("room");
+        newRoom.setRoomNumber(5);
+        newRoom.setCapacity(13);
+        facility.addFacilityDetail(newRoom);
         assertEquals(4, facility.getRooms().size());
     }
 

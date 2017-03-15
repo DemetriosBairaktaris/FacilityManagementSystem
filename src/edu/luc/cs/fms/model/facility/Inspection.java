@@ -21,4 +21,6 @@ public interface Inspection {
      * @return void
      */
     public void setPassed(boolean passed);
+
+    void log();
 }
