@@ -153,7 +153,7 @@ public class User {
         System.out.println("Actual Usage for "+ manager.getFacilityInformation());
         System.out.println(manager.listActualUsage());
         System.out.println("Usage Rate: "+(manager.calcUsageRate()*100)+"% of year\n");
-        System.out.println("Inspection passed: "+manager.inspect());
+        System.out.println("Inspection passed: "+manager.inspect()+"\n");
         System.out.println("List of Inspections: \n"+manager.listInspections());
         System.out.println("Facility in use during "+ date1+" - "+date2+":\n"
         +manager.isInUseDuringInterval(date1, date2));

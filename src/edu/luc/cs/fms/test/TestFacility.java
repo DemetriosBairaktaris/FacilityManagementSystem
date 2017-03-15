@@ -92,34 +92,57 @@ public class TestFacility {
 
     @Test
     public void testIsInUseDuringInterval() {
-        Date currentDate = new Date();
-        Date one, two, three;
-        one = new Date(currentDate.getTime() + 30000);
-        two = new Date(currentDate.getTime() + 40000);
-        three = new Date(currentDate.getTime() + 31000);
+        Date currentDate = (Date) context.getBean("date");
+        
+        Date one = newDate(); 
+        Date two = newDate(); 
+        Date three = newDate();
+        
+        
+        one.setTime(currentDate.getTime() + 30000);
+        two.setTime(currentDate.getTime() + 40000);
+        three.setTime(currentDate.getTime() + 31000);
         assertFalse(facility.isInUseDuringInterval(one, two));
         facility.assignFacilityToUse(one, two);
         assertTrue(facility.isInUseDuringInterval(one, two));
         assertTrue(facility.isInUseDuringInterval(one, three));
+        Date five = newDate();
+        Date six = newDate();
+        five.setTime(five.getTime()*20);
+        six.setTime(six.getTime()*40);
+        assertFalse(facility.isInUseDuringInterval(five,five));
     }
 
     @Test
     public void testAssignFacilityToUse() {
-        Date currentDate = new Date();
-        Date one = new Date(currentDate.getTime() + 200000);
-        Date two = new Date(currentDate.getTime() + 300000);
+        Date currentDate = newDate();
+        Date one = newDate();
+        Date two = newDate();
+        
+        one.setTime(currentDate.getTime()+200000);
+        two.setTime(currentDate.getTime()+300000);
         assertTrue(facility.assignFacilityToUse(one, two));
-        assertFalse(facility.assignFacilityToUse(new Date(currentDate.getTime() - 20000), two));
+        currentDate.setTime(currentDate.getTime()-20000);
+        assertFalse(facility.assignFacilityToUse(currentDate, two));
         assertFalse(facility.assignFacilityToUse(one, one));
     }
 
     @Test
     public void testListActualUsage() {
-        Date currentDate = new Date();
-        Date one = new Date(currentDate.getTime() + 30000);
-        Date two = new Date(currentDate.getTime() + 40000);
-        Date three = new Date(currentDate.getTime() + 50000);
-        Date four = new Date(currentDate.getTime() + 60000);
+        Date currentDate = newDate();
+        
+        Date one = newDate();
+        one.setTime(currentDate.getTime()+30000);
+        
+        Date two = newDate();
+        two.setTime(currentDate.getTime()+40000);
+        
+        Date three = newDate();
+        three.setTime(currentDate.getTime()+50000);
+        
+        Date four = newDate();
+        four.setTime(currentDate.getTime()+60000);
+        
         facility.assignFacilityToUse(one, two);
         facility.assignFacilityToUse(three, four);
         assertEquals("Usage Dates:\n" + one.toString() + " - " + two.toString() + "\n" + three.toString() + " - "
@@ -150,6 +173,8 @@ public class TestFacility {
                                                   // -- 4-10-2018
         assertEquals((70560.0 / 525600.0), facility.calcUsageRate(), 0.005);
     }
+    
+   
 
     @Test
     public void testVacateFacility() throws Exception {
@@ -167,8 +192,13 @@ public class TestFacility {
     public void testListInspections() {
         facility.inspect() ; 
         facility.inspect() ; 
-        Date d = new Date();
+        Date d = newDate();
         assertEquals("Inspections:\n" + d + ":  passed\n" + d + ":  passed\n",
                 facility.listInspections());
+    }
+   
+    
+    private Date newDate(){
+        return (Date)context.getBean("date");
     }
 }

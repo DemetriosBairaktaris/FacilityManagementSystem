@@ -13,7 +13,6 @@ import edu.luc.cs.fms.model.maintenance.ConcreteMaintenance;
 import edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest;
 import edu.luc.cs.fms.model.maintenance.ConcreteOrder;
 import edu.luc.cs.fms.model.maintenance.ConcreteSchedule;
-import edu.luc.cs.fms.model.system.ConcreteSystemLog;
 import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
@@ -30,14 +29,14 @@ public class ConcreteFacilityManager implements FacilityManager {
 
     public ConcreteFacilityManager() {/*default*/}
     
+    
+    @Override 
+    public void log(){
+        sysLog.logCreate(this);
+    }
     @Override
     public void setSysLog(SystemLog sysLog) {
       this.sysLog = sysLog;
-    };
-    
-    @Override
-    public SystemLog getSysLog() {
-      return sysLog;
     };
     
     @Override
@@ -76,6 +75,7 @@ public class ConcreteFacilityManager implements FacilityManager {
         Room newRoom = (Room)context.getBean("room");
         newRoom.setRoomNumber(roomNumber);
         newRoom.setCapacity(capacity);
+        newRoom.log();
         currentFacility.addFacilityDetail(newRoom);
     }
 
@@ -220,89 +220,5 @@ public class ConcreteFacilityManager implements FacilityManager {
     @Override
     public boolean inspect() {
         return currentFacility.inspect(); 
-    }
-
-    @Override
-    public void setLog(ConcreteLog log) {
-      // TODO Auto-generated method stub
-      
-    }
-
-    @Override
-    public ConcreteLog getLog() {
-      // TODO Auto-generated method stub
-      return null;
-    }
-
-    @Override
-    public void setRequests(List<ConcreteMaintenanceRequest> requests) {
-      // TODO Auto-generated method stub
-      
-    }
-
-    @Override
-    public List<ConcreteMaintenanceRequest> getRequests() {
-      // TODO Auto-generated method stub
-      return null;
-    }
-
-    @Override
-    public void setOrders(List<ConcreteOrder> orders) {
-      // TODO Auto-generated method stub
-      
-    }
-
-    @Override
-    public List<ConcreteOrder> getOrders() {
-      // TODO Auto-generated method stub
-      return null;
-    }
-
-    @Override
-    public void setSchedule(ConcreteSchedule schedule) {
-      // TODO Auto-generated method stub
-      
-    }
-
-    @Override
-    public ConcreteSchedule getSchedule() {
-      // TODO Auto-generated method stub
-      return null;
-    }
-
-    @Override
-    public void setCost(BigDecimal cost) {
-      // TODO Auto-generated method stub
-      
-    }
-
-    @Override
-    public BigDecimal getCost() {
-      // TODO Auto-generated method stub
-      return null;
-    }
-
-    @Override
-    public void setOrderNum(int orderNum) {
-      // TODO Auto-generated method stub
-      
-    }
-
-    @Override
-    public int getOrderNum() {
-      // TODO Auto-generated method stub
-      return 0;
-    }
-
-    @Override
-    public void setNumRequests(int numRequests) {
-      // TODO Auto-generated method stub
-      
-    }
-
-    @Override
-    public int getNumRequests() {
-      // TODO Auto-generated method stub
-      return 0;
     }
 }

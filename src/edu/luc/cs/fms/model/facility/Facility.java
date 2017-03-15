@@ -14,11 +14,11 @@ import edu.luc.cs.fms.model.system.SystemLog;
 public interface Facility {
 
     public void setRooms(List<Room> rooms);
-    public void setInspections(List<ConcreteInspection> inspections);
-    public List<ConcreteInspection> getInspections();
+    public void setInspections(List<Inspection> inspections);
+    public List<Inspection> getInspections();
     public void setMaintenance(Maintenance maintenance);
     public void setUse(ConcreteUse use);
-    public ConcreteUse getUse();
+    public Use getUse();
     
   
     /**
@@ -114,9 +114,33 @@ public interface Facility {
      * @return Inspection
      */
     public boolean inspect();
+    
+    /**
+     * used to log the creation of the implemeting object
+     */
     void log();
+    
+    /**
+     * 
+     * @param description
+     */
     void setDescription(String description);
+    
+    /**
+     * 
+     * @param address
+     */
     void setAddress(String address);
+    
+    /**
+     * 
+     * @param name
+     */
     void setName(String name);
+    
+    /**
+     * 
+     * @param sysLog
+     */
     void setSysLog(SystemLog sysLog);
 }

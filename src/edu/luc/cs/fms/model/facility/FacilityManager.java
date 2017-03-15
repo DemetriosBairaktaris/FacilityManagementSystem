@@ -1,9 +1,12 @@
 package edu.luc.cs.fms.model.facility;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import edu.luc.cs.fms.dal.ConcreteFacilityDAO;
-import edu.luc.cs.fms.model.maintenance.Maintenance;
+import edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest;
+import edu.luc.cs.fms.model.maintenance.ConcreteOrder;
 import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
@@ -11,11 +14,8 @@ import edu.luc.cs.fms.model.system.SystemLog;
  * @author TeamDK
  *
  */
-public interface FacilityManager extends Maintenance {
+public interface FacilityManager {
 
-    public void setSysLog(SystemLog sysLog);
-    public SystemLog getSysLog();
-    public void setFacilities(ConcreteFacilityDAO facilities);
     public ConcreteFacilityDAO getFacilities();
   
     /**
@@ -119,4 +119,105 @@ public interface FacilityManager extends Maintenance {
       * @return true if passed
       */
      public boolean inspect();
+     
+     /**
+      * 
+      * @param sysLog
+      */
+     public void setSysLog(SystemLog sysLog);
+     
+     /**
+      * 
+      * @param facilities
+      */
+     public void setFacilities(ConcreteFacilityDAO facilities);
+     
+     /**
+      * called to log the creation of object
+      */
+     void log();
+     
+     /**
+      * 
+      * @param requestNum
+      */
+     void closeRequest(int requestNum);
+     
+     /**
+      * 
+      * @param cost
+      * @param orderNum
+      */
+     void setPartsCost(BigDecimal cost, int orderNum);
+     
+     /**
+      * 
+      * @param cost
+      * @param orderNum
+      */
+     void setLaborCost(BigDecimal cost, int orderNum);
+     
+     /**
+      * 
+      * @param desc
+      * @param requestNum
+      */
+     void createOrder(String desc, int requestNum);
+     
+     /**
+      * 
+      * @return
+      */
+     String listFacilityProblems();
+     
+     /**
+      * 
+      * @return
+      */
+     List<ConcreteOrder> listMaintenance();
+             
+     /**
+      * 
+      * @return
+      */
+     List<ConcreteMaintenanceRequest> listMaintRequests();
+     
+     /**
+      * 
+      * @return
+      */
+     long calcDownTimeForFacility();
+     
+     /**
+      * 
+      * @return
+      */
+     float calcProblemRateForFacility();
+     
+     /**
+      * 
+      * @return
+      */
+     BigDecimal calcMaintenanceCostForFacility();
+     
+     /**
+      * 
+      * @param date1
+      * @param date2
+      * @return
+      */
+     boolean scheduleMaintenance(Date date1, Date date2);
+     
+     /**
+      * 
+      * @param problem
+      */
+     void makeFacilityMaintRequest(String problem);
+     
+     /**
+      * 
+      * @param orderNum
+      * @param requestNum
+      */
+     void closeOrder(int orderNum, int requestNum);
 }

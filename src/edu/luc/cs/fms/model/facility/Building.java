@@ -2,10 +2,15 @@
 package edu.luc.cs.fms.model.facility;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest;
 import edu.luc.cs.fms.model.maintenance.Maintenance;
 
 import edu.luc.cs.fms.model.system.SystemLog;
+import jdk.nashorn.internal.runtime.Context;
 
 /**
  * Concrete Implementation of Facility
@@ -18,10 +23,11 @@ public class Building implements Facility {
     private String description;
     private String address;
     private List<Room> rooms;
-    private List<ConcreteInspection> inspections;
+    private List<Inspection> inspections;
     private Maintenance maintenance;
     private ConcreteUse use;
     private SystemLog sysLog;
+    private ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");; 
     
     public Building() {/*default*/}
     
@@ -56,12 +62,12 @@ public class Building implements Facility {
     };
     
     @Override
-    public void setInspections(List<ConcreteInspection> inspections) {
+    public void setInspections(List<Inspection> inspections) {
       this.inspections = inspections;
     };
     
     @Override
-    public List<ConcreteInspection> getInspections() {
+    public List<Inspection> getInspections() {
       return inspections;
     };
     
@@ -141,9 +147,6 @@ public class Building implements Facility {
      */
     @Override
     public void addFacilityDetail(Room room) {
-        if(sysLog==null){
-            System.out.println("WEEE WOO WEE WOO");
-        }
         sysLog.logAdd(room, this);
         this.rooms.add(room);
     }
@@ -205,7 +208,7 @@ public class Building implements Facility {
         if (inspections.size() == 0) {
             inspectionResults += "No Inspections done, yet";
         } else {
-            for (ConcreteInspection i : inspections) {
+            for (Inspection i : inspections) {
                 inspectionResults = inspectionResults.concat(i.getDate() + ":  ");
                 if (i.getPassed()) {
                     inspectionResults = inspectionResults.concat("passed\n");
@@ -241,8 +244,8 @@ public class Building implements Facility {
      */
     @Override
     public boolean inspect() {
-        ConcreteInspection i = new ConcreteInspection(new Date(), sysLog);
-        
+        Inspection i = (Inspection) context.getBean("inspection");
+        i.log();
         inspections.add(i);
         i.setPassed(true);
         for(ConcreteMaintenanceRequest m : maintenance.listMaintRequests()){

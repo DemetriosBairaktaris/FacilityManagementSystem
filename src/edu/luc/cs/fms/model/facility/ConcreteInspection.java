@@ -1,8 +1,6 @@
 package edu.luc.cs.fms.model.facility;
 
 import java.util.Date;
-
-import edu.luc.cs.fms.model.system.ConcreteSystemLog;
 import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
@@ -16,15 +14,23 @@ public class ConcreteInspection implements Inspection{
     private boolean passed;
     private SystemLog sysLog;
 
-    public ConcreteInspection(Date dateOfInspection, SystemLog sysLog) {
-        this.dateOfInspection = dateOfInspection;
-        this.sysLog = sysLog;
+    public ConcreteInspection() {/*default*/}
+    
+    @Override
+    public void setDateOfInspection(Date dateOfInspection){
+        this.dateOfInspection = dateOfInspection ; 
+    }
+    
+    @Override
+    public void setSysLog(SystemLog sysLog){
+        this.sysLog = sysLog ; 
     }
     
     @Override
     public void log(){
         sysLog.logCreate(this);
     }
+    
     @Override
     public Date getDate() {
         return dateOfInspection;
