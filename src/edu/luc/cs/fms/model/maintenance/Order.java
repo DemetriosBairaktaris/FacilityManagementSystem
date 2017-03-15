@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 
 public interface Order {
   
-    public void setLabor(LaborCost laborCost);
-    public LaborCost getLabor();
-    public void setParts(PartsCost partsCost);
-    public PartsCost getParts();
-    public void setTotal(BigDecimal totalCost);
-    public BigDecimal getTotal();
+    public void setLaborCost(LaborCost laborCost);
+    public LaborCost getLaborCost();
+    public void setPartsCost(PartsCost partsCost);
+    public PartsCost getPartsCost();
+    public void setTotalCost(BigDecimal totalCost);
+    public BigDecimal getTotalCost();
   
     /**
      * @return description
@@ -36,13 +36,13 @@ public interface Order {
      * sets labor cost in BigDecimal format
      * @param cost
      */
-    public void setLaborCost(BigDecimal cost);
+    public void setLabor(BigDecimal cost);
 
     /**
      * sets part cost in BigDecimal format
      * @param cost
      */
-    public void setPartsCost(BigDecimal cost);
+    public void setParts(BigDecimal cost);
 
     /**
      * @return total cost of parts and labor

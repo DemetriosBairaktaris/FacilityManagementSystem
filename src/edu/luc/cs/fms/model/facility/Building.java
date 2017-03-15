@@ -27,16 +27,24 @@ public class Building implements Facility {
     private ConcreteUse use;
     private SystemLog sysLog;
     
-    public Building(String name, String desc, String address, SystemLog sysLog) {
-        this.name = name;
-        this.description = desc;
-        this.address = address;
+    public Building(SystemLog sysLog) {
+        //this.name = name;
+        //this.description = desc;
+        //this.address = address;
         //this.rooms = new ArrayList<>();
         //this.inspections = new ArrayList<>();
         this.sysLog = sysLog;
         sysLog.logCreate(this);
         //this.maintenance = new ConcreteMaintenance(sysLog);
         //this.use = new ConcreteUse(sysLog);
+    }
+    
+    public void setDescription(String description) {
+      this.description = description;
+    }
+    
+    public void setAddress(String address) {
+      this.address = address;
     }
     
     public void setName(String name) {

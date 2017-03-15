@@ -24,16 +24,19 @@ import edu.luc.cs.fms.model.system.SystemLog;
  */
 public class TestFacility {
 
-    private Facility facility;
+    private Building facility;
     private String name = "Water Tower Campus";
-    private String desc = "LUC Campus located at Water Tower Place.";
+    private String description = "LUC Campus located at Water Tower Place.";
     private String address = "911 Clark Street";
     private SystemLog sysLog;
 
     @Before
     public void setUp() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
-        facility = (Facility) context.getBean("building");
+        facility = (Building) context.getBean("building");
+        facility.setAddress(address);
+        facility.setName(name);
+        facility.setDescription(description);
         sysLog = (SystemLog) context.getBean("system");
         facility.addFacilityDetail(new BasicRoom(1, 20, sysLog));
         facility.addFacilityDetail(new BasicRoom(2, 25, sysLog));
@@ -52,12 +55,12 @@ public class TestFacility {
 
     @Test
     public void testGetDescription() {
-        assertEquals(desc, facility.getDescription());
+        assertEquals(description, facility.getDescription());
     }
 
     @Test
     public void testGetFacilityInformation() {
-        assertEquals(name + ":  " + desc + "\n" + "Address:  " + address + "\n" + "Available Capacity:  "
+        assertEquals(name + ":  " + description + "\n" + "Address:  " + address + "\n" + "Available Capacity:  "
                 + facility.requestAvailableCapacity(), facility.getFacilityInformation());
     }
 

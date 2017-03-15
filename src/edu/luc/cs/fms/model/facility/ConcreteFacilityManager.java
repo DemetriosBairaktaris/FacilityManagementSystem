@@ -4,8 +4,12 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import edu.luc.cs.fms.dal.ConcreteFacilityDAO;
 import edu.luc.cs.fms.model.maintenance.ConcreteLog;
+import edu.luc.cs.fms.model.maintenance.ConcreteMaintenance;
 import edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest;
 import edu.luc.cs.fms.model.maintenance.ConcreteOrder;
 import edu.luc.cs.fms.model.maintenance.ConcreteSchedule;
@@ -22,6 +26,7 @@ public class ConcreteFacilityManager implements FacilityManager {
     private ConcreteFacilityDAO facilities;
     private SystemLog sysLog;
     private Facility currentFacility;
+    ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
 
     public ConcreteFacilityManager() {
         //facilities = new ConcreteFacilityDAO();
@@ -48,8 +53,13 @@ public class ConcreteFacilityManager implements FacilityManager {
     }
 
     @Override
-    public void addNewFacility(String name, String desc, String address) {
-        facilities.insertFacility(new Building(name, desc, address, sysLog));
+    public void addNewFacility(String name, String description, String address) {
+      Building building = (Building) context.getBean("building");
+      building.setAddress(address);
+      building.setDescription(description);
+      building.setName(name);
+      building.setMaintenance((ConcreteMaintenance) context.getBean("maintenance"));
+        facilities.insertFacility(building);
     }
 
     @Override

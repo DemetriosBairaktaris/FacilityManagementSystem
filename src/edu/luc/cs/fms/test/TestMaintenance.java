@@ -48,8 +48,8 @@ public class TestMaintenance {
         maintenance.createOrder("Repair sink plumbing.", 0);
         maintenance.createOrder("Replace light bulb.", 1);
         maintenance.createOrder("Patch ceiling crack.", 2);
-        //maintenance.setLaborCost(laborCost, 0);
-        //maintenance.setPartsCost(partsCost, 0);
+        maintenance.setLaborCost(laborCost, 0);
+        maintenance.setPartsCost(partsCost, 0);
     }
     
     @After

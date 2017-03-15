@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
@@ -25,6 +28,7 @@ public class ConcreteMaintenance implements Maintenance {
     private int requestNum;
     private int numRequests;
     private SystemLog sysLog;
+    ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
 
     public ConcreteMaintenance(SystemLog sysLog) {
         this.sysLog = sysLog;
@@ -85,8 +89,10 @@ public class ConcreteMaintenance implements Maintenance {
     @Override
     public void makeFacilityMaintRequest(String problem) {
       //TODO fix this
-        ConcreteMaintenanceRequest request = new ConcreteMaintenanceRequest(problem, requestNum, sysLog);
-        
+        ConcreteMaintenanceRequest request = (ConcreteMaintenanceRequest) context.getBean("request");
+        request.setProblem(problem);
+        request.setRequestNum(requestNum);
+        request.log();
         requests.add(request);
         requestNum++;
     }
@@ -107,7 +113,12 @@ public class ConcreteMaintenance implements Maintenance {
     @Override
     public void createOrder(String desc, int requestNum) {
       //TODO fix this
-        ConcreteOrder order = new ConcreteOrder(desc, orderNum, sysLog);
+        ConcreteOrder order = (ConcreteOrder) context.getBean("order");
+        order.setLaborCost((LaborCost) context.getBean("labor"));
+        order.setPartsCost((PartsCost) context.getBean("parts"));
+        order.setDescription(desc);
+        order.setOrderNum(requestNum);
+        order.log();
         orders.add(order);
         orderNum++;
         requests.get(requestNum).addOpenOrder();
@@ -138,13 +149,13 @@ public class ConcreteMaintenance implements Maintenance {
     @Override
     public void setPartsCost(BigDecimal cost, int orderNum) {
         ConcreteOrder order = orders.get(orderNum);
-        order.setLaborCost(cost);
+        order.setLabor(cost);
     }
 
     @Override
     public void setLaborCost(BigDecimal cost, int orderNum) {
         ConcreteOrder order = orders.get(orderNum);
-        order.setPartsCost(cost);
+        order.setParts(cost);
     }
 
     @Override

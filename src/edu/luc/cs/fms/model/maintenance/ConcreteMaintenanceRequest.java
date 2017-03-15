@@ -14,13 +14,27 @@ public class ConcreteMaintenanceRequest implements MaintenanceRequest{
     private String problem;
     private int requestNum;
     private int openOrders;
+    private SystemLog sysLog;
 
-    public ConcreteMaintenanceRequest(String problem, int requestNum, SystemLog sysLog) {
+    public ConcreteMaintenanceRequest(SystemLog sysLog) {
         //status = false;
-        this.problem = problem;
-        this.requestNum = requestNum;
+        //this.problem = problem;
+        //this.requestNum = requestNum;
         //openOrders = 0;
-        sysLog.logCreate(this);
+        //sysLog.logCreate(this); //this doesn't work because the context populates the attributes after
+      this.sysLog = sysLog;
+    }
+    
+    public void log() {
+      sysLog.logCreate(this);
+    }
+    
+    public void setProblem(String problem) {
+      this.problem = problem;
+    }
+    
+    public void setRequestNum(int requestNum) {
+      this.requestNum = requestNum;
     }
     
     public void setOpenOrders(int openOrders) {

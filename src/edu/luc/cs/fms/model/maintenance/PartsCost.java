@@ -14,7 +14,7 @@ public class PartsCost implements Cost {
     private BigDecimal cost;
 
     public PartsCost() {
-        cost = new BigDecimal("0");
+        //cost = new BigDecimal("0");
     }
 
     @Override
