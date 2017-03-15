@@ -1,7 +1,9 @@
 package edu.luc.cs.fms.model.maintenance;
 
 public interface MaintenanceRequest {
-
+  
+    public void setOpenOrders(int openOrders);
+  
     /**
      * @return status
      */

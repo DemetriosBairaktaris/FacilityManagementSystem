@@ -14,13 +14,13 @@ public class ConcreteInspection implements Inspection{
 
     private Date dateOfInspection;
     private boolean passed;
-    private SystemLog s;
+    private SystemLog sysLog;
 
-    public ConcreteInspection(Date d) {
-        dateOfInspection = d;
-        passed = false;
-        s = new ConcreteSystemLog();
-        s.logCreate(this);
+    public ConcreteInspection(Date dateOfInspection, SystemLog sysLog) {
+        this.dateOfInspection = dateOfInspection;
+        this.sysLog = sysLog;
+        //passed = false;
+        sysLog.logCreate(this);
     }
 
     @Override

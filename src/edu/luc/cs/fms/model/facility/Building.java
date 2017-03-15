@@ -25,20 +25,51 @@ public class Building implements Facility {
     private List<ConcreteInspection> inspections;
     private Maintenance maintenance;
     private ConcreteUse use;
-    private SystemLog s;
+    private SystemLog sysLog;
     
-    public Building(String name, String desc, String address) {
-        this.name = name;
-        this.description = desc;
-        this.address = address;
-        this.rooms = new ArrayList<>();
-        this.inspections = new ArrayList<>();
-        this.inspections = new ArrayList<>();
-        s = new ConcreteSystemLog();
-        s.logCreate(this);
-        this.maintenance = new ConcreteMaintenance(s);
-        this.use = new ConcreteUse();
+    public Building(SystemLog sysLog) {
+        //this.name = name;
+        //this.description = desc;
+        //this.address = address;
+        //this.rooms = new ArrayList<>();
+        //this.inspections = new ArrayList<>();
+        this.sysLog = sysLog;
+        sysLog.logCreate(this);
+        //this.maintenance = new ConcreteMaintenance(sysLog);
+        //this.use = new ConcreteUse(sysLog);
     }
+    
+    public void setDescription(String description) {
+      this.description = description;
+    }
+    
+    public void setAddress(String address) {
+      this.address = address;
+    }
+    
+    public void setName(String name) {
+      this.name = name;
+    }
+    
+    public void setRooms(List<Room> rooms) {
+      this.rooms = rooms;
+    };
+    public void setInspections(List<ConcreteInspection> inspections) {
+      this.inspections = inspections;
+    };
+    public List<ConcreteInspection> getInspections() {
+      return inspections;
+    };
+    public void setMaintenance(Maintenance maintenance) {
+      this.maintenance = maintenance;
+    };
+    public void setUse(ConcreteUse use) {
+      this.use = use;
+    };
+    public ConcreteUse getUse() {
+      return use;
+    };
+    
     
     public String getName() {
         return this.name;
@@ -94,7 +125,7 @@ public class Building implements Facility {
      * @param room
      */
     public void addFacilityDetail(Room room) {
-        s.logAdd(room, this);
+        sysLog.logAdd(room, this);
         this.rooms.add(room);
     }
 
@@ -114,7 +145,7 @@ public class Building implements Facility {
      * vacates a facility and makes it available
      */
     public void vacateFacility() {
-        s.logVacate(this);
+        sysLog.logVacate(this);
         for (Room room : this.getRooms()) {
             room.vacate();
         }
@@ -183,7 +214,7 @@ public class Building implements Facility {
      * @return Inspection
      */
     public boolean inspect() {
-        ConcreteInspection i = new ConcreteInspection(new Date());
+        ConcreteInspection i = new ConcreteInspection(new Date(), sysLog);
         
         inspections.add(i);
         i.setPassed(true);
@@ -193,7 +224,7 @@ public class Building implements Facility {
                 break; 
             }
         }
-        s.logInspect(this);
+        sysLog.logInspect(this);
         return i.getPassed();
     }
 }

@@ -11,8 +11,11 @@ import java.util.GregorianCalendar;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import edu.luc.cs.fms.model.facility.*;
+import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
  * 
@@ -21,17 +24,23 @@ import edu.luc.cs.fms.model.facility.*;
  */
 public class TestFacility {
 
-    private Facility facility;
+    private Building facility;
     private String name = "Water Tower Campus";
-    private String desc = "LUC Campus located at Water Tower Place.";
+    private String description = "LUC Campus located at Water Tower Place.";
     private String address = "911 Clark Street";
+    private SystemLog sysLog;
 
     @Before
     public void setUp() throws Exception {
-        facility = new Building(name, desc, address);
-        facility.addFacilityDetail(new BasicRoom(1, 20));
-        facility.addFacilityDetail(new BasicRoom(2, 25));
-        facility.addFacilityDetail(new BasicRoom(11, 20));
+        ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
+        facility = (Building) context.getBean("building");
+        facility.setAddress(address);
+        facility.setName(name);
+        facility.setDescription(description);
+        sysLog = (SystemLog) context.getBean("system");
+        facility.addFacilityDetail(new BasicRoom(1, 20, sysLog));
+        facility.addFacilityDetail(new BasicRoom(2, 25, sysLog));
+        facility.addFacilityDetail(new BasicRoom(11, 20, sysLog));
     }
 
     @After
@@ -46,26 +55,26 @@ public class TestFacility {
 
     @Test
     public void testGetDescription() {
-        assertEquals(desc, facility.getDescription());
+        assertEquals(description, facility.getDescription());
     }
 
     @Test
     public void testGetFacilityInformation() {
-        assertEquals(name + ":  " + desc + "\n" + "Address:  " + address + "\n" + "Available Capacity:  "
+        assertEquals(name + ":  " + description + "\n" + "Address:  " + address + "\n" + "Available Capacity:  "
                 + facility.requestAvailableCapacity(), facility.getFacilityInformation());
     }
 
     @Test
     public void testRequestAvailableCapacity() {
         assertEquals(65, facility.requestAvailableCapacity());
-        facility.addFacilityDetail(new BasicRoom(5, 5));
+        facility.addFacilityDetail(new BasicRoom(5, 5, sysLog));
         assertEquals(70, facility.requestAvailableCapacity());
     }
 
     @Test
     public void testAddFacilityDetail() {
         assertEquals(3, facility.getRooms().size());
-        facility.addFacilityDetail(new BasicRoom(5, 13));
+        facility.addFacilityDetail(new BasicRoom(5, 13, sysLog));
         assertEquals(4, facility.getRooms().size());
     }
 

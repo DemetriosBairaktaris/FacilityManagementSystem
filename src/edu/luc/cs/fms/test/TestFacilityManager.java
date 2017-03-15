@@ -13,6 +13,8 @@ import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import edu.luc.cs.fms.model.facility.ConcreteFacilityManager;
 import edu.luc.cs.fms.model.facility.FacilityManager;
@@ -32,7 +34,8 @@ public class TestFacilityManager {
 
     @Before
     public void setUp() throws Exception {
-        manager = new ConcreteFacilityManager();
+        ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
+        manager = (FacilityManager) context.getBean("manager");
         manager.addNewFacility(name, desc, address);
         c = new GregorianCalendar();
     }

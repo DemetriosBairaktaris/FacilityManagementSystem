@@ -11,13 +11,13 @@ public class BasicRoom implements Room {
     
     private int roomNumber;
     private int capacity;
-    private SystemLog s;
+    private SystemLog sysLog;
     
-    public BasicRoom(int roomNumber, int capacity) {
+    public BasicRoom(int roomNumber, int capacity, SystemLog sysLog) {
         this.roomNumber = roomNumber;
         this.capacity = capacity;
-        s = new ConcreteSystemLog();
-        s.logCreate(this);
+        this.sysLog = sysLog;
+        sysLog.logCreate(this);
     }
     
     @Override
@@ -37,7 +37,7 @@ public class BasicRoom implements Room {
     
     @Override
     public void vacate(){
-        s.logVacate(this);
+        sysLog.logVacate(this);
     }
     
     @Override

@@ -10,6 +10,8 @@ import java.util.Date;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import edu.luc.cs.fms.model.maintenance.ConcreteMaintenance;
 import edu.luc.cs.fms.model.system.ConcreteSystemLog;
@@ -26,12 +28,14 @@ public class TestMaintenance {
     private BigDecimal laborCost;
     private BigDecimal partsCost;
     private Date date1, date2, date3, date4;
-    private SystemLog sysLog;
+    //private SystemLog sysLog;
 
     @Before
     public void setUp() throws Exception {
-        sysLog = new ConcreteSystemLog();
-        maintenance = new ConcreteMaintenance(sysLog);
+        ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
+        //sysLog = new ConcreteSystemLog();
+        //maintenance = new ConcreteMaintenance(sysLog);
+        maintenance = (ConcreteMaintenance) context.getBean("maintenance");
         laborCost = new BigDecimal("343.87");
         partsCost = new BigDecimal("210.45");
         date1 = new Date(1491022800000L); // April 1, 2017
@@ -50,7 +54,7 @@ public class TestMaintenance {
     
     @After
     public void tearDown() throws Exception {
-        sysLog = null;
+        //sysLog = null;
         maintenance = null;
         laborCost = null;
         partsCost = null;
