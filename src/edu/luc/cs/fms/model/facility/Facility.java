@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import edu.luc.cs.fms.model.maintenance.Maintenance;
+import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
  * 
@@ -113,4 +114,9 @@ public interface Facility {
      * @return Inspection
      */
     public boolean inspect();
+    void log();
+    void setDescription(String description);
+    void setAddress(String address);
+    void setName(String name);
+    void setSysLog(SystemLog sysLog);
 }

@@ -19,10 +19,12 @@ public class ConcreteInspection implements Inspection{
     public ConcreteInspection(Date dateOfInspection, SystemLog sysLog) {
         this.dateOfInspection = dateOfInspection;
         this.sysLog = sysLog;
-        //passed = false;
+    }
+    
+    @Override
+    public void log(){
         sysLog.logCreate(this);
     }
-
     @Override
     public Date getDate() {
         return dateOfInspection;

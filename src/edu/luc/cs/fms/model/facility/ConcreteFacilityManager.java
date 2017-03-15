@@ -26,23 +26,26 @@ public class ConcreteFacilityManager implements FacilityManager {
     private ConcreteFacilityDAO facilities;
     private SystemLog sysLog;
     private Facility currentFacility;
-    ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
+    ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
 
-    public ConcreteFacilityManager() {
-        //facilities = new ConcreteFacilityDAO();
-        //log = new ConcreteSystemLog();
-        //sysLog.logCreate(this);
-    }
+    public ConcreteFacilityManager() {/*default*/}
     
+    @Override
     public void setSysLog(SystemLog sysLog) {
       this.sysLog = sysLog;
     };
+    
+    @Override
     public SystemLog getSysLog() {
       return sysLog;
     };
+    
+    @Override
     public void setFacilities(ConcreteFacilityDAO facilities) {
       this.facilities = facilities;
     };
+    
+    @Override
     public ConcreteFacilityDAO getFacilities() {
       return facilities;
     };
@@ -54,12 +57,13 @@ public class ConcreteFacilityManager implements FacilityManager {
 
     @Override
     public void addNewFacility(String name, String description, String address) {
-      Building building = (Building) context.getBean("building");
+      Facility building = (Facility) context.getBean("facility");
       building.setAddress(address);
       building.setDescription(description);
       building.setName(name);
       building.setMaintenance((ConcreteMaintenance) context.getBean("maintenance"));
-        facilities.insertFacility(building);
+      building.log();
+      facilities.insertFacility(building);
     }
 
     @Override
@@ -69,7 +73,10 @@ public class ConcreteFacilityManager implements FacilityManager {
 
     @Override
     public void addFacilityDetail(int roomNumber, int capacity) {
-        currentFacility.addFacilityDetail(new BasicRoom(roomNumber, capacity, sysLog));
+        Room newRoom = (Room)context.getBean("room");
+        newRoom.setRoomNumber(roomNumber);
+        newRoom.setCapacity(capacity);
+        currentFacility.addFacilityDetail(newRoom);
     }
 
     @Override

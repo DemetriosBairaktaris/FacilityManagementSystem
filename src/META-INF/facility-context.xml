@@ -29,17 +29,20 @@
     <bean id="manager" class="edu.luc.cs.fms.model.facility.ConcreteFacilityManager" scope="prototype" >
         <property name="facilities" ref="dao" />
         <property name="sysLog" ref="system" />
-        <property name="facility" ref="building" />
+        
     </bean>
     
-    <bean id="building" class="edu.luc.cs.fms.model.facility.Building" scope="prototype" >
+    <bean id="facility" class="edu.luc.cs.fms.model.facility.Building" scope="prototype" >
         <property name="maintenance" ref="maintenance" />
         <property name="rooms" ref="list" />
         <property name="inspections" ref="list" />
         <property name="use" ref="use" />
+        <property name="sysLog" ref="system"  />
     </bean>
     
-    <bean id="room" class="edu.luc.cs.fms.model.facility.BasicRoom" scope="prototype" />
+    <bean id="room" class="edu.luc.cs.fms.model.facility.BasicRoom" scope="prototype" >
+    	<property name="sysLog" ref="system" />
+    </bean>
     
     <bean id="inspection" class="edu.luc.cs.fms.model.facility.ConcreteInspection" scope="prototype" >
         <property name="date" ref="date" />
@@ -109,5 +112,4 @@
     <bean id="parts" class="edu.luc.cs.fms.model.maintenance.PartsCost" scope="prototype" >
         <property name="cost" ref="decimal" />
     </bean>
-    
 </beans>
