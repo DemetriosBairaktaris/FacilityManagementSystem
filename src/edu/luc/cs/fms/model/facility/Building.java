@@ -1,15 +1,16 @@
 
 package edu.luc.cs.fms.model.facility;
-
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import edu.luc.cs.fms.model.maintenance.ConcreteMaintenance;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest;
 import edu.luc.cs.fms.model.maintenance.Maintenance;
-import edu.luc.cs.fms.model.system.ConcreteSystemLog;
+
 import edu.luc.cs.fms.model.system.SystemLog;
+import jdk.nashorn.internal.runtime.Context;
 
 /**
  * Concrete Implementation of Facility
@@ -22,55 +23,70 @@ public class Building implements Facility {
     private String description;
     private String address;
     private List<Room> rooms;
-    private List<ConcreteInspection> inspections;
+    private List<Inspection> inspections;
     private Maintenance maintenance;
     private ConcreteUse use;
     private SystemLog sysLog;
+    private ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");; 
     
-    public Building(SystemLog sysLog) {
-        //this.name = name;
-        //this.description = desc;
-        //this.address = address;
-        //this.rooms = new ArrayList<>();
-        //this.inspections = new ArrayList<>();
-        this.sysLog = sysLog;
+    public Building() {/*default*/}
+    
+    @Override
+    public void log(){
         sysLog.logCreate(this);
-        //this.maintenance = new ConcreteMaintenance(sysLog);
-        //this.use = new ConcreteUse(sysLog);
     }
     
+    @Override
+    public void setSysLog(SystemLog sysLog){
+        this.sysLog = sysLog ; 
+    }
+    
+    @Override
     public void setDescription(String description) {
       this.description = description;
     }
     
+    @Override
     public void setAddress(String address) {
       this.address = address;
     }
     
+    @Override
     public void setName(String name) {
       this.name = name;
     }
     
+    @Override
     public void setRooms(List<Room> rooms) {
       this.rooms = rooms;
     };
-    public void setInspections(List<ConcreteInspection> inspections) {
+    
+    @Override
+    public void setInspections(List<Inspection> inspections) {
       this.inspections = inspections;
     };
-    public List<ConcreteInspection> getInspections() {
+    
+    @Override
+    public List<Inspection> getInspections() {
       return inspections;
     };
+    
+    @Override
     public void setMaintenance(Maintenance maintenance) {
       this.maintenance = maintenance;
     };
+    
+    @Override
     public void setUse(ConcreteUse use) {
       this.use = use;
     };
+    
+    @Override
     public ConcreteUse getUse() {
       return use;
     };
     
-    
+    @Override
     public String getName() {
         return this.name;
     }
@@ -80,6 +96,7 @@ public class Building implements Facility {
      * 
      * @return description
      */
+    @Override
     public String getDescription() {
         return description;
     }
@@ -88,6 +105,7 @@ public class Building implements Facility {
      * Retrieves the facility address
      * @return address
      */
+    @Override
     public String getAddress() {
         return address;
     }
@@ -101,6 +119,7 @@ public class Building implements Facility {
      * Allows calling maintenance methods by retrieving object
      * @return Maintenance
      */
+    @Override
     public Maintenance getMaintenance() {
         return maintenance;
     }
@@ -109,6 +128,7 @@ public class Building implements Facility {
      * Retrieves all the rooms associated with this facility
      * @return list of Room objects
      */
+    @Override
     public List<Room> getRooms() {
         return rooms;
     }
@@ -116,6 +136,7 @@ public class Building implements Facility {
     /**
      * @return String
      */
+    @Override
     public String getFacilityInformation() {
         return this.toString() + "\n" + "Available Capacity:  " + this.requestAvailableCapacity();
     }
@@ -124,6 +145,7 @@ public class Building implements Facility {
      * adds a room to the facility
      * @param room
      */
+    @Override
     public void addFacilityDetail(Room room) {
         sysLog.logAdd(room, this);
         this.rooms.add(room);
@@ -133,6 +155,7 @@ public class Building implements Facility {
      * returns the available capacity
      * @return int
      */
+    @Override
     public int requestAvailableCapacity() {
         int availCapacity = 0;
         for (Room room : rooms) {
@@ -144,6 +167,7 @@ public class Building implements Facility {
     /**
      * vacates a facility and makes it available
      */
+    @Override
     public void vacateFacility() {
         sysLog.logVacate(this);
         for (Room room : this.getRooms()) {
@@ -157,6 +181,7 @@ public class Building implements Facility {
      * @param end
      * @return boolean
      */
+    @Override
     public boolean isInUseDuringInterval(Date start, Date end) {
         return use.isInUseDuringInterval(start, end);
     }
@@ -167,6 +192,7 @@ public class Building implements Facility {
      * @param end
      * @return boolean
      */
+    @Override
     public boolean assignFacilityToUse(Date start, Date end) {
         return use.assignFacilityToUse(start, end);
     }
@@ -175,13 +201,14 @@ public class Building implements Facility {
      * lists all the inspection results if any
      * @return String
      */
+    @Override
     public String listInspections() {
         String inspectionResults = "Inspections:\n";
 
         if (inspections.size() == 0) {
             inspectionResults += "No Inspections done, yet";
         } else {
-            for (ConcreteInspection i : inspections) {
+            for (Inspection i : inspections) {
                 inspectionResults = inspectionResults.concat(i.getDate() + ":  ");
                 if (i.getPassed()) {
                     inspectionResults = inspectionResults.concat("passed\n");
@@ -197,6 +224,7 @@ public class Building implements Facility {
      * lists the actual usage of the facility
      * @return String
      */
+    @Override
     public String listActualUsage() {
         return use.listActualUsage();
     }
@@ -205,6 +233,7 @@ public class Building implements Facility {
      * determines the usage rate
      * @return double
      */
+    @Override
     public double calcUsageRate() {
         return use.calcUsageRate();
     }
@@ -213,9 +242,10 @@ public class Building implements Facility {
      * checks if any maintenance requests are open
      * @return Inspection
      */
+    @Override
     public boolean inspect() {
-        ConcreteInspection i = new ConcreteInspection(new Date(), sysLog);
-        
+        Inspection i = (Inspection) context.getBean("inspection");
+        i.log();
         inspections.add(i);
         i.setPassed(true);
         for(ConcreteMaintenanceRequest m : maintenance.listMaintRequests()){

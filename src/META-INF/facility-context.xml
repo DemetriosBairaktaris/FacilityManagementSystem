@@ -10,6 +10,7 @@
     <!-- Utility beans -->
     <bean id="map" class="java.util.HashMap" />
     <bean id="list" class="java.util.ArrayList" scope="prototype" />
+    <bean id="linkedList" class="java.util.LinkedList" scope="prototype" />
     <bean id="decimal" class="java.math.BigDecimal" scope="prototype" >
         <constructor-arg>
             <value>0</value>
@@ -29,29 +30,37 @@
     <bean id="manager" class="edu.luc.cs.fms.model.facility.ConcreteFacilityManager" scope="prototype" >
         <property name="facilities" ref="dao" />
         <property name="sysLog" ref="system" />
-        <property name="facility" ref="building" />
+        
     </bean>
     
-    <bean id="building" class="edu.luc.cs.fms.model.facility.Building" scope="prototype" >
+    <bean id="facility" class="edu.luc.cs.fms.model.facility.Building" scope="prototype" >
         <property name="maintenance" ref="maintenance" />
         <property name="rooms" ref="list" />
         <property name="inspections" ref="list" />
         <property name="use" ref="use" />
+        <property name="sysLog" ref="system"  />
     </bean>
     
-    <bean id="room" class="edu.luc.cs.fms.model.facility.BasicRoom" scope="prototype" />
+    <bean id="room" class="edu.luc.cs.fms.model.facility.BasicRoom" scope="prototype" >
+    	<property name="sysLog" ref="system" />
+    </bean>
     
     <bean id="inspection" class="edu.luc.cs.fms.model.facility.ConcreteInspection" scope="prototype" >
-        <property name="date" ref="date" />
-        <property name="passed" value="false" />
+        <property name="dateOfInspection" ref="date" />
+        <property name="sysLog" ref="system"/>
     </bean>
     
     <bean id="interval" class="edu.luc.cs.fms.model.facility.ConcreteInterval" scope="prototype" >
         <property name="endDate" ref="date" />
         <property name="startDate" ref="date" />
+        <property name="sysLog" ref="system"/>
     </bean>
     
-    <bean id="use" class="edu.luc.cs.fms.model.facility.ConcreteUse" scope="prototype" />
+    <bean id="use" class="edu.luc.cs.fms.model.facility.ConcreteUse" scope="prototype">
+    	<property name="intervals" ref="list"/>
+    	<property name="list" ref="linkedList"/>
+    	<property name="sysLog" ref="system"/>
+    </bean>
     
     <!-- Maintenance Beans -->
     <bean id="log" class="edu.luc.cs.fms.model.maintenance.ConcreteLog" scope="prototype" >
@@ -109,5 +118,4 @@
     <bean id="parts" class="edu.luc.cs.fms.model.maintenance.PartsCost" scope="prototype" >
         <property name="cost" ref="decimal" />
     </bean>
-    
 </beans>

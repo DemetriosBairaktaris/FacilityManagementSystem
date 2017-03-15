@@ -2,6 +2,7 @@ package edu.luc.cs.fms.model.facility;
 
 import java.util.Date;
 import java.util.List;
+import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
  * 
@@ -10,16 +11,13 @@ import java.util.List;
  */
 public interface Use {
 
-    public void setIntervals(List<ConcreteInterval> intervals);
-    public List<ConcreteInterval> getIntervals();
-    public void setList(List<ConcreteInterval> list);
-    public List<ConcreteInterval> getList();
+    public void setIntervals(List<Interval> intervals);
+    public List<Interval> getIntervals();
+    public void setList(List<Interval> list);
     public void setMinutesPerYear(float minutesPerYear);
     public float getMinutesPerYear();
-    public void setNewIntervalAdded(boolean newIntervalAdded);
-    public boolean getNewIntervalAdded();
+   
     
-  
     /**
      * @return list of actual usage
      */
@@ -46,4 +44,15 @@ public interface Use {
      * @return double
      */
     public double calcUsageRate();
+    
+    /**
+     * 
+     * @param sysLog
+     */
+    void setSysLog(SystemLog sysLog);
+    
+    /**
+     * used to log creation of implementing object
+     */
+    void log();
 }

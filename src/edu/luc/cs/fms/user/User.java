@@ -4,11 +4,8 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import edu.luc.cs.fms.model.facility.ConcreteFacilityManager;
 import edu.luc.cs.fms.model.facility.FacilityManager;
 
 /**
@@ -68,10 +65,10 @@ public class User {
         manager.scheduleMaintenance(start, end);
         manager.createOrder("Fix lights.", 0);
         manager.createOrder("Replace door", 1);
-        manager.setLaborCost(new BigDecimal("2000"), 0);
-        manager.setPartsCost(new BigDecimal("500"), 0);
-        manager.setLaborCost(new BigDecimal("200"), 1);
-        manager.setPartsCost(new BigDecimal("500"), 1);
+        manager.setLaborCost(BigDecimal.valueOf(2000), 0);
+        manager.setPartsCost(BigDecimal.valueOf(500), 0);
+        manager.setLaborCost(BigDecimal.valueOf(200), 1);
+        manager.setPartsCost(BigDecimal.valueOf(100), 1);
         manager.closeOrder(0, 0);
         manager.closeRequest(0);
         manager.closeOrder(1, 1);
@@ -156,7 +153,7 @@ public class User {
         System.out.println("Actual Usage for "+ manager.getFacilityInformation());
         System.out.println(manager.listActualUsage());
         System.out.println("Usage Rate: "+(manager.calcUsageRate()*100)+"% of year\n");
-        System.out.println("Inspection passed: "+manager.inspect());
+        System.out.println("Inspection passed: "+manager.inspect()+"\n");
         System.out.println("List of Inspections: \n"+manager.listInspections());
         System.out.println("Facility in use during "+ date1+" - "+date2+":\n"
         +manager.isInUseDuringInterval(date1, date2));

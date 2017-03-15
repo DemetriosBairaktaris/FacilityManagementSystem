@@ -1,11 +1,10 @@
 package edu.luc.cs.fms.model.facility;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
@@ -15,43 +14,53 @@ import edu.luc.cs.fms.model.system.SystemLog;
  */
 public class ConcreteUse implements Use{
 
-    private List<ConcreteInterval> intervals;
-    private List<ConcreteInterval> list;
+    private List<Interval> intervals;
+    private List<Interval> list;
     private Date currentDate;
     private float minutesPerYear;
     private boolean newIntervalAdded;
     private SystemLog sysLog;
+    private ApplicationContext context ; 
 
-    public ConcreteUse(SystemLog sysLog) {
-        intervals = new ArrayList<>();
+    public ConcreteUse() {
         minutesPerYear = 525600;
         newIntervalAdded = false;
-        this.sysLog = sysLog;
+        context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
     }
     
-    public void setIntervals(List<ConcreteInterval> intervals) {
+    @Override
+    public void log(){
+        sysLog.logCreate(this);;
+    }
+    
+    @Override
+    public void setSysLog(SystemLog sysLog){
+        this.sysLog = sysLog ; 
+    }
+    
+    @Override
+    public void setIntervals(List<Interval> intervals) {
       this.intervals = intervals;
     };
-    public List<ConcreteInterval> getIntervals() {
+    
+    @Override
+    public List<Interval> getIntervals() {
       return intervals;
     };
-    public void setList(List<ConcreteInterval> list) {
+    
+    @Override
+    public void setList(List<Interval> list) {
       this.list = list;
     };
-    public List<ConcreteInterval> getList() {
-      return list;
-    };
+    
+    @Override
     public void setMinutesPerYear(float minutesPerYear) {
       this.minutesPerYear = minutesPerYear;
     };
+    
+    @Override
     public float getMinutesPerYear() {
       return minutesPerYear;
-    };
-    public void setNewIntervalAdded(boolean newIntervalAdded) {
-      this.newIntervalAdded = newIntervalAdded;
-    };
-    public boolean getNewIntervalAdded() {
-      return newIntervalAdded;
     };
 
     @Override
@@ -62,7 +71,7 @@ public class ConcreteUse implements Use{
             return "No Usage";
         }
 
-        for (ConcreteInterval i : intervals) {
+        for (Interval i : intervals) {
             usageDates = usageDates.concat(i.getStartDate() + " - " + i.getEndDate() + "\n");
         }
         return usageDates;
@@ -70,14 +79,18 @@ public class ConcreteUse implements Use{
 
     @Override
     public boolean assignFacilityToUse(Date start, Date end) {
-        currentDate = new Date();
+        currentDate =(Date) context.getBean("date");
         
         if (start.getTime() < currentDate.getTime()) {
             return false;
         } else if (start.getTime() >= end.getTime()) {
             return false;
         } else {
-            intervals.add(new ConcreteInterval(start, end, sysLog));
+            Interval interval = (Interval)context.getBean("interval");
+            interval.setStartDate(start);
+            interval.setEndDate(end);
+            interval.log();
+            intervals.add(interval);
             newIntervalAdded = true;
             return true;
         }
@@ -94,7 +107,7 @@ public class ConcreteUse implements Use{
             newIntervalAdded = false;
         }
 
-        for (ConcreteInterval i : list) {
+        for (Interval i : list) {
             if (start.getTime() >= i.getStartDate().getTime() && end.getTime() <= i.getEndDate().getTime()) {
                 return true;
             }
@@ -111,7 +124,7 @@ public class ConcreteUse implements Use{
             newIntervalAdded = false;
         }
 
-        for (ConcreteInterval i : list) {
+        for (Interval i : list) {
             double val = i.getEndDate().getTime() - i.getStartDate().getTime();
             val = val / 1000;
             val = val / 60;
@@ -126,7 +139,7 @@ public class ConcreteUse implements Use{
      */
     private void sortAndCombine() {
         Collections.sort(intervals);
-        list = new LinkedList<>();
+        list.clear();
         list.add(intervals.get(0));
         
         for (int i = 1; i < intervals.size(); i++) {
@@ -139,4 +152,7 @@ public class ConcreteUse implements Use{
             }
         }
     }
+
+
+   
 }

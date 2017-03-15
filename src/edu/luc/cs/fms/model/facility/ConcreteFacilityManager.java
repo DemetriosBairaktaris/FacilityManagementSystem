@@ -13,7 +13,6 @@ import edu.luc.cs.fms.model.maintenance.ConcreteMaintenance;
 import edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest;
 import edu.luc.cs.fms.model.maintenance.ConcreteOrder;
 import edu.luc.cs.fms.model.maintenance.ConcreteSchedule;
-import edu.luc.cs.fms.model.system.ConcreteSystemLog;
 import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
@@ -26,23 +25,26 @@ public class ConcreteFacilityManager implements FacilityManager {
     private ConcreteFacilityDAO facilities;
     private SystemLog sysLog;
     private Facility currentFacility;
-    ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
+    ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
 
-    public ConcreteFacilityManager() {
-        //facilities = new ConcreteFacilityDAO();
-        //log = new ConcreteSystemLog();
-        //sysLog.logCreate(this);
-    }
+    public ConcreteFacilityManager() {/*default*/}
     
+    
+    @Override 
+    public void log(){
+        sysLog.logCreate(this);
+    }
+    @Override
     public void setSysLog(SystemLog sysLog) {
       this.sysLog = sysLog;
     };
-    public SystemLog getSysLog() {
-      return sysLog;
-    };
+    
+    @Override
     public void setFacilities(ConcreteFacilityDAO facilities) {
       this.facilities = facilities;
     };
+    
+    @Override
     public ConcreteFacilityDAO getFacilities() {
       return facilities;
     };
@@ -54,12 +56,13 @@ public class ConcreteFacilityManager implements FacilityManager {
 
     @Override
     public void addNewFacility(String name, String description, String address) {
-      Building building = (Building) context.getBean("building");
+      Facility building = (Facility) context.getBean("facility");
       building.setAddress(address);
       building.setDescription(description);
       building.setName(name);
       building.setMaintenance((ConcreteMaintenance) context.getBean("maintenance"));
-        facilities.insertFacility(building);
+      building.log();
+      facilities.insertFacility(building);
     }
 
     @Override
@@ -69,7 +72,11 @@ public class ConcreteFacilityManager implements FacilityManager {
 
     @Override
     public void addFacilityDetail(int roomNumber, int capacity) {
-        currentFacility.addFacilityDetail(new BasicRoom(roomNumber, capacity, sysLog));
+        Room newRoom = (Room)context.getBean("room");
+        newRoom.setRoomNumber(roomNumber);
+        newRoom.setCapacity(capacity);
+        newRoom.log();
+        currentFacility.addFacilityDetail(newRoom);
     }
 
     @Override
@@ -213,89 +220,5 @@ public class ConcreteFacilityManager implements FacilityManager {
     @Override
     public boolean inspect() {
         return currentFacility.inspect(); 
-    }
-
-    @Override
-    public void setLog(ConcreteLog log) {
-      // TODO Auto-generated method stub
-      
-    }
-
-    @Override
-    public ConcreteLog getLog() {
-      // TODO Auto-generated method stub
-      return null;
-    }
-
-    @Override
-    public void setRequests(List<ConcreteMaintenanceRequest> requests) {
-      // TODO Auto-generated method stub
-      
-    }
-
-    @Override
-    public List<ConcreteMaintenanceRequest> getRequests() {
-      // TODO Auto-generated method stub
-      return null;
-    }
-
-    @Override
-    public void setOrders(List<ConcreteOrder> orders) {
-      // TODO Auto-generated method stub
-      
-    }
-
-    @Override
-    public List<ConcreteOrder> getOrders() {
-      // TODO Auto-generated method stub
-      return null;
-    }
-
-    @Override
-    public void setSchedule(ConcreteSchedule schedule) {
-      // TODO Auto-generated method stub
-      
-    }
-
-    @Override
-    public ConcreteSchedule getSchedule() {
-      // TODO Auto-generated method stub
-      return null;
-    }
-
-    @Override
-    public void setCost(BigDecimal cost) {
-      // TODO Auto-generated method stub
-      
-    }
-
-    @Override
-    public BigDecimal getCost() {
-      // TODO Auto-generated method stub
-      return null;
-    }
-
-    @Override
-    public void setOrderNum(int orderNum) {
-      // TODO Auto-generated method stub
-      
-    }
-
-    @Override
-    public int getOrderNum() {
-      // TODO Auto-generated method stub
-      return 0;
-    }
-
-    @Override
-    public void setNumRequests(int numRequests) {
-      // TODO Auto-generated method stub
-      
-    }
-
-    @Override
-    public int getNumRequests() {
-      // TODO Auto-generated method stub
-      return 0;
     }
 }

@@ -2,8 +2,6 @@
 package edu.luc.cs.fms.model.facility;
 
 import java.util.Date;
-
-import edu.luc.cs.fms.model.system.ConcreteSystemLog;
 import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
@@ -11,16 +9,22 @@ import edu.luc.cs.fms.model.system.SystemLog;
  * @author TeamDK
  *
  */
-public class ConcreteInterval implements Interval, Comparable<ConcreteInterval> {
+public class ConcreteInterval implements Interval {
 
     private Date startDate;
     private Date endDate;
     private SystemLog sysLog;
 
-    public ConcreteInterval(Date startDate, Date endDate, SystemLog sysLog) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.sysLog = sysLog;
+    public ConcreteInterval() {/*default*/}
+    
+    
+    @Override
+    public void setSysLog(SystemLog sysLog){
+        this.sysLog = sysLog ;
+    }
+    
+    @Override
+    public void log(){
         sysLog.logCreate(this);
     }
 
@@ -42,6 +46,11 @@ public class ConcreteInterval implements Interval, Comparable<ConcreteInterval> 
         return endDate;
     }
     
+    @Override
+    public void setStartDate(Date startDate){
+        this.startDate = startDate ; 
+    }
+    
     /**
      * changes the end date if necessary
      * @param endDate
@@ -53,7 +62,7 @@ public class ConcreteInterval implements Interval, Comparable<ConcreteInterval> 
     }
 
     @Override
-    public int compareTo(ConcreteInterval interval) {
+    public int compareTo(Interval interval) {
         return this.startDate.compareTo(interval.getStartDate());
     }
 

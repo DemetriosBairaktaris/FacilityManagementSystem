@@ -38,8 +38,6 @@
     </bean>
     
     <bean id="room" class="edu.luc.cs.fms.model.facility.BasicRoom" scope="prototype" >
-        <constructor-arg type="int" value="101"/> <!-- values for testing -->
-        <constructor-arg type="int" value="40"/>
         <constructor-arg ref="system" />
     </bean>
     

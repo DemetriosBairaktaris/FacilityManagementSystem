@@ -2,7 +2,9 @@ package edu.luc.cs.fms.model.facility;
 
 import java.util.Date;
 
-public interface Interval {
+import edu.luc.cs.fms.model.system.SystemLog;
+
+public interface Interval extends Comparable<Interval>{
 
     /**
      * 
@@ -22,4 +24,21 @@ public interface Interval {
      * @return void
      */
     public void setEndDate(Date endDate);
+
+    /**
+     * 
+     * @param startDate
+     */
+    void setStartDate(Date startDate);
+    
+    /**
+     * used to log creation of the implementing object
+     */
+    void log();
+    
+    /**
+     * 
+     * @param sysLog
+     */
+    void setSysLog(SystemLog sysLog);
 }

@@ -25,8 +25,10 @@ public class TestRoom {
 
     @Before
     public void setUp() throws Exception {
-        ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/app-context.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
         room = (Room) context.getBean("room");
+        room.setRoomNumber(roomNum);
+        room.setCapacity(capacity);
     }
 
     @After

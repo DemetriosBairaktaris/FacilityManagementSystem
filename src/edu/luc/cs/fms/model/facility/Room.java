@@ -1,5 +1,7 @@
 package edu.luc.cs.fms.model.facility;
 
+import edu.luc.cs.fms.model.system.SystemLog;
+
 /**
  * This class creates objects that are associated with a specific building
  * 
@@ -30,4 +32,8 @@ public interface Room {
      * @return void
      */
     public void vacate();
+    void log();
+    void setRoomNumber(int roomNumber);
+    void setCapacity(int capacity);
+    void setSysLog(SystemLog sysLog);
 }

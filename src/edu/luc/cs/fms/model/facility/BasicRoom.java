@@ -1,6 +1,4 @@
 package edu.luc.cs.fms.model.facility;
-
-import edu.luc.cs.fms.model.system.ConcreteSystemLog;
 import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
@@ -13,11 +11,16 @@ public class BasicRoom implements Room {
     private int capacity;
     private SystemLog sysLog;
     
-    public BasicRoom(int roomNumber, int capacity, SystemLog sysLog) {
-        this.roomNumber = roomNumber;
-        this.capacity = capacity;
-        this.sysLog = sysLog;
-        sysLog.logCreate(this);
+    public BasicRoom() { /*default*/}
+    
+    @Override
+    public void log(){
+        this.sysLog.logCreate(this);
+    }
+    
+    @Override
+    public void setSysLog(SystemLog sysLog){
+        this.sysLog = sysLog ; 
     }
     
     @Override
@@ -43,5 +46,15 @@ public class BasicRoom implements Room {
     @Override
     public String toString() {
         return "Room Number:  " + this.getRoomNumber() + "\nCapacity:  " + this.getAvailableCapacity();
+    }
+    
+    @Override
+    public void setRoomNumber(int roomNumber){
+        this.roomNumber = roomNumber;
+    }
+    
+    @Override 
+    public void setCapacity(int capacity){
+        this.capacity = capacity;
     }
 }
