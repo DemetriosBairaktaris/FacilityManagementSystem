@@ -1,44 +1,43 @@
 package edu.luc.cs.fms.model.facility;
 
-import java.util.Date;
-
 import edu.luc.cs.fms.model.system.SystemLog;
 
-public interface Interval extends Comparable<Interval>{
+import java.util.Date;
 
-    /**
-     * 
-     * @return starting date
-     */
-    public Date getStartDate();
+public interface Interval extends Comparable<Interval> {
 
-    /**
-     * 
-     * @return end date
-     */
-    public Date getEndDate();
-    
-    /**
-     * changes the end date if necessary
-     * @param endDate
-     * @return void
-     */
-    public void setEndDate(Date endDate);
+  /**
+   * Gets the start dat.e
+   * @return starting Date
+   */
+  public Date getStartDate();
 
-    /**
-     * 
-     * @param startDate
-     */
-    void setStartDate(Date startDate);
-    
-    /**
-     * used to log creation of the implementing object
-     */
-    void log();
-    
-    /**
-     * 
-     * @param sysLog
-     */
-    void setSysLog(SystemLog sysLog);
+  /**
+   * Gets the end date.
+   * @return end Date
+   */
+  public Date getEndDate();
+
+  /**
+   * Changes the end date if necessary.
+   * @param endDate Date
+   */
+  public void setEndDate(Date endDate);
+
+  /**
+   * Sets the start date.
+   * @param startDate Date
+   */
+  public void setStartDate(Date startDate);
+
+  /**
+   * Used to log creation of the implementing object.
+   */
+  public void log();
+
+  /**
+   * Sets the sysLog object.
+   * @param sysLog SystemLog
+   */
+  public void setSysLog(SystemLog sysLog);
 }

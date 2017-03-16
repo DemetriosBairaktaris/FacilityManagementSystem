@@ -12,14 +12,12 @@
     <bean id="list" class="java.util.ArrayList" scope="prototype" />
     <bean id="linkedList" class="java.util.LinkedList" scope="prototype" />
     <bean id="decimal" class="java.math.BigDecimal" scope="prototype" >
-        <constructor-arg>
-            <value>0</value>
-        </constructor-arg>
+        <constructor-arg type="java.lang.String" value="0" />
     </bean>
     <bean id="date" class="java.util.Date" scope="prototype" />
     
     <!-- DAL Bean -->
-    <bean id="dao" class="edu.luc.cs.fms.dal.ConcreteFacilityDAO" >
+    <bean id="dao" class="edu.luc.cs.fms.dal.ConcreteFacilityData" >
         <property name="facilityHashMap" ref="map" />
     </bean>
     
@@ -42,7 +40,7 @@
     </bean>
     
     <bean id="room" class="edu.luc.cs.fms.model.facility.BasicRoom" scope="prototype" >
-    	<property name="sysLog" ref="system" />
+        <property name="sysLog" ref="system" />
     </bean>
     
     <bean id="inspection" class="edu.luc.cs.fms.model.facility.ConcreteInspection" scope="prototype" >
@@ -57,65 +55,30 @@
     </bean>
     
     <bean id="use" class="edu.luc.cs.fms.model.facility.ConcreteUse" scope="prototype">
-    	<property name="intervals" ref="list"/>
-    	<property name="list" ref="linkedList"/>
-    	<property name="sysLog" ref="system"/>
+        <property name="minutesPerYear" value="525600" />
+        <property name="intervals" ref="list"/>
+        <property name="list" ref="linkedList"/>
+        <property name="sysLog" ref="system"/>
     </bean>
     
     <!-- Maintenance Beans -->
     <bean id="log" class="edu.luc.cs.fms.model.maintenance.ConcreteLog" scope="prototype" >
         <property name="maintenance" ref="list" />
     </bean>
-    
-    <bean id="request" class="edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest" scope="prototype">
-        <property name="requestNum">
-            <value>0</value>
-        </property>
-        <property name="openOrders">
-            <value>0</value>
-        </property>
-        <property name="status">
-            <value>false</value>
-        </property>
-    </bean>
-    
+
     <bean id="maintenance" class="edu.luc.cs.fms.model.maintenance.ConcreteMaintenance" scope="prototype">
         <property name="log" ref="log" />
         <property name="requests" ref="list" />
         <property name="orders" ref="list" />
         <property name="cost" ref="decimal" />
-        <property name="numRequests">
-            <value>0</value>
-        </property>
+        <property name="numRequests" value="0" />
         <property name="schedule" ref="schedule" />
-    </bean>
-    
-    <bean id="order" class="edu.luc.cs.fms.model.maintenance.ConcreteOrder" scope="prototype" >
-        <property name="laborCost" ref="labor" />
-        <property name="partsCost" ref="parts" />
-        <property name="totalCost" ref="decimal" />
-        <property name="status">
-            <value>false</value>
-        </property>
-        <property name="orderNum">
-            <value>0</value>
-        </property>
     </bean>
     
     <bean id="schedule" class="edu.luc.cs.fms.model.maintenance.ConcreteSchedule" scope="prototype" >
         <property name="currentDate" ref="date" />
         <property name="startDate" ref="list" />
         <property name="endDate" ref="list" />
-        <property name="downTime">
-            <value>0</value>
-        </property>
-    </bean>
-    
-    <bean id="labor" class="edu.luc.cs.fms.model.maintenance.LaborCost" scope="prototype" >
-        <property name="cost" ref="decimal" />
-    </bean>
-    
-    <bean id="parts" class="edu.luc.cs.fms.model.maintenance.PartsCost" scope="prototype" >
-        <property name="cost" ref="decimal" />
+        <property name="downTime" value="0" />
     </bean>
 </beans>

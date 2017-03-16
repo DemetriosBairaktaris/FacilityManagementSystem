@@ -1,45 +1,64 @@
 package edu.luc.cs.fms.model.maintenance;
 
 public interface MaintenanceRequest {
-  
-    public void setOpenOrders(int openOrders);
-  
-    /**
-     * @return status
-     */
-    public boolean getStatus();
 
-    /**
-     * sets the status of the request
-     * @param status
-     */
-    public void setStatus(boolean status);
+  public void setOpenOrders(int openOrders);
 
-    /**
-     * This method returns the problem description
-     * @return problem description
-     */
-    public String getProblem();
+  /**
+   * Gets the status.
+   * @return status boolean
+   */
+  public boolean getStatus();
 
-    /**
-     * 
-     * @return request number
-     */
-    public int getRequestNum();
+  /**
+   * Sets the status of the request.
+   * @param status boolean
+   */
+  public void setStatus(boolean status);
 
-    /**
-     * 
-     * @return number of open orders
-     */
-    public int getOpenOrders();
 
-    /**
-     * adds an open order
-     */
-    public void addOpenOrder();
+  /**
+   * Gets the problem.
+   * @return String
+   */
+  public String getProblem();
 
-    /**
-     * removes an order once closed
-     */
-    public void removeOpenOrder();
+  /**
+   * Gets the request number.
+   * @return request integer
+   */
+  public int getRequestNum();
+
+  /**
+   * Gets the open order number.
+   * @return integer of orders
+   */
+  public int getOpenOrders();
+
+  /**
+   * Adds an open order.
+   */
+  public void addOpenOrder();
+
+  /**
+   * Removes an order once closed.
+   */
+  public void removeOpenOrder();
+
+  /**
+   * Logs the object.
+   */
+  public void log();
+
+  /**
+   * Sets the problem.
+   * @param problem String
+   */
+  public void setProblem(String problem);
+
+  /**
+   * Sets the request number.
+   * @param requestNum integer
+   */
+  public void setRequestNum(int requestNum);
 }

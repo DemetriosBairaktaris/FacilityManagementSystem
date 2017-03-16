@@ -3,37 +3,56 @@ package edu.luc.cs.fms.model.facility;
 import edu.luc.cs.fms.model.system.SystemLog;
 
 /**
- * This class creates objects that are associated with a specific building
+ * This class creates objects that are associated with a specific building.
  * 
  * @author TeamDK
  *
  */
 public interface Room {
-    /**
-     * gets the room number
-     * @return room number
-     */
-    public int getRoomNumber();
 
-    /**
-     * gets the available capacity of the room
-     * @return available capacity
-     */
-    public int getAvailableCapacity();
+  /**
+   * Gets the room number.
+   * @return room number
+   */
+  public int getRoomNumber();
 
-    /**
-     * Returns whether or not the room can hold any more inhabitants
-     * @return boolean
-     */
-    public boolean isAvailable();
+  /**
+   * Gets the available capacity of the room.
+   * @return available capacity
+   */
+  public int getAvailableCapacity();
 
-    /**
-     * Clears all inhabitants out of the room.
-     * @return void
-     */
-    public void vacate();
-    void log();
-    void setRoomNumber(int roomNumber);
-    void setCapacity(int capacity);
-    void setSysLog(SystemLog sysLog);
+  /**
+   * Returns whether or not the room can hold any more inhabitants.
+   * @return boolean
+   */
+  public boolean isAvailable();
+
+  /**
+   * Clears all inhabitants out of the room.
+   */
+  public void vacate();
+
+  /**
+   * Logs the object.
+   */
+  public void log();
+  
+  /**
+   * Sets the room number.
+   * @param roomNumber integer
+   */
+  public void setRoomNumber(int roomNumber);
+    
+  /**
+   * Sets the room capacity.
+   * @param capacity integer
+   */
+  public void setCapacity(int capacity);
+    
+  /**
+   * Sets the system log object.
+   * @param sysLog SystemLog
+   */
+  public void setSysLog(SystemLog sysLog);
 }

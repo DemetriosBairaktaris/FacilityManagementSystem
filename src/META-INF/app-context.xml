@@ -9,14 +9,9 @@
     
     <!-- Utility beans -->
     <bean id="map" class="java.util.HashMap" />
-    <bean id="list" class="java.util.ArrayList" scope="prototype" />
-    <bean id="decimal" class="java.math.BigDecimal" scope="prototype" >
-        <constructor-arg type="java.lang.String" value="0" />
-    </bean>
-    <bean id="date" class="java.util.Date" scope="prototype" />
-    
+
     <!-- DAL Bean -->
-    <bean id="dao" class="edu.luc.cs.fms.dal.ConcreteFacilityDAO" >
+    <bean id="dao" class="edu.luc.cs.fms.dal.ConcreteFacilityData" >
         <property name="facilityHashMap" ref="map" />
     </bean>
     
@@ -28,85 +23,4 @@
         <property name="facilities" ref="dao" />
         <property name="sysLog" ref="system" />
     </bean>
-    
-    <bean id="building" class="edu.luc.cs.fms.model.facility.Building" scope="prototype" >
-        <constructor-arg ref="system" />
-        <property name="maintenance" ref="maintenance" />
-        <property name="rooms" ref="list" />
-        <property name="inspections" ref="list" />
-        <property name="use" ref="use" />
-    </bean>
-    
-    <bean id="room" class="edu.luc.cs.fms.model.facility.BasicRoom" scope="prototype" >
-        <constructor-arg ref="system" />
-    </bean>
-    
-    <bean id="inspection" class="edu.luc.cs.fms.model.facility.ConcreteInspection" scope="prototype" >
-        <constructor-arg ref="date" />
-        <constructor-arg ref="system" />
-        <property name="passed" value="false" />
-    </bean>
-    
-    <bean id="interval" class="edu.luc.cs.fms.model.facility.ConcreteInterval" scope="prototype" >
-        <constructor-arg ref="date" />
-        <constructor-arg ref="date" />
-        <constructor-arg ref="system" />
-    </bean>
-    
-    <bean id="use" class="edu.luc.cs.fms.model.facility.ConcreteUse" scope="prototype" >
-        <constructor-arg ref="system" />
-        <property name="intervals" ref="list" />
-        <property name="list" ref="list" />
-        <property name="minutesPerYear" value="525600" />
-        <property name="newIntervalAdded" value="false" />
-    </bean>
-    
-    <!-- Maintenance Beans -->
-    <bean id="log" class="edu.luc.cs.fms.model.maintenance.ConcreteLog" scope="prototype" >
-        <property name="maintenance" ref="list" />
-    </bean>
-    
-    <bean id="request" class="edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest" scope="prototype">
-        <constructor-arg ref="system" />
-        <property name="openOrders" value="0" />
-        <property name="status" value="false" />
-    </bean>
-    
-    <bean id="maintenance" class="edu.luc.cs.fms.model.maintenance.ConcreteMaintenance" scope="prototype">
-        <constructor-arg ref="system" />
-        <property name="log" ref="log" />
-        <property name="requests" ref="list" />
-        <property name="orders" ref="list" />
-        <property name="schedule" ref="schedule" />
-        <property name="cost" ref="decimal" />
-        <property name="orderNum" value="0" />
-        <property name="numRequests" value="0" />
-    </bean>
-    
-    <bean id="order" class="edu.luc.cs.fms.model.maintenance.ConcreteOrder" scope="prototype" >
-        <constructor-arg ref="system" />
-        <property name="laborCost" ref="labor" />
-        <property name="partsCost" ref="parts" />
-        <property name="totalCost" value="0" />
-        <property name="status" value="false" />
-    </bean>
-    
-    <bean id="schedule" class="edu.luc.cs.fms.model.maintenance.ConcreteSchedule" scope="prototype" >
-        <constructor-arg ref="system" />
-        <property name="currentDate" ref="date" />
-        <property name="startDate" ref="list" />
-        <property name="endDate" ref="list" />
-        <property name="downTime">
-            <value>0</value>
-        </property>
-    </bean>
-    
-    <bean id="labor" class="edu.luc.cs.fms.model.maintenance.LaborCost" scope="prototype" >
-        <property name="cost" value="0" />
-    </bean>
-    
-    <bean id="parts" class="edu.luc.cs.fms.model.maintenance.PartsCost" scope="prototype" >
-        <property name="cost" value="0" />
-    </bean>
-    
 </beans>

@@ -8,95 +8,76 @@ import edu.luc.cs.fms.model.system.SystemLog;
  * @author TeamDK
  *
  */
-public class ConcreteMaintenanceRequest implements MaintenanceRequest{
+public class ConcreteMaintenanceRequest implements MaintenanceRequest {
 
-    private boolean status;
-    private String problem;
-    private int requestNum;
-    private int openOrders;
-    private SystemLog sysLog;
+  private boolean status;
+  private String problem;
+  private int requestNum;
+  private int openOrders;
+  private SystemLog sysLog;
 
-    public ConcreteMaintenanceRequest(SystemLog sysLog) {
-        //status = false;
-        //this.problem = problem;
-        //this.requestNum = requestNum;
-        //openOrders = 0;
-        //sysLog.logCreate(this); //this doesn't work because the context populates the attributes after
-      this.sysLog = sysLog;
-    }
-    
-    public void log() {
-      sysLog.logCreate(this);
-    }
-    
-    public void setProblem(String problem) {
-      this.problem = problem;
-    }
-    
-    public void setRequestNum(int requestNum) {
-      this.requestNum = requestNum;
-    }
-    
-    public void setOpenOrders(int openOrders) {
-      this.openOrders = openOrders;
-    }
+  public ConcreteMaintenanceRequest(SystemLog sysLog) {
+    this.sysLog = sysLog;
+  }
 
-    /**
-     * @return status
-     */
-    public boolean getStatus() {
-        return status;
-    }
+  @Override
+  public void log() {
+    sysLog.logCreate(this);
+  }
 
-    /**
-     * sets the status of the request
-     * @param status
-     */
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
+  @Override
+  public void setProblem(String problem) {
+    this.problem = problem;
+  }
 
-    /**
-     * This method returns the problem description
-     * @return problem description
-     */
-    public String getProblem() {
-        return this.problem;
-    }
+  @Override
+  public void setRequestNum(int requestNum) {
+    this.requestNum = requestNum;
+  }
+  
+  @Override
+  public void setOpenOrders(int openOrders) {
+    this.openOrders = openOrders;
+  }
 
-    /**
-     * 
-     * @return request number
-     */
-    public int getRequestNum() {
-        return requestNum;
-    }
+  @Override
+  public boolean getStatus() {
+    return status;
+  }
 
-    /**
-     * 
-     * @return number of open orders
-     */
-    public int getOpenOrders() {
-        return openOrders;
-    }
+  @Override
+  public void setStatus(boolean status) {
+    this.status = status;
+  }
 
-    /**
-     * adds an open order
-     */
-    public void addOpenOrder() {
-        openOrders++;
-    }
+  @Override
+  public String getProblem() {
+    return this.problem;
+  }
 
-    /**
-     * removes an order once closed
-     */
-    public void removeOpenOrder() {
-        openOrders--;
-    }
+  @Override
+  public int getRequestNum() {
+    return requestNum;
+  }
 
-    @Override
-    public String toString() {
-        return "Maintenance Request #" + this.getRequestNum() + "\nStatus: " + this.getStatus() + "\nProblem: "
-                + this.getProblem();
-    }
+  @Override
+  public int getOpenOrders() {
+    return openOrders;
+  }
+
+  @Override
+  public void addOpenOrder() {
+    openOrders++;
+  }
+
+  @Override
+  public void removeOpenOrder() {
+    openOrders--;
+  }
+
+  @Override
+  public String toString() {
+    return "Maintenance Request #" + this.getRequestNum() + "\nStatus: " 
+        + this.getStatus() + "\nProblem: " + this.getProblem();
+  }
 }

@@ -11,19 +11,17 @@ import java.math.BigDecimal;
  */
 public class PartsCost implements Cost {
 
-    private BigDecimal cost;
+  private BigDecimal cost;
 
-    public PartsCost() {
-        //cost = new BigDecimal("0");
-    }
+  public PartsCost() {}
 
-    @Override
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
-    }
+  @Override
+  public void setCost(BigDecimal cost) {
+    this.cost = cost;
+  }
 
-    @Override
-    public BigDecimal getCost() {
-        return cost;
-    }
+  @Override
+  public BigDecimal getCost() {
+    return cost;
+  }
 }

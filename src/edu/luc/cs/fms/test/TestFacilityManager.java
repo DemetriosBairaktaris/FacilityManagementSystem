@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import edu.luc.cs.fms.model.facility.FacilityManager;
+
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,122 +16,130 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import edu.luc.cs.fms.model.facility.FacilityManager;
+
 
 /**
- * 
+ * This class tests the facility manager.
  * @author TeamDK
  *
  */
 public class TestFacilityManager {
 
-    private FacilityManager manager;
-    private String name = "Cuneo";
-    private String desc = "Building Containing classrooms";
-    private String address = "23 west loyola ave";
-    private Calendar c;
-    ApplicationContext context ; 
+  private FacilityManager manager;
+  private String name = "Cuneo";
+  private String desc = "Building Containing classrooms";
+  private String address = "23 west loyola ave";
+  private Calendar cal;
+  ApplicationContext context; 
 
-    @Before
-    public void setUp() throws Exception {
-        context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
-        manager = (FacilityManager) context.getBean("manager");
-        manager.addNewFacility(name, desc, address);
-        c = new GregorianCalendar();
-    }
+  /**
+   * Sets up the test.
+   * @throws Exception ignored
+   */
+  @Before
+  public void setUp() throws Exception {
+    context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
+    manager = (FacilityManager) context.getBean("manager");
+    manager.addNewFacility(name, desc, address);
+    cal = new GregorianCalendar();
+  }
 
-    @After
-    public void tearDown() throws Exception {
-        manager = null;
-    }
+  /**
+   * Destroys the test.
+   * @throws Exception ignored
+   */
+  @After
+  public void tearDown() throws Exception {
+    manager = null;
+    ((ConfigurableApplicationContext)context).close();
+    cal = null;
+  }
 
-    @Test
-    public void testListFacilities() {
-        assertEquals("Facilities:\nid:  " + name.hashCode() + "\n" + name + ":  " + desc + "\n" + "Address:  " + address
-                + "\n", manager.listFacilities());
-    }
+  @Test
+  public void testListFacilities() {
+    assertEquals("Facilities:\nid:  " + name.hashCode() + "\n" + name 
+        + ":  " + desc + "\n" + "Address:  " + address
+        + "\n", manager.listFacilities());
+  }
 
-    @Test
-    public void testRemoveFacilities() {
-        manager.removeFacility(name);
-        assertEquals("Facilities:\nNone", manager.listFacilities());
-    }
+  @Test
+  public void testRemoveFacilities() {
+    manager.removeFacility(name);
+    assertEquals("Facilities:\nNone", manager.listFacilities());
+  }
 
-    @Test
-    public void testAddRoomToFacility() {
-        int roomNumber = 1;
-        int capacity = 20;
-        manager.getFacility(name);
-        manager.addFacilityDetail(roomNumber, capacity);
-        assertEquals("Rooms:\nRoom 1 - Capacity 20\n", manager.listRooms());
-    }
+  @Test
+  public void testAddRoomToFacility() {
+    int roomNumber = 1;
+    int capacity = 20;
+    manager.getFacility(name);
+    manager.addFacilityDetail(roomNumber, capacity);
+    assertEquals("Rooms:\nRoom 1 - Capacity 20\n", manager.listRooms());
+  }
 
-    @Test
-    public void testScheduleMaintenance() {
-        manager.getFacility(name);
-        Date date1, date2;
-        c.set(2018, 0, 1);
-        date1 = c.getTime();
-        c.set(2018, 1, 1);
-        date2 = c.getTime();
-        assertTrue(manager.scheduleMaintenance(date1, date2));
-        c.set(1999, 1, 2);
-        date1 = c.getTime();
-        c.set(1999, 2, 3);
-        date2 = c.getTime();
-        assertFalse(manager.scheduleMaintenance(date1, date2));
-    }
+  @Test
+  public void testScheduleMaintenance() {
+    manager.getFacility(name);
+    cal.set(2018, 0, 1);
+    Date date1 = cal.getTime();
+    cal.set(2018, 1, 1);
+    Date date2 = cal.getTime();
+    assertTrue(manager.scheduleMaintenance(date1, date2));
+    cal.set(1999, 1, 2);
+    date1 = cal.getTime();
+    cal.set(1999, 2, 3);
+    date2 = cal.getTime();
+    assertFalse(manager.scheduleMaintenance(date1, date2));
+  }
 
-    @Test
-    public void TestCalcMaintenanceCostForFacility() {
-        
-        String problem = "Dirty Windows";
-        Date d1, d2;
-        c.set(2018, 1, 8);
-        d1 = c.getTime();
-        c.set(2018, 3, 8);
-        d2 = c.getTime();
-        manager.getFacility(name);
-        manager.makeFacilityMaintRequest(problem);
-        manager.createOrder("Clean Windows", 0);
-        
-        
-        manager.setLaborCost(BigDecimal.valueOf(20), 0);
-        manager.setPartsCost(BigDecimal.valueOf(5), 0);
-        manager.scheduleMaintenance(d1, d2);
-        assertEquals(25.00, manager.calcMaintenanceCostForFacility().doubleValue(), 0.005);
-    }
+  @Test
+  public void testCalcMaintenanceCostForFacility() {
+    manager.getFacility(name);
+    String problem = "Dirty Windows";
+    manager.makeFacilityMaintRequest(problem);
+    manager.createOrder("Clean Windows", 0);
+    manager.setLaborCost(BigDecimal.valueOf(20), 0);
+    manager.setPartsCost(BigDecimal.valueOf(5), 0);
+    cal.set(2018, 1, 8);
+    Date d1 = cal.getTime();
+    cal.set(2018, 3, 8);
+    Date d2 = cal.getTime();
+    manager.scheduleMaintenance(d1, d2);
+    assertEquals(25.00, manager.calcMaintenanceCostForFacility().doubleValue(), 0.005);
+  }
 
-    @Test
-    public void testCalcProblemRateForFacility() {
-        manager.getFacility(name);
-        manager.makeFacilityMaintRequest("1");
-        manager.makeFacilityMaintRequest("2");
-        System.out.println(manager.listMaintRequests());
-        assertEquals(2.0 / 365.0, manager.calcProblemRateForFacility(), 0.00005);
-    }
+  @Test
+  public void testCalcProblemRateForFacility() {
+    manager.getFacility(name);
+    manager.makeFacilityMaintRequest("1");
+    manager.makeFacilityMaintRequest("2");
+    System.out.println(manager.listMaintRequests());
+    assertEquals(2.0 / 365.0, manager.calcProblemRateForFacility(), 0.00005);
+  }
 
-    @Test
-    public void testCalcDownTimeForFacility() {
-        manager.getFacility(name);
-        Date date1, date2;
-        c.set(2018, 1, 8);
-        date1 = c.getTime();
-        c.set(2018, 3, 8);
-        date2 = c.getTime();
-        manager.scheduleMaintenance(date1, date2);
-        assertEquals(TimeUnit.MILLISECONDS.toDays((date2.getTime() - date1.getTime())), manager.calcDownTimeForFacility());
-    }
+  @Test
+  public void testCalcDownTimeForFacility() {
+    manager.getFacility(name);
+    cal.set(2018, 1, 8);
+    Date date1 = cal.getTime();
+    cal.set(2018, 3, 8);
+    Date date2 = cal.getTime();
+    manager.scheduleMaintenance(date1, date2);
+    assertEquals(TimeUnit.MILLISECONDS.toDays((date2.getTime() 
+        - date1.getTime())), manager.calcDownTimeForFacility());
+  }
 
-    @Test
-    public void testListFacilityProblems() {
-        String problem1 = "Bathroom is flooded";
-        String problem2 = "Clock is crooked";
-        manager.getFacility(name);
-        assertEquals("No facility problems.", manager.listFacilityProblems());
-        manager.makeFacilityMaintRequest(problem1);
-        manager.makeFacilityMaintRequest(problem2);
-        assertEquals("Facility Problems:\n" + problem1 + "\n" + problem2 + "\n", manager.listFacilityProblems());
-    }
+  @Test
+  public void testListFacilityProblems() {
+    manager.getFacility(name);
+    assertEquals("No facility problems.", manager.listFacilityProblems());
+    String problem1 = "Bathroom is flooded";
+    String problem2 = "Clock is crooked";
+    manager.makeFacilityMaintRequest(problem1);
+    manager.makeFacilityMaintRequest(problem2);
+    assertEquals("Facility Problems:\n" + problem1 + "\n" 
+        + problem2 + "\n", manager.listFacilityProblems());
+  }
 }

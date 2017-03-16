@@ -4,48 +4,80 @@ import java.math.BigDecimal;
 
 public interface Order {
   
-    public void setLaborCost(LaborCost laborCost);
-    public LaborCost getLaborCost();
-    public void setPartsCost(PartsCost partsCost);
-    public PartsCost getPartsCost();
-    public void setTotalCost(BigDecimal totalCost);
-    public BigDecimal getTotalCost();
+  /**
+   * Logs the creation.
+   */
+  public void log();
+
+  /**
+   * Sets laborCost object.
+   * @param laborCost LaborCost
+   */
+  public void setLaborCost(Cost laborCost);
   
-    /**
-     * @return description
-     */
-    public String getDescription();
+  /**
+   * Sets PartsCost object.
+   * @param partsCost PartsCost
+   */
+  public void setPartsCost(Cost partsCost);
+  
+  /**
+   * Sets total cost.
+   * @param totalCost BigDecimal 
+   */
+  public void setTotalCost(BigDecimal totalCost);
 
-    /**
-     * @return order number
-     */
-    public int getOrderNum();
+  /**
+   * Gets the description.
+   * @return description String
+   */
+  public String getDescription();
 
-    /**
-     * True is complete, false is open
-     * @param status
-     */
-    public void setStatus(boolean status);
+  /**
+   * Gets the order number.
+   * @return order integer
+   */
+  public int getOrderNum();
 
-    /**
-     * @return status of order
-     */
-    public boolean getStatus();
+  /**
+   * True is complete, false is open.
+   * @param status boolean
+   */
+  public void setStatus(boolean status);
 
-    /**
-     * sets labor cost in BigDecimal format
-     * @param cost
-     */
-    public void setLabor(BigDecimal cost);
+  /**
+   * Gets the status.
+   * @return status of order
+   */
+  public boolean getStatus();
 
-    /**
-     * sets part cost in BigDecimal format
-     * @param cost
-     */
-    public void setParts(BigDecimal cost);
+  /**
+   * Sets labor cost in BigDecimal format.
+   * @param cost BigDecimal
+   */
+  public void setLabor(BigDecimal cost);
 
-    /**
-     * @return total cost of parts and labor
-     */
-    public BigDecimal getCost();
+  /**
+   * Sets part cost in BigDecimal format.
+   * @param cost BigDecimal
+   */
+  public void setParts(BigDecimal cost);
+
+  /**
+   * Returns total cost.
+   * @return BigDecimal object
+   */
+  public BigDecimal getCost();
+
+  /**
+   * Sets the description.
+   * @param description String
+   */
+  public void setDescription(String description);
+
+  /**
+   * Sets the order number.
+   * @param orderNum integer
+   */
+  public void setOrderNum(int orderNum);
 }

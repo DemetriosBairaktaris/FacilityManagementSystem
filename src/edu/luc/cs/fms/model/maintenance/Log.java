@@ -3,25 +3,29 @@ package edu.luc.cs.fms.model.maintenance;
 import java.util.List;
 
 public interface Log {
-  
-    public void setMaintenance(List<ConcreteOrder> maintenance);
-    public List<ConcreteOrder> getMaintenance();
-  
-    /**
-     * adds an order to the log
-     * @param order
-     */
-    public void addOrder(ConcreteOrder order);
-    /**
-     * retrieves an order from the log
-     * @param index
-     * @return selected order
-     */
-    public ConcreteOrder getOrder(int index);
 
-    /**
-     * returns all orders
-     * @return all orders
-     */
-    public List<ConcreteOrder> getMaintenanceList();
+  /**
+   * Sets the list of maintenance objects.
+   * @param maintenance list of orders
+   */
+  public void setMaintenance(List<Order> maintenance);
+
+  /**
+   * Adds an order to the log.
+   * @param order Order
+   */
+  public void addOrder(Order order);
+
+  /**
+   * Retrieves an order from the log.
+   * @param index integer
+   * @return selected order
+   */
+  public Order getOrder(int index);
+
+  /**
+   * Returns all orders.
+   * @return all orders list
+   */
+  public List<Order> getMaintenanceList();
 }

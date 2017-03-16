@@ -6,103 +6,123 @@ import java.util.List;
 
 public interface Maintenance {
 
-    public void setLog(ConcreteLog log);
-    public ConcreteLog getLog();
-    public void setRequests(List<ConcreteMaintenanceRequest> requests);
-    public List<ConcreteMaintenanceRequest> getRequests();
-    public void setOrders(List<ConcreteOrder> orders);
-    public List<ConcreteOrder> getOrders();
-    public void setSchedule(ConcreteSchedule schedule);
-    public ConcreteSchedule getSchedule();
-    public void setCost(BigDecimal cost);
-    public BigDecimal getCost();
-    public void setOrderNum(int orderNum);
-    public int getOrderNum();
-    public void setNumRequests(int numRequests);
-    public int getNumRequests();
+  /**
+   * Sets the log object.
+   * @param log Log
+   */
+  public void setLog(Log log);
   
-    /**
-     * makes a maintenance request
-     * @param problem
-     */
-    public void makeFacilityMaintRequest(String problem);
+  /**
+   * Sets the request object list.
+   * @param requests list
+   */
+  public void setRequests(List<MaintenanceRequest> requests);
+  
+  /**
+   * Sets the order object list.
+   * @param orders list
+   */
+  public void setOrders(List<Order> orders);
+  
+  /**
+   * Sets the schedule object.
+   * @param schedule Schedule
+   */
+  public void setSchedule(Schedule schedule);
+  
+  /**
+   * Sets the cost object.
+   * @param cost BigDecimal
+   */
+  public void setCost(BigDecimal cost);
 
-    /**
-     * schedules maintenance for specified dates
-     * @param start
-     * @param end
-     * @return true if successful
-     */
-    public boolean scheduleMaintenance(Date start, Date end);
+  /**
+   * Sets the request number.
+   * @param numRequests integer
+   */
+  public void setNumRequests(int numRequests);
 
-    /**
-     * calculates total maintenance cost
-     * @return
-     */
-    public BigDecimal calcMaintenanceCostForFacility();
+  /**
+   * Makes a maintenance request.
+   * @param problem String
+   */
+  public void makeFacilityMaintRequest(String problem);
 
-    /**
-     * calculates problem rate per 365 days
-     * @return
-     */
-    public float calcProblemRateForFacility();
+  /**
+   * Schedules maintenance for specified dates.
+   * @param start Date
+   * @param end Date
+   * @return boolean true if successful
+   */
+  public boolean scheduleMaintenance(Date start, Date end);
 
-    /**
-     * calculates down time for facility
-     * @return
-     */
-    public long calcDownTimeForFacility();
+  /**
+   * Calculates total maintenance cost.
+   * @return BigDecimal object
+   */
+  public BigDecimal calcMaintenanceCostForFacility();
 
-    /**
-     * retrieves a list of maintenance requests
-     * @return
-     */
-    public List<ConcreteMaintenanceRequest> listMaintRequests();
+  /**
+   * Calculates problem rate per 365 days.
+   * @return float number
+   */
+  public float calcProblemRateForFacility();
 
-    /**
-     * retrieves list of maintenance performed
-     * @return
-     */
-    public List<ConcreteOrder> listMaintenance();
+  /**
+   * Calculates down time for facility.
+   * @return long number
+   */
+  public long calcDownTimeForFacility();
 
-    /**
-     * lists the problems in the maintenance requests
-     * @return
-     */
-    public String listFacilityProblems();
+  /**
+   * Retrieves a list of maintenance requests.
+   * @return List of maintenance requests
+   */
+  public List<MaintenanceRequest> listMaintRequests();
 
-    /**
-     * creates an order and assigns it to a maintenance request
-     * @param desc
-     * @param requestNum
-     */
-    public void createOrder(String desc, int requestNum);
+  /**
+   * Retrieves list of maintenance performed.
+   * @return list of orders
+   */
+  public List<Order> listMaintenance();
 
-    /**
-     * sets labor cost for an order
-     * @param cost
-     * @param orderNum
-     */
-    public void setLaborCost(BigDecimal cost, int orderNum);
+  /**
+   * Lists the problems in the maintenance requests.
+   * @return String of facility problems
+   */
+  public String listFacilityProblems();
 
-    /**
-     * sets parts cost for an order
-     * @param cost
-     * @param orderNum
-     */
-    public void setPartsCost(BigDecimal cost, int orderNum);
+  /**
+   * Creates an order and assigns it to a maintenance request.
+   * @param description String
+   * @param requestNum integer
+   */
+  public void createOrder(String description, int requestNum);
 
-    /**
-     * closes maintenance request if it has no open orders
-     * @param requestNum
-     */
-    public void closeRequest(int requestNum);
+  /**
+   * Sets labor cost for an order.
+   * @param cost BigDecimal
+   * @param orderNum integer
+   */
+  public void setLaborCost(BigDecimal cost, int orderNum);
 
-    /**
-     * closes an order and removes it from maintenance request
-     * @param orderNum
-     * @param requestNum
-     */
-    public void closeOrder(int orderNum, int requestNum);
+  /**
+   * Sets parts cost for an order.
+   * @param cost BigDecimal
+   * @param orderNum integer
+   */
+  public void setPartsCost(BigDecimal cost, int orderNum);
 
+  /**
+   * Closes maintenance request if it has no open orders.
+   * @param requestNum integer
+   */
+  public void closeRequest(int requestNum);
+
+  /**
+   * Closes an order and removes it from maintenance request.
+   * @param orderNum integer
+   * @param requestNum integer
+   */
+  public void closeOrder(int orderNum, int requestNum);
 }
