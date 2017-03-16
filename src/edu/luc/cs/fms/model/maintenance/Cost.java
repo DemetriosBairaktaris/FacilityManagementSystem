@@ -4,13 +4,15 @@ import java.math.BigDecimal;
 
 public interface Cost {
 
-    /**
-     * @param cost
-     */
-    public void setCost(BigDecimal cost);
+  /**
+   * Sets the cost.
+   * @param cost BigDecimal cost
+   */
+  public void setCost(BigDecimal cost);
 
-    /**
-     * @return cost
-     */
-    public BigDecimal getCost();
+  /**
+   * Gets the cost.
+   * @return cost BigDecimal cost
+   */
+  public BigDecimal getCost();
 }

@@ -1,223 +1,221 @@
 package edu.luc.cs.fms.model.facility;
 
+import edu.luc.cs.fms.dal.FacilityData;
+import edu.luc.cs.fms.model.maintenance.MaintenanceRequest;
+import edu.luc.cs.fms.model.maintenance.Order;
+import edu.luc.cs.fms.model.system.SystemLog;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import edu.luc.cs.fms.dal.ConcreteFacilityDAO;
-import edu.luc.cs.fms.model.maintenance.ConcreteMaintenanceRequest;
-import edu.luc.cs.fms.model.maintenance.ConcreteOrder;
-import edu.luc.cs.fms.model.system.SystemLog;
-
 /**
- * 
+ * This class defines a facility manager.
  * @author TeamDK
  *
  */
 public interface FacilityManager {
 
-    public ConcreteFacilityDAO getFacilities();
+  /**
+   * Lists the facilities.
+   * @return String
+   */
+  public String listFacilities();
   
-    /**
-     * 
-     * @return list of facilities in a string
-     */
-    public String listFacilities();
+  /**
+   * All pertinent facility information in a string.
+   * @return String
+   */
+  public String getFacilityInformation();
+  
+  /**
+   * Available capacity.
+   * @return integer
+   */
+  public int requestAvailableCapacity();
+  
+  /**
+   * Creates a new facility object.
+   * @param name String
+   * @param description String
+   * @param address String
+   */
+  public void addNewFacility(String name, String description, String address);
+  
+  /**
+   * Adds a new room or detail to the facility.
+   * @param roomNumber integer
+   * @param capacity integer
+   */
+  public void addFacilityDetail(int roomNumber, int capacity);
+  
+  /**
+   * Removes a facility from management.
+   * @param name String
+   */
+  public void removeFacility(String name);
+  
+  /**
+   * Returns a facility.
+   * @param name String
+   */
+  public void getFacility(String name);
+  
+  /**
+   * Shows the current facility in a string.
+   * @return String
+   */
+  public String currentFacility();
+  
+  /**
+   * Lists all rooms and their information.
+   * @return String
+   */
+  public String listRooms();
+  
+  /**
+   * Checks if facility is in use during specific interval.
+   * @param date1 Date
+   * @param date2 Date
+   * @return true if successful
+   */
+  public boolean isInUseDuringInterval(Date date1, Date date2);
+  
+  /**
+   * Assigns facility for usage in a specified date range.
+   * @param date1 Date
+   * @param date2 Date
+   * @return true if successful
+   */
+  public boolean assignFacilityToUse(Date date1, Date date2);
+  
+  /**
+   * Vacates a facility.
+   */
+  public void vacateFacility();
+  
+  /**
+   * Lists all inspections.
+   * @return String
+   */
+  public String listInspections();
+  
+  /**
+   * lLists actual usage.
+   * @return String
+   */
+  public String listActualUsage();
+  
+  /**
+   * Calculated usage rate.
+   * @return double
+   */
+  public double calcUsageRate();
+  
+  /**
+   *  inspects a facility.
+   * @return boolean
+   */
+  public boolean inspect();
+   
+  /**
+   * Sets the system log. 
+   * @param sysLog SystemLog
+   */
+  public void setSysLog(SystemLog sysLog);
+   
+  /**
+   * Sets the facilities data. 
+   * @param facilities FacilityDate
+   */
+  public void setFacilities(FacilityData facilities);
+   
+  /**
+   * Called to log the creation of object.
+   */
+  public void log();
+   
+  /**
+   * Closes a request.
+   * @param requestNum integer
+   */
+  public void closeRequest(int requestNum);
+   
+  /**
+   * Sets the parts cost.
+   * @param cost BigDecimal
+   * @param orderNum integer
+   */
+  public void setPartsCost(BigDecimal cost, int orderNum);
+   
+  /**
+   * Sets the labor cost.
+   * @param cost BigDecimal
+   * @param orderNum integer
+   */
+  public void setLaborCost(BigDecimal cost, int orderNum);
+   
+  /**
+   * Creates an order.
+   * @param description String
+   * @param requestNum integer
+   */
+  public void createOrder(String description, int requestNum);
+   
+  /**
+   * Returns a list of the problems.
+   * @return String
+   */
+  public String listFacilityProblems();
+   
+  /**
+   * Lists the maintenance done.
+   * @return List
+   */
+  public List<Order> listMaintenance();
+  
+  /**
+   * Lists the maintenance open.
+   * @return List
+   */
+  public List<MaintenanceRequest> listMaintRequests();
 
-    /**
-     * 
-     * @return all pertinent facility information in a string
-     */
-    public String getFacilityInformation();
+  /**
+   * Calculates the facility down time.
+   * @return long
+   */
+  public long calcDownTimeForFacility();
+   
+  /**
+   * Calculates the facility problem rate.
+   * @return float
+   */
+  public float calcProblemRateForFacility();
+   
+  /**
+   * Calculates the cost of the facility.
+   * @return BigDecimal
+   */
+  public BigDecimal calcMaintenanceCostForFacility();
 
-    /**
-     * 
-     * @return available capacity
-     */
-    public int requestAvailableCapacity();
+  /**
+   * Schedules the maintenance.
+   * @param date1 Date
+   * @param date2 Date
+   * @return boolean
+   */
+  public boolean scheduleMaintenance(Date date1, Date date2);
+   
+  /**
+   * Makes a maintenance request. 
+   * @param problem String
+   */
+  public void makeFacilityMaintRequest(String problem);
 
-    /**
-     * creates a new facility object
-     * @param name
-     * @param Desc
-     * @param address
-     */
-    public void addNewFacility(String name, String Desc, String address);
-
-    /**
-     * adds a new room or detail to the facility
-     * @param roomNumber
-     * @param capacity
-     */
-    public void addFacilityDetail(int roomNumber, int capacity);
-
-    /**
-     * removes a facility from management
-     * @param name
-     */
-    public void removeFacility(String name);
-
-    /**
-     * returns a facility
-     * @param name
-     */
-    public void getFacility(String name);
-
-    /**
-     * shows the current facility in a string
-     * @return
-     */
-    public String currentFacility();
-
-    /**
-     * lists all rooms and their information
-     * @return
-     */
-    public String listRooms();
-
-    /**
-     * checks if facility is in use during specific interval
-     * @param date1
-     * @param date2
-     * @return true if successful
-     */
-    public boolean isInUseDuringInterval(Date date1, Date date2);
-
-    /**
-     * assigns facility for usage in a specified date range
-     * @param date1
-     * @param date2
-     * @return true if successful
-     */
-    public boolean assignFacilityToUse(Date date1, Date date2);
-
-    /**
-     * vacates a facility
-     */
-    public void vacateFacility();
-
-    /**
-     * lists all inspections
-     * @return list of inspections
-     */
-    public String listInspections();
-
-    /**
-     * lists actual usage 
-     * @return actual usage
-     */
-    public String listActualUsage();
-
-    /**
-     * 
-     * @return calculated usage rate
-     */
-     public double calcUsageRate();
-
-     /**
-      * inspects a facility
-      * @return true if passed
-      */
-     public boolean inspect();
-     
-     /**
-      * 
-      * @param sysLog
-      */
-     public void setSysLog(SystemLog sysLog);
-     
-     /**
-      * 
-      * @param facilities
-      */
-     public void setFacilities(ConcreteFacilityDAO facilities);
-     
-     /**
-      * called to log the creation of object
-      */
-     void log();
-     
-     /**
-      * 
-      * @param requestNum
-      */
-     void closeRequest(int requestNum);
-     
-     /**
-      * 
-      * @param cost
-      * @param orderNum
-      */
-     void setPartsCost(BigDecimal cost, int orderNum);
-     
-     /**
-      * 
-      * @param cost
-      * @param orderNum
-      */
-     void setLaborCost(BigDecimal cost, int orderNum);
-     
-     /**
-      * 
-      * @param desc
-      * @param requestNum
-      */
-     void createOrder(String desc, int requestNum);
-     
-     /**
-      * 
-      * @return
-      */
-     String listFacilityProblems();
-     
-     /**
-      * 
-      * @return
-      */
-     List<ConcreteOrder> listMaintenance();
-             
-     /**
-      * 
-      * @return
-      */
-     List<ConcreteMaintenanceRequest> listMaintRequests();
-     
-     /**
-      * 
-      * @return
-      */
-     long calcDownTimeForFacility();
-     
-     /**
-      * 
-      * @return
-      */
-     float calcProblemRateForFacility();
-     
-     /**
-      * 
-      * @return
-      */
-     BigDecimal calcMaintenanceCostForFacility();
-     
-     /**
-      * 
-      * @param date1
-      * @param date2
-      * @return
-      */
-     boolean scheduleMaintenance(Date date1, Date date2);
-     
-     /**
-      * 
-      * @param problem
-      */
-     void makeFacilityMaintRequest(String problem);
-     
-     /**
-      * 
-      * @param orderNum
-      * @param requestNum
-      */
-     void closeOrder(int orderNum, int requestNum);
+  /**
+   * Closes the order.
+   * @param orderNum integer
+   * @param requestNum integer
+   */
+  public void closeOrder(int orderNum, int requestNum);
 }

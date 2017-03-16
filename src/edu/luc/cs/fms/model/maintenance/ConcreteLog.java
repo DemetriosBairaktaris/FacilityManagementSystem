@@ -1,6 +1,5 @@
 package edu.luc.cs.fms.model.maintenance;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,48 +8,34 @@ import java.util.List;
  * @author TeamDK
  *
  */
-public class ConcreteLog implements Log{
+public class ConcreteLog implements Log {
 
-    private List<ConcreteOrder> maintenance;
+  private List<Order> maintenance;
 
-    public ConcreteLog() {
-        //maintenance = new ArrayList<ConcreteOrder>();
-    }
+  public ConcreteLog() {}
 
-    public void setMaintenance(List<ConcreteOrder> maintenance) {
-      this.maintenance = maintenance;
-    };
-    public List<ConcreteOrder> getMaintenance() {
-      return maintenance;
-    };
-    
-    /**
-     * adds an order to the log
-     * @param order
-     */
-    public void addOrder(ConcreteOrder order) {
-        maintenance.add(order);
-    }
+  @Override
+  public void setMaintenance(List<Order> maintenance) {
+    this.maintenance = maintenance;
+  }
 
-    /**
-     * retrieves an order from the log
-     * @param index
-     * @return selected order
-     */
-    public ConcreteOrder getOrder(int index) {
-        return maintenance.get(index);
-    }
+  @Override
+  public void addOrder(Order order) {
+    maintenance.add(order);
+  }
 
-    /**
-     * returns all orders
-     * @return all orders
-     */
-    public List<ConcreteOrder> getMaintenanceList() {
-        return maintenance;
-    }
+  @Override
+  public Order getOrder(int index) {
+    return maintenance.get(index);
+  }
 
-    @Override
-    public String toString() {
-        return "Completed Maintenance Log";
-    }
+  @Override
+  public List<Order> getMaintenanceList() {
+    return maintenance;
+  }
+
+  @Override
+  public String toString() {
+    return "Completed Maintenance Log";
+  }
 }
