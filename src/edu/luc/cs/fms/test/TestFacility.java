@@ -11,7 +11,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -29,15 +31,30 @@ public class TestFacility {
   private String name = "Water Tower Campus";
   private String description = "LUC Campus located at Water Tower Place.";
   private String address = "911 Clark Street";
-  private ApplicationContext context; 
-
+  private static ApplicationContext context; 
+  
+  /**
+   * Runs once first before tests
+   */
+  @BeforeClass
+  public static void setUpClass() {
+      context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
+  }
+  
+  /**
+   * Runs after all tests are done
+   */
+  @AfterClass
+  public static void afterClass() { 
+      ((ConfigurableApplicationContext)context).close();
+  }
+  
   /**
    * Sets up the test of facility.
    * @throws Exception ignore
    */
   @Before
   public void setUp() throws Exception {
-    context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
     facility = (Facility) context.getBean("facility");
     facility.setAddress(address);
     facility.setName(name);
@@ -63,7 +80,6 @@ public class TestFacility {
   @After
   public void tearDown() throws Exception {
     facility = null;
-    ((ConfigurableApplicationContext)context).close();
   }
 
   @Test

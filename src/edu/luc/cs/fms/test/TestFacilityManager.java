@@ -13,7 +13,9 @@ import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -32,15 +34,30 @@ public class TestFacilityManager {
   private String desc = "Building Containing classrooms";
   private String address = "23 west loyola ave";
   private Calendar cal;
-  ApplicationContext context; 
+  private static ApplicationContext context; 
+
+  /**
+   * runs once before all test
+   */
+  @BeforeClass
+  public static void setUpClass() {
+    context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
+  }
+  
+  /*
+   * runs after all tests are done
+   */
+  @AfterClass
+  public static void afterClass(){
+      ((ConfigurableApplicationContext)context).close();
+  }
 
   /**
    * Sets up the test.
    * @throws Exception ignored
    */
   @Before
-  public void setUp() throws Exception {
-    context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
+    public void setUp() throws Exception {
     manager = (FacilityManager) context.getBean("manager");
     manager.addNewFacility(name, desc, address);
     cal = new GregorianCalendar();
@@ -53,7 +70,6 @@ public class TestFacilityManager {
   @After
   public void tearDown() throws Exception {
     manager = null;
-    ((ConfigurableApplicationContext)context).close();
     cal = null;
   }
 

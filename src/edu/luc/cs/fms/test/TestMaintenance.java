@@ -10,7 +10,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -30,15 +32,29 @@ public class TestMaintenance {
   private Date date2;
   private Date date3;
   private Date date4;
-  private ApplicationContext context;
+  private static ApplicationContext context;
 
+  /**
+   * runs once before all tests
+   */
+  @BeforeClass
+  public static void setUpClass() {
+      context = new ClassPathXmlApplicationContext("/META-INF/maintenance-context.xml");
+  }
+  
+  /**
+   * runs after all tests are done
+   */
+  @AfterClass
+  public static void afterClass(){
+      ((ConfigurableApplicationContext)context).close();
+  }
   /**
    * Provides the setup.
    * @throws Exception ignored
    */
   @Before
   public void setUp() throws Exception {
-    context = new ClassPathXmlApplicationContext("/META-INF/maintenance-context.xml");
     maintenance = (Maintenance) context.getBean("maintenance");
     laborCost = new BigDecimal("343.87");
     partsCost = new BigDecimal("210.45");
@@ -62,7 +78,6 @@ public class TestMaintenance {
    */
   @After
   public void tearDown() throws Exception {
-    ((ConfigurableApplicationContext)context).close();
     maintenance = null;
     laborCost = null;
     partsCost = null;

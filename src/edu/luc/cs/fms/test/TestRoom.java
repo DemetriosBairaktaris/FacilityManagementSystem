@@ -6,7 +6,9 @@ import static org.junit.Assert.assertTrue;
 import edu.luc.cs.fms.model.facility.Room;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -22,15 +24,29 @@ public class TestRoom {
   private Room room;
   private int roomNum;
   private int capacity;
-  private ApplicationContext context;
+  private static ApplicationContext context;
 
+  /**
+   * runs once before all tests
+   */
+  @BeforeClass
+  public static void setUpClass() {
+      context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml"); 
+  }
+  
+  /**
+   * runs once after all tests
+   */
+  @AfterClass
+  public static void afterClass() {
+      ((ConfigurableApplicationContext)context).close();
+  }
   /**
    * Sets up the test.
    * @throws Exception ignored
    */
   @Before
   public void setUp() throws Exception {
-    context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
     roomNum = 101;
     capacity = 40;
     room = (Room) context.getBean("room");
@@ -45,7 +61,6 @@ public class TestRoom {
   @After
   public void tearDown() throws Exception {
     room = null;
-    ((ConfigurableApplicationContext)context).close();
   }
 
   @Test
