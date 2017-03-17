@@ -29,7 +29,7 @@ public class ConcreteOrder implements Order {
   
   @Override
   public void setSysLog(SystemLog sysLog) {
-      this.sysLog = sysLog ; 
+    this.sysLog = sysLog ; 
   }
 
   @Override

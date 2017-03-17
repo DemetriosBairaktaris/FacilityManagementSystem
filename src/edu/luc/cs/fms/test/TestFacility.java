@@ -34,11 +34,11 @@ public class TestFacility {
   private static ApplicationContext context; 
   
   /**
-   * Runs once first before tests
+   * Runs once first before tests.
    */
   @BeforeClass
   public static void setUpClass() {
-      context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
+    context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml");
   }
   
   /**
@@ -46,7 +46,7 @@ public class TestFacility {
    */
   @AfterClass
   public static void afterClass() { 
-      ((ConfigurableApplicationContext)context).close();
+    ((ConfigurableApplicationContext)context).close();
   }
   
   /**

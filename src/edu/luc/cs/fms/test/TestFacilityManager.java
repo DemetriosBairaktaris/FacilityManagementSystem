@@ -37,7 +37,7 @@ public class TestFacilityManager {
   private static ApplicationContext context; 
 
   /**
-   * runs once before all test
+   * runs once before all test.
    */
   @BeforeClass
   public static void setUpClass() {
@@ -48,8 +48,8 @@ public class TestFacilityManager {
    * runs after all tests are done
    */
   @AfterClass
-  public static void afterClass(){
-      ((ConfigurableApplicationContext)context).close();
+  public static void afterClass() {
+    ((ConfigurableApplicationContext)context).close();
   }
 
   /**

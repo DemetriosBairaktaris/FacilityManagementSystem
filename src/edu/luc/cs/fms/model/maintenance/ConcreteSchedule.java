@@ -23,8 +23,8 @@ public class ConcreteSchedule implements Schedule {
   public ConcreteSchedule() {/*default*/}
 
   @Override
-  public void setSysLog(SystemLog sysLog){
-      this.sysLog = sysLog ; 
+  public void setSysLog(SystemLog sysLog) {
+    this.sysLog = sysLog ; 
   }
   
   @Override

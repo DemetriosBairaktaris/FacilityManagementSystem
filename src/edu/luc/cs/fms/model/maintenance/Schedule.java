@@ -1,9 +1,9 @@
 package edu.luc.cs.fms.model.maintenance;
 
+import edu.luc.cs.fms.model.system.SystemLog;
+
 import java.util.Date;
 import java.util.List;
-
-import edu.luc.cs.fms.model.system.SystemLog;
 
 public interface Schedule {
 
@@ -46,8 +46,8 @@ public interface Schedule {
   public long calcDownTimeForFacility();
   
   /**
-   * 
-   * @param sysLog
+   * Sets the sysLog.
+   * @param sysLog SystemLog
    */
   void setSysLog(SystemLog sysLog);
 }

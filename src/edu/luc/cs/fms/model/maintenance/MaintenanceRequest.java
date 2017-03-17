@@ -65,8 +65,8 @@ public interface MaintenanceRequest {
   public void setRequestNum(int requestNum);
   
   /**
-   * 
-   * @param sysLog
+   * Sets the sysLog.
+   * @param sysLog SystemLog
    */
   void setSysLog(SystemLog sysLog);
 }

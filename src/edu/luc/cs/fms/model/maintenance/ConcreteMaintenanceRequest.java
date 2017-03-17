@@ -24,8 +24,8 @@ public class ConcreteMaintenanceRequest implements MaintenanceRequest {
   }
   
   @Override 
-  public void setSysLog(SystemLog sysLog){
-      this.sysLog  = sysLog ; 
+  public void setSysLog(SystemLog sysLog) {
+    this.sysLog  = sysLog ; 
   }
 
   @Override

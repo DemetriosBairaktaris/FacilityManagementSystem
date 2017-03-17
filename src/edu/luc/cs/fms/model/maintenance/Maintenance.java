@@ -1,10 +1,10 @@
 package edu.luc.cs.fms.model.maintenance;
 
+import edu.luc.cs.fms.model.system.SystemLog;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-
-import edu.luc.cs.fms.model.system.SystemLog;
 
 public interface Maintenance {
 
@@ -129,8 +129,8 @@ public interface Maintenance {
   public void closeOrder(int orderNum, int requestNum);
 
   /**
-   * 
-   * @param sysLog
+   * Sets the sysLog.
+   * @param sysLog SystemLog
    */
   void setSysLog(SystemLog sysLog);
 }

@@ -35,19 +35,19 @@ public class TestMaintenance {
   private static ApplicationContext context;
 
   /**
-   * runs once before all tests
+   * runs once before all tests.
    */
   @BeforeClass
   public static void setUpClass() {
-      context = new ClassPathXmlApplicationContext("/META-INF/maintenance-context.xml");
+    context = new ClassPathXmlApplicationContext("/META-INF/maintenance-context.xml");
   }
   
   /**
-   * runs after all tests are done
+   * runs after all tests are done.
    */
   @AfterClass
-  public static void afterClass(){
-      ((ConfigurableApplicationContext)context).close();
+  public static void afterClass() {
+    ((ConfigurableApplicationContext)context).close();
   }
 
   /**

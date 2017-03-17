@@ -27,20 +27,21 @@ public class TestRoom {
   private static ApplicationContext context;
 
   /**
-   * runs once before all tests
+   * runs once before all tests.
    */
   @BeforeClass
   public static void setUpClass() {
-      context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml"); 
+    context = new ClassPathXmlApplicationContext("/META-INF/facility-context.xml"); 
   }
   
   /**
-   * runs once after all tests
+   * runs once after all tests.
    */
   @AfterClass
   public static void afterClass() {
-      ((ConfigurableApplicationContext)context).close();
+    ((ConfigurableApplicationContext)context).close();
   }
+  
   /**
    * Sets up the test.
    * @throws Exception ignored
