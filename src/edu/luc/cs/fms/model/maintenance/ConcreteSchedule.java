@@ -20,10 +20,13 @@ public class ConcreteSchedule implements Schedule {
   private long downTime;
   private SystemLog sysLog;
 
-  public ConcreteSchedule(SystemLog sysLog) {
-    this.sysLog = sysLog;
-  }
+  public ConcreteSchedule() {/*default*/}
 
+  @Override
+  public void setSysLog(SystemLog sysLog){
+      this.sysLog = sysLog ; 
+  }
+  
   @Override
   public void setCurrentDate(Date currentDate) {
     this.currentDate = currentDate;

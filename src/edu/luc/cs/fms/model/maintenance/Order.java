@@ -1,5 +1,7 @@
 package edu.luc.cs.fms.model.maintenance;
 
+import edu.luc.cs.fms.model.system.SystemLog;
+
 import java.math.BigDecimal;
 
 public interface Order {
@@ -80,4 +82,10 @@ public interface Order {
    * @param orderNum integer
    */
   public void setOrderNum(int orderNum);
+  
+  /**
+   * Sets the System Log.
+   * @param sysLog SystemLog
+   */
+  void setSysLog(SystemLog sysLog);
 }

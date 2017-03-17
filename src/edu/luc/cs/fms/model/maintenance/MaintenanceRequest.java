@@ -1,5 +1,7 @@
 package edu.luc.cs.fms.model.maintenance;
 
+import edu.luc.cs.fms.model.system.SystemLog;
+
 public interface MaintenanceRequest {
 
   public void setOpenOrders(int openOrders);
@@ -61,4 +63,10 @@ public interface MaintenanceRequest {
    * @param requestNum integer
    */
   public void setRequestNum(int requestNum);
+  
+  /**
+   * 
+   * @param sysLog
+   */
+  void setSysLog(SystemLog sysLog);
 }

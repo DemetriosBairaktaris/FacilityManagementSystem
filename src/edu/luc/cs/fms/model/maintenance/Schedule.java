@@ -3,6 +3,8 @@ package edu.luc.cs.fms.model.maintenance;
 import java.util.Date;
 import java.util.List;
 
+import edu.luc.cs.fms.model.system.SystemLog;
+
 public interface Schedule {
 
   /**
@@ -42,4 +44,10 @@ public interface Schedule {
    * @return total down time for facility from total maintenance
    */
   public long calcDownTimeForFacility();
+  
+  /**
+   * 
+   * @param sysLog
+   */
+  void setSysLog(SystemLog sysLog);
 }

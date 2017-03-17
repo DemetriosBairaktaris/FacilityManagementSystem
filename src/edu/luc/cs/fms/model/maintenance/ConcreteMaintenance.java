@@ -29,13 +29,16 @@ public class ConcreteMaintenance implements Maintenance {
   ApplicationContext context = 
       new ClassPathXmlApplicationContext("/META-INF/maintenance-context.xml");
 
-  public ConcreteMaintenance(SystemLog sysLog) {
-    this.sysLog = sysLog;
-  }
+  public ConcreteMaintenance() {/*default*/}
 
   @Override
   public void setLog(Log log) {
     this.log = log;
+  }
+  
+  @Override
+  public void setSysLog(SystemLog sysLog) {
+    this.sysLog = sysLog ; 
   }
   
   @Override

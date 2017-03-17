@@ -42,7 +42,7 @@ public class TestFacility {
   }
   
   /**
-   * Runs after all tests are done
+   * Runs after all tests are done.
    */
   @AfterClass
   public static void afterClass() { 

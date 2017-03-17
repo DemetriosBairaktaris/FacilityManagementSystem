@@ -26,6 +26,7 @@
         <property name="requestNum" value="0" />
         <property name="openOrders" value="0" />
         <property name="status" value="false" />
+        <property name="sysLog" ref="system"/>
     </bean>
     
     <bean id="maintenance" class="edu.luc.cs.fms.model.maintenance.ConcreteMaintenance" scope="prototype">
@@ -35,6 +36,7 @@
         <property name="cost" ref="decimal" />
         <property name="numRequests" value="0" />
         <property name="schedule" ref="schedule" />
+        <property name="sysLog" ref="system"/>
     </bean>
     
     <bean id="order" class="edu.luc.cs.fms.model.maintenance.ConcreteOrder" scope="prototype" >
@@ -43,6 +45,7 @@
         <property name="totalCost" ref="decimal" />
         <property name="status" value="false" />
         <property name="orderNum" value="0" />
+        <property name="sysLog" ref="system"/>
     </bean>
     
     <bean id="schedule" class="edu.luc.cs.fms.model.maintenance.ConcreteSchedule" scope="prototype" >
@@ -50,6 +53,7 @@
         <property name="startDate" ref="list" />
         <property name="endDate" ref="list" />
         <property name="downTime" value="0" />
+        <property name="sysLog" ref="system" />
     </bean>
     
     <bean id="labor" class="edu.luc.cs.fms.model.maintenance.LaborCost" scope="prototype" >

@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import edu.luc.cs.fms.model.system.SystemLog;
+
 public interface Maintenance {
 
   /**
@@ -125,4 +127,10 @@ public interface Maintenance {
    * @param requestNum integer
    */
   public void closeOrder(int orderNum, int requestNum);
+
+  /**
+   * 
+   * @param sysLog
+   */
+  void setSysLog(SystemLog sysLog);
 }

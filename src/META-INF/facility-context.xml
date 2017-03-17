@@ -51,14 +51,14 @@
     <bean id="interval" class="edu.luc.cs.fms.model.facility.ConcreteInterval" scope="prototype" >
         <property name="endDate" ref="date" />
         <property name="startDate" ref="date" />
-        <property name="sysLog" ref="system"/>
+        <property name="sysLog" ref="system" />
     </bean>
     
     <bean id="use" class="edu.luc.cs.fms.model.facility.ConcreteUse" scope="prototype">
         <property name="minutesPerYear" value="525600" />
-        <property name="intervals" ref="list"/>
-        <property name="list" ref="linkedList"/>
-        <property name="sysLog" ref="system"/>
+        <property name="intervals" ref="list" />
+        <property name="list" ref="linkedList" />
+        <property name="sysLog" ref="system" />
     </bean>
     
     <!-- Maintenance Beans -->
@@ -73,6 +73,7 @@
         <property name="cost" ref="decimal" />
         <property name="numRequests" value="0" />
         <property name="schedule" ref="schedule" />
+        <property name="sysLog" ref="system" />
     </bean>
     
     <bean id="schedule" class="edu.luc.cs.fms.model.maintenance.ConcreteSchedule" scope="prototype" >
@@ -80,5 +81,6 @@
         <property name="startDate" ref="list" />
         <property name="endDate" ref="list" />
         <property name="downTime" value="0" />
+        <property name="sysLog" ref="system" />
     </bean>
 </beans>

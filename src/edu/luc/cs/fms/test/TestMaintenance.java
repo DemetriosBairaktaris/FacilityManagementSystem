@@ -49,6 +49,7 @@ public class TestMaintenance {
   public static void afterClass(){
       ((ConfigurableApplicationContext)context).close();
   }
+
   /**
    * Provides the setup.
    * @throws Exception ignored

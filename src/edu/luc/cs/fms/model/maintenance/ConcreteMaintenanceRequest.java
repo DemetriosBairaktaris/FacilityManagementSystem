@@ -16,13 +16,16 @@ public class ConcreteMaintenanceRequest implements MaintenanceRequest {
   private int openOrders;
   private SystemLog sysLog;
 
-  public ConcreteMaintenanceRequest(SystemLog sysLog) {
-    this.sysLog = sysLog;
-  }
+  public ConcreteMaintenanceRequest() {}
 
   @Override
   public void log() {
     sysLog.logCreate(this);
+  }
+  
+  @Override 
+  public void setSysLog(SystemLog sysLog){
+      this.sysLog  = sysLog ; 
   }
 
   @Override

@@ -20,13 +20,16 @@ public class ConcreteOrder implements Order {
   private BigDecimal totalCost;
   private SystemLog sysLog;
 
-  public ConcreteOrder(SystemLog sysLog) {
-    this.sysLog = sysLog;
-  }
+  public ConcreteOrder() {/*default*/}
 
   @Override
   public void log() {
     sysLog.logCreate(this);
+  }
+  
+  @Override
+  public void setSysLog(SystemLog sysLog) {
+      this.sysLog = sysLog ; 
   }
 
   @Override
